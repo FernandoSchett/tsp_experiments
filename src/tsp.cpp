@@ -51,13 +51,13 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			case 'k': /* -k ou --k_best */
 				param.k_best = std::atoi(optarg);
 				break;
-            case 'a': /* -a ou --alpha */
+			case 'a': /* -a ou --alpha */
 				param.alpha = std::stold(optarg);
 				break;
 			case 'f': /* -f ou --filename */
 				param.filename = optarg;
 				break;
-            case 'c': /* -c ou --choice_method */
+			case 'c': /* -c ou --choice_method */
 				param.choice_method = optarg;
 				break;
 			case 'i': /* -i ou --iterations */
@@ -80,7 +80,7 @@ int32_t main(int argc, char *argv[]){
 
 	read_args(argc, argv, param);
 
-    std::cout << param.filename << std::endl;
+	std::cout << param.filename << std::endl;
 	
 	randmt = std::mt19937(param.seed_rand);
 
