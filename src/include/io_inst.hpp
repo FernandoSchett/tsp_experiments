@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <cassert>
+#include <regex>
 
 class IData{
 public:
