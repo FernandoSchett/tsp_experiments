@@ -91,6 +91,9 @@ int32_t main(int argc, char* argv[]) {
 	tour.double_sided_nn_heur(idata, param);
 	if(tour.is_tour_valid(idata)){
 		printf("Valid tour! :D\n");
+		tour.print_tour();
+	}else{
+		printf("Invalid tour... :(\n");
 	}
 
 	return 0;
