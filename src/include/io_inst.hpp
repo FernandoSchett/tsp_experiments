@@ -9,7 +9,13 @@
 #include <cassert>
 #include <regex>
 
-class IData{
+struct Point {
+    int id;
+    long double x;
+    long double y;
+};
+
+class IData {
 public:
     std::string instance_name;
     int n_nodes;
@@ -19,9 +25,11 @@ public:
     std::string node_coord_type;
     std::string display_data_type;
     std::vector<int> nodes;
-    std::vector<std::vector<long double>> distances;
+    std::vector<std::vector<int>> distances;
+    std::vector<Point> node_coords;
 
     void read_input(Parameters& param);
+    void build_distance_matrix_for_euc_2D(std::ifstream& file);
 };
 
 #endif

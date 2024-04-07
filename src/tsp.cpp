@@ -6,7 +6,7 @@ std::mt19937 randmt;
 #include <getopt.h>
 #include <string>
 
-void show_help(const char *name) {
+void show_help(const char* name) {
 	fprintf(stderr, "\
 			[uso] %s <opcoes>\n\
 			-h,		--help				show this screen.\n\
@@ -40,39 +40,39 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while( (opt = getopt_long(argc, argv, "hs:k:a:f:c:i:", options, NULL)) > 0 ) {
-		switch ( opt ) {
-			case 'h': /* -h ou --help */
-				show_help(argv[0]);
-				break;
-			case 's': /* -s ou --seed */
-				param.seed_rand = std::atoi(optarg);
-				break;
-			case 'k': /* -k ou --k_best */
-				param.k_best = std::atoi(optarg);
-				break;
-			case 'a': /* -a ou --alpha */
-				param.alpha = std::stold(optarg);
-				break;
-			case 'f': /* -f ou --filename */
-				param.filename = optarg;
-				break;
-			case 'c': /* -c ou --choice_method */
-				param.choice_method = optarg;
-				break;
-			case 'i': /* -i ou --iterations */
-				param.iterations = std::atoi(optarg);
-				break;
-			default:
-				fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
-				exit(-1);
+	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:i:", options, NULL)) > 0) {
+		switch (opt) {
+		case 'h': /* -h ou --help */
+			show_help(argv[0]);
+			break;
+		case 's': /* -s ou --seed */
+			param.seed_rand = std::atoi(optarg);
+			break;
+		case 'k': /* -k ou --k_best */
+			param.k_best = std::atoi(optarg);
+			break;
+		case 'a': /* -a ou --alpha */
+			param.alpha = std::stold(optarg);
+			break;
+		case 'f': /* -f ou --filename */
+			param.filename = optarg;
+			break;
+		case 'c': /* -c ou --choice_method */
+			param.choice_method = optarg;
+			break;
+		case 'i': /* -i ou --iterations */
+			param.iterations = std::atoi(optarg);
+			break;
+		default:
+			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
+			exit(-1);
 		}
 	}
 }
 
 
 
-int32_t main(int argc, char *argv[]){
+int32_t main(int argc, char* argv[]) {
 	// std::ios::sync_with_stdio(false); std::cin.tie(0);
 
 	Parameters param;
@@ -81,8 +81,9 @@ int32_t main(int argc, char *argv[]){
 	read_args(argc, argv, param);
 
 	std::cout << param.filename << std::endl;
-	
+
 	randmt = std::mt19937(param.seed_rand);
 
 	idata.read_input(param);
+	
 }

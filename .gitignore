@@ -2,3 +2,4 @@
 *TSP
 */build/
 *.vscode
+.editorconfig
