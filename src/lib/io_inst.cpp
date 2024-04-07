@@ -68,11 +68,6 @@ void IData::read_input(Parameters& param)
 
 	std::cout << "instance_name: " << this->instance_name << std::endl;
 	std::cout << "n_nodes: " << this->n_nodes << std::endl;
-	std::cout << "edge_weight_type: " << this->edge_weight_type << std::endl;
-	std::cout << "edge_weight_format: " << this->edge_weight_format << std::endl;
-	std::cout << "edge_data_format: " << this->edge_data_format << std::endl;
-	std::cout << "node_coord_type: " << this->node_coord_type << std::endl;
-	std::cout << "display_data_type: " << this->display_data_type << std::endl;
 
 	file.close();
 }
@@ -94,7 +89,6 @@ void IData::build_distance_matrix_for_euc_2D(std::ifstream& file) {
 		p.id = stoi(aux);
 
 		file >> p.x >> p.y;
-		printf("%d %.10Lf %.10Lf\n", p.id, p.x, p.y);
 		this->node_coords.push_back(p);
 	}
 
