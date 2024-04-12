@@ -2,6 +2,7 @@
 std::mt19937 randmt;
 #include "parameters.hpp"
 #include "io_inst.hpp"
+#include "tour.hpp"
 #include <iostream>
 #include <getopt.h>
 #include <string>
@@ -85,5 +86,15 @@ int32_t main(int argc, char* argv[]) {
 	randmt = std::mt19937(param.seed_rand);
 
 	idata.read_input(param);
-	
+
+	Tour tour;
+	tour.double_sided_nn_heur(idata, param);
+	if(tour.is_tour_valid(idata)){
+		printf("Valid tour! :D\n");
+		tour.print_tour();
+	}else{
+		printf("Invalid tour... :(\n");
+	}
+
+	return 0;
 }

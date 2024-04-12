@@ -11,7 +11,7 @@ TARGET := TSP
 INCLUDES := -I src/include
 
 # source files
-SOURCES := src/lib/io_inst.cpp  
+SOURCES := src/lib/io_inst.cpp  src/lib/double_sided_nn_heur.cpp
 
 # object files
 # src/lib/ -> build/
@@ -28,6 +28,9 @@ build/io_inst.o: src/lib/io_inst.cpp
 	mkdir -p $(dir $@)
 	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/io_inst.cpp -o $@
 
+build/double_sided_nn_heur.o: src/lib/double_sided_nn_heur.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/double_sided_nn_heur.cpp -o $@
 
 clean:
 	$(RM) -r build
