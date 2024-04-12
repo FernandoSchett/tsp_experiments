@@ -78,6 +78,12 @@ int32_t main(int argc, char* argv[]) {
 	Parameters param;
 	IData idata;
 	double s_CPU_inicial, s_CPU_final, s_total_inicial, s_total_final;
+	
+	std::ofstream file;
+	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);	
+	
+	if (!file)
+		exit(1);
 
 	read_args(argc, argv, param);
 
@@ -93,7 +99,8 @@ int32_t main(int argc, char* argv[]) {
 	tour.double_sided_nn_heur(idata, param);
 	get_cpu_time(&s_CPU_final, &s_total_final);
 
-	printf ("Tempo de CPU total = %f\n", s_CPU_final - s_CPU_inicial);
+	file << idata.instance_name << ';';  
+	file << (s_CPU_final - s_CPU_inicial) << '\n';
 	
 	if(tour.is_tour_valid(idata)){
 		printf("Valid tour! :D\n");
@@ -102,5 +109,6 @@ int32_t main(int argc, char* argv[]) {
 		printf("Invalid tour... :(\n");
 	}
 
+	file.close();
 	return 0;
 }
