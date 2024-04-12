@@ -1,3 +1,4 @@
+#include "get_sys_time.hpp"
 #include <sys/resource.h>
 
 void get_cpu_time(double *seg_CPU_total, double *seg_sistema_total)

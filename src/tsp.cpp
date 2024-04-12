@@ -2,6 +2,7 @@
 std::mt19937 randmt;
 #include "parameters.hpp"
 #include "io_inst.hpp"
+#include "get_sys_time.hpp"
 #include "tour.hpp"
 #include <iostream>
 #include <getopt.h>
@@ -71,13 +72,12 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 	}
 }
 
-
-
 int32_t main(int argc, char* argv[]) {
 	// std::ios::sync_with_stdio(false); std::cin.tie(0);
 
 	Parameters param;
 	IData idata;
+	double s_CPU_inicial, s_CPU_final, s_total_inicial, s_total_final;
 
 	read_args(argc, argv, param);
 
@@ -88,7 +88,13 @@ int32_t main(int argc, char* argv[]) {
 	idata.read_input(param);
 
 	Tour tour;
+	
+	get_cpu_time(&s_CPU_inicial, &s_total_inicial);
 	tour.double_sided_nn_heur(idata, param);
+	get_cpu_time(&s_CPU_final, &s_total_final);
+
+	printf ("Tempo de CPU total = %f\n", s_CPU_final - s_CPU_inicial);
+	
 	if(tour.is_tour_valid(idata)){
 		printf("Valid tour! :D\n");
 		tour.print_tour();
