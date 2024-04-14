@@ -29,7 +29,8 @@ public:
     std::vector<Point> node_coords;
 
     void read_input(Parameters& param);
-    void build_distance_matrix_for_euc_2D(std::ifstream& file);
+    int dist(Point p1, Point p2);
+    void read_node_coords_for_euc_2D(std::ifstream& file);
 };
 
 #endif

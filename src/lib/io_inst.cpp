@@ -1,4 +1,5 @@
 #include "io_inst.hpp"
+#include "dists.hpp"
 
 void IData::read_input(Parameters& param)
 {
@@ -57,7 +58,7 @@ void IData::read_input(Parameters& param)
 		}
 		else if (std::regex_match(aux, rgx_ncs)) {
 			if (this->edge_weight_type == "EUC_2D") {
-				this->build_distance_matrix_for_euc_2D(file);
+				this->read_node_coords_for_euc_2D(file);
 			}
 			file >> this->display_data_type;
 		}
@@ -72,13 +73,14 @@ void IData::read_input(Parameters& param)
 	file.close();
 }
 
-int euc_dist(Point p1, Point p2) {
-	long double xd = p1.x - p2.x;
-	long double yd = p1.y - p2.y;
-	return int(sqrt(xd * xd + yd * yd) + 0.5);
+int IData::dist(Point p1, Point p2){
+	if (this->edge_weight_type == "EUC_2D"){
+		return dist_euc_2D(p1, p2);
+	}
+	return dist_euc_2D(p1,p2);
 }
 
-void IData::build_distance_matrix_for_euc_2D(std::ifstream& file) {
+void IData::read_node_coords_for_euc_2D(std::ifstream& file) {
 	std::string aux;
 	Point p; p.x = p.y = p.id = 0;
 	this->node_coords.push_back(p);
@@ -90,16 +92,6 @@ void IData::build_distance_matrix_for_euc_2D(std::ifstream& file) {
 
 		file >> p.x >> p.y;
 		this->node_coords.push_back(p);
-	}
-
-	this->distances.resize(this->n_nodes + 1, std::vector<int>(this->n_nodes + 1, 0));
-	for (int i = 1; i <= this->n_nodes; i++) {
-		this->distances[i][i] = 0;
-		for (int j = i + 1; j <= this->n_nodes; j++) {
-			int dij = euc_dist(this->node_coords[i], this->node_coords[j]);
-			this->distances[i][j] = dij;
-			this->distances[j][i] = dij;
-		}
 	}
 
 }

@@ -11,8 +11,8 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
     // Insert nearest node to initial node
     int nrst_node = 0;
     int nrst_dist = 0;
-    for (int i = 1; i < inst.distances[init_node].size(); i++) {
-        int dist = inst.distances[init_node][i];
+    for (int i = 1; i < inst.node_coords.size(); i++) {
+        int dist = inst.dist(inst.node_coords[init_node], inst.node_coords[i]);
         if (i != init_node && (nrst_node == 0 || (!visited[i] && dist < nrst_dist))) {
             nrst_node = i;
             nrst_dist = dist;
@@ -25,8 +25,8 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
     while (this->tour.size() < inst.n_nodes) {
         int nrst_node_left = 0;
         int nrst_dist_left = 0;
-        for (int i = 1; i < inst.distances[tour.front()].size(); i++) {
-            int dist = inst.distances[tour.front()][i];
+        for (int i = 1; i < inst.node_coords.size(); i++) {
+            int dist = inst.dist(inst.node_coords[tour.front()], inst.node_coords[i]);
             if (i != tour.front() && ((!visited[i] && nrst_node_left == 0) || (!visited[i] && dist < nrst_dist_left))) {
                 nrst_node_left = i;
                 nrst_dist_left = dist;
@@ -35,8 +35,8 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
 
         int nrst_node_right = 0;
         int nrst_dist_right = 0;
-        for (int i = 1; i < inst.distances[tour.back()].size(); i++) {
-            int dist = inst.distances[tour.back()][i];
+        for (int i = 1; i < inst.node_coords.size(); i++) {
+            int dist = inst.dist(inst.node_coords[tour.back()], inst.node_coords[i]);
             if (i != tour.back() && ((!visited[i] && nrst_node_right == 0) || (!visited[i] && dist < nrst_dist_right))) {
                 nrst_node_right = i;
                 nrst_dist_right = dist;
@@ -57,11 +57,11 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
     std::list<int>::iterator prev = this->tour.begin();
     std::list<int>::iterator curr = this->tour.begin(); curr++;
     while (curr != this->tour.end()) {
-        this->sol_value += inst.distances[*prev][*curr];
+        this->sol_value += inst.dist(inst.node_coords[*prev], inst.node_coords[*curr]);
         prev++;
         curr++;
     }
-    this->sol_value += inst.distances[*prev][this->tour.front()];
+    this->sol_value += inst.dist(inst.node_coords[*prev], inst.node_coords[this->tour.front()]);
 }
 
 bool Tour::is_tour_valid(IData& inst) {
