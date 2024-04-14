@@ -73,11 +73,11 @@ void IData::read_input(Parameters& param)
 	file.close();
 }
 
-int IData::dist(Point p1, Point p2){
-	if (this->edge_weight_type == "EUC_2D"){
+int IData::dist(Point p1, Point p2) {
+	if (this->edge_weight_type == "EUC_2D") {
 		return dist_euc_2D(p1, p2);
 	}
-	return dist_euc_2D(p1,p2);
+	return dist_euc_2D(p1, p2);
 }
 
 void IData::read_node_coords_for_euc_2D(std::ifstream& file) {

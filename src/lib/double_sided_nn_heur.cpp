@@ -85,7 +85,7 @@ bool Tour::is_tour_valid(IData& inst) {
     return true;
 }
 
-void Tour::print_tour(){
+void Tour::print_tour() {
     printf("TOUR:\n");
     for (int node : this->tour) {
         printf(" %d", node);
