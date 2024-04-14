@@ -30,6 +30,7 @@ public:
 
     void read_input(Parameters& param);
     void build_distance_matrix_for_euc_2D(std::ifstream& file);
+    void build_distance_matrix_for_ceil_2D(std::ifstream& file);
 };
 
 #endif

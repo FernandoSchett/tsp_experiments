@@ -58,6 +58,8 @@ void IData::read_input(Parameters& param)
 		else if (std::regex_match(aux, rgx_ncs)) {
 			if (this->edge_weight_type == "EUC_2D") {
 				this->build_distance_matrix_for_euc_2D(file);
+			}else if (this->edge_weight_type == "CEIL_2D") {
+				this->build_distance_matrix_for_euc_2D(file);
 			}
 			file >> this->display_data_type;
 		}
@@ -76,6 +78,12 @@ int euc_dist(Point p1, Point p2) {
 	long double xd = p1.x - p2.x;
 	long double yd = p1.y - p2.y;
 	return int(sqrt(xd * xd + yd * yd) + 0.5);
+}
+
+int ceil_2D_dist(Point p1, Point p2) {
+	long double xd = p1.x - p2.x;
+	long double yd = p1.y - p2.y;
+	return ceil(sqrt(xd * xd + yd * yd));
 }
 
 void IData::build_distance_matrix_for_euc_2D(std::ifstream& file) {
@@ -102,4 +110,19 @@ void IData::build_distance_matrix_for_euc_2D(std::ifstream& file) {
 		}
 	}
 
+}
+
+void IData::build_distance_matrix_for_ceil_2D(std::ifstream& file) {
+	std::string aux;
+	Point p; p.x = p.y = p.id = 0;
+	this->node_coords.push_back(p);
+	while (file >> aux) {
+		if (aux == "EOF") {
+			break;
+		}
+		p.id = stoi(aux);
+
+		file >> p.x >> p.y;
+		this->node_coords.push_back(p);
+	}
 }
