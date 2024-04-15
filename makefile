@@ -11,7 +11,7 @@ TARGET := TSP
 INCLUDES := -I src/include
 
 # source files
-SOURCES := src/lib/io_inst.cpp  src/lib/double_sided_nn_heur.cpp src/lib/get_sys_time.cpp
+SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp src/lib/get_sys_time.cpp src/lib/saving_heurist.cpp
 
 # object files
 # src/lib/ -> build/
@@ -35,6 +35,10 @@ build/double_sided_nn_heur.o: src/lib/double_sided_nn_heur.cpp
 build/get_sys_time.o: src/lib/get_sys_time.cpp
 	mkdir -p $(dir $@)
 	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/get_sys_time.cpp -o $@
+
+build/saving_heurist.o: src/lib/saving_heurist.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/saving_heurist.cpp -o $@
 
 clean:
 	$(RM) -r build
