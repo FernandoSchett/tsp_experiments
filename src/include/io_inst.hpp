@@ -31,6 +31,7 @@ public:
     void read_input(Parameters& param);
     int dist(Point p1, Point p2);
     void read_node_coords_for_euc_2D(std::ifstream& file);
+    void read_node_coords_for_ceil_2D(std::ifstream& file);
     void read_distance_matrix_for_explicit(std::ifstream& file);
     void read_full_matrix(std::ifstream& file);
     void read_upper_row(std::ifstream& file);

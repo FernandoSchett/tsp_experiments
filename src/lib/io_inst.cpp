@@ -61,6 +61,9 @@ void IData::read_input(Parameters& param)
 			if (this->edge_weight_type == "EUC_2D") {
 				this->read_node_coords_for_euc_2D(file);
 			}
+			else if (this->edge_weight_type == "CEIL_2D") {
+				this->read_node_coords_for_ceil_2D(file);
+			}
 		}
 		else if (std::regex_match(aux, rgx_ews)) {
 			if (this->edge_weight_type == "EXPLICIT") {
@@ -81,6 +84,12 @@ void IData::read_input(Parameters& param)
 int IData::dist(Point p1, Point p2) {
 	if (this->edge_weight_type == "EUC_2D") {
 		return dist_euc_2D(p1, p2);
+	}
+	else if (this->edge_weight_type == "CEIL_2D") {
+		return dist_ceil_2D(p1, p2);
+	}
+	else if (this->edge_weight_type == "EXPLICIT") {
+		return this->distances[p1.id][p2.id];
 	}
 	return dist_euc_2D(p1, p2);
 }
@@ -110,7 +119,6 @@ void IData::read_node_coords_for_euc_2D(std::ifstream& file) {
 	}
 
 }
-
 void IData::read_distance_matrix_for_explicit(std::ifstream& file) {
 
 	Point p; p.x = p.y = p.id = 0;
@@ -187,4 +195,19 @@ void IData::read_lower_diag_row(std::ifstream& file) {
 		}
 	}
 
+}
+
+void IData::read_node_coords_for_ceil_2D(std::ifstream& file) {
+	std::string aux;
+	Point p; p.x = p.y = p.id = 0;
+	this->node_coords.push_back(p);
+	while (file >> aux) {
+		if (aux == "EOF") {
+			break;
+		}
+		p.id = stoi(aux);
+
+		file >> p.x >> p.y;
+		this->node_coords.push_back(p);
+	}
 }
