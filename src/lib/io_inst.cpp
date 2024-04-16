@@ -1,4 +1,5 @@
 #include "io_inst.hpp"
+#include "dists.hpp"
 
 void IData::read_input(Parameters& param)
 {
@@ -17,6 +18,7 @@ void IData::read_input(Parameters& param)
 	std::regex rgx_ddt("\\DISPLAY_DATA_TYPE[:]*");
 	std::regex rgx_colon("\\:");
 	std::regex rgx_ncs("\\NODE_COORD_SECTION[:]*");
+	std::regex rgx_ews("\\EDGE_WEIGHT_SECTION[:]*");
 
 	std::smatch match;
 
@@ -57,11 +59,16 @@ void IData::read_input(Parameters& param)
 		}
 		else if (std::regex_match(aux, rgx_ncs)) {
 			if (this->edge_weight_type == "EUC_2D") {
-				this->build_distance_matrix_for_euc_2D(file);
-			}else if (this->edge_weight_type == "CEIL_2D") {
-				this->build_distance_matrix_for_euc_2D(file);
+				this->read_node_coords_for_euc_2D(file);
 			}
-			file >> this->display_data_type;
+			else if (this->edge_weight_type == "CEIL_2D") {
+				this->read_node_coords_for_ceil_2D(file);
+			}
+		}
+		else if (std::regex_match(aux, rgx_ews)) {
+			if (this->edge_weight_type == "EXPLICIT") {
+				this->read_distance_matrix_for_explicit(file);
+			}
 		}
 		else if (aux == "EOF") {
 			break;
@@ -74,19 +81,20 @@ void IData::read_input(Parameters& param)
 	file.close();
 }
 
-int euc_dist(Point p1, Point p2) {
-	long double xd = p1.x - p2.x;
-	long double yd = p1.y - p2.y;
-	return int(sqrt(xd * xd + yd * yd) + 0.5);
+int IData::dist(Point p1, Point p2) {
+	if (this->edge_weight_type == "EUC_2D") {
+		return dist_euc_2D(p1, p2);
+	}
+	else if (this->edge_weight_type == "CEIL_2D") {
+		return dist_ceil_2D(p1, p2);
+	}
+	else if (this->edge_weight_type == "EXPLICIT") {
+		return this->distances[p1.id][p2.id];
+	}
+	return dist_euc_2D(p1, p2);
 }
 
-int ceil_2D_dist(Point p1, Point p2) {
-	long double xd = p1.x - p2.x;
-	long double yd = p1.y - p2.y;
-	return ceil(sqrt(xd * xd + yd * yd));
-}
-
-void IData::build_distance_matrix_for_euc_2D(std::ifstream& file) {
+void IData::read_node_coords_for_euc_2D(std::ifstream& file) {
 	std::string aux;
 	Point p; p.x = p.y = p.id = 0;
 	this->node_coords.push_back(p);
@@ -104,15 +112,92 @@ void IData::build_distance_matrix_for_euc_2D(std::ifstream& file) {
 	for (int i = 1; i <= this->n_nodes; i++) {
 		this->distances[i][i] = 0;
 		for (int j = i + 1; j <= this->n_nodes; j++) {
-			int dij = euc_dist(this->node_coords[i], this->node_coords[j]);
+			int dij = dist(this->node_coords[i], this->node_coords[j]);
 			this->distances[i][j] = dij;
 			this->distances[j][i] = dij;
 		}
 	}
 
 }
+void IData::read_distance_matrix_for_explicit(std::ifstream& file) {
 
-void IData::build_distance_matrix_for_ceil_2D(std::ifstream& file) {
+	Point p; p.x = p.y = p.id = 0;
+	this->node_coords.push_back(p);
+	for (int i = 1; i <= this->n_nodes; i++) {
+		p.id = i;
+		this->node_coords.push_back(p);
+	}
+
+	if (this->edge_weight_format == "FULL_MATRIX") {
+		this->read_full_matrix(file);
+	}
+	else if (this->edge_weight_format == "UPPER_ROW") {
+		this->read_upper_row(file);
+	}
+	else if (this->edge_weight_format == "UPPER_DIAG_ROW") {
+		this->read_upper_diag_row(file);
+	}
+	else if (this->edge_weight_format == "LOWER_DIAG_ROW") {
+		this->read_lower_diag_row(file);
+	}
+}
+
+void IData::print_distance_matrix() {
+	for (int i = 1; i <= this->n_nodes; i++) {
+		for (int j = 1; j <= this->n_nodes; j++) {
+			std::cout << this->distances[i][j] << " ";
+		}
+		std::cout << "\n";
+	}
+}
+
+void IData::read_full_matrix(std::ifstream& file) {
+
+	this->distances.resize(this->n_nodes + 1, std::vector<int>(this->n_nodes + 1, 0));
+	for (int i = 1; i <= this->n_nodes; i++) {
+		for (int j = 1; j <= this->n_nodes; j++) {
+			file >> this->distances[i][j];
+		}
+	}
+}
+
+void IData::read_upper_row(std::ifstream& file) {
+
+	this->distances.resize(this->n_nodes + 1, std::vector<int>(this->n_nodes + 1, 0));
+	for (int i = 1; i <= this->n_nodes; i++) {
+		this->distances[i][i] = 0;
+		for (int j = i + 1; j <= this->n_nodes; j++) {
+			file >> this->distances[i][j];
+			this->distances[j][i] = this->distances[i][j];
+		}
+	}
+}
+
+void IData::read_upper_diag_row(std::ifstream& file) {
+
+	this->distances.resize(this->n_nodes + 1, std::vector<int>(this->n_nodes + 1, 0));
+	for (int i = 1; i <= this->n_nodes; i++) {
+		for (int j = i; j <= this->n_nodes; j++) {
+			file >> this->distances[i][j];
+			this->distances[j][i] = this->distances[i][j];
+		}
+	}
+
+}
+
+void IData::read_lower_diag_row(std::ifstream& file) {
+
+	this->distances.resize(this->n_nodes + 1, std::vector<int>(this->n_nodes + 1, 0));
+	for (int i = 1; i <= this->n_nodes; i++) {
+		for (int j = 1; j <= i; j++) {
+			file >> this->distances[i][j];
+			this->distances[j][i] = this->distances[i][j];
+		}
+	}
+
+}
+
+void IData::read_node_coords_for_ceil_2D(std::ifstream& file) {
 	std::string aux;
 	Point p; p.x = p.y = p.id = 0;
 	this->node_coords.push_back(p);
