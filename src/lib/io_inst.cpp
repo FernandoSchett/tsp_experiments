@@ -58,12 +58,7 @@ void IData::read_input(Parameters& param)
 			file >> this->display_data_type;
 		}
 		else if (std::regex_match(aux, rgx_ncs)) {
-			if (this->edge_weight_type == "EUC_2D") {
-				this->read_node_coords_for_euc_2D(file);
-			}
-			else if (this->edge_weight_type == "CEIL_2D") {
-				this->read_node_coords_for_ceil_2D(file);
-			}
+			this->read_node_coords(file);
 		}
 		else if (std::regex_match(aux, rgx_ews)) {
 			if (this->edge_weight_type == "EXPLICIT") {
@@ -81,20 +76,23 @@ void IData::read_input(Parameters& param)
 	file.close();
 }
 
-int IData::dist(Point p1, Point p2) {
+int IData::dist(Point p_i, Point p_j) {
 	if (this->edge_weight_type == "EUC_2D") {
-		return dist_euc_2D(p1, p2);
+		return dist_euc_2D(p_i, p_j);
 	}
 	else if (this->edge_weight_type == "CEIL_2D") {
-		return dist_ceil_2D(p1, p2);
+		return dist_ceil_2D(p_i, p_j);
 	}
 	else if (this->edge_weight_type == "EXPLICIT") {
-		return this->distances[p1.id][p2.id];
+		return this->distances[p_i.id][p_j.id];
 	}
-	return dist_euc_2D(p1, p2);
+	else if (this->edge_weight_type == "GEO") {
+		return dist_geo(p_i, p_j);
+	}
+	return dist_euc_2D(p_i, p_j);
 }
 
-void IData::read_node_coords_for_euc_2D(std::ifstream& file) {
+void IData::read_node_coords(std::ifstream& file) {
 	std::string aux;
 	Point p; p.x = p.y = p.id = 0;
 	this->node_coords.push_back(p);
@@ -107,17 +105,6 @@ void IData::read_node_coords_for_euc_2D(std::ifstream& file) {
 		file >> p.x >> p.y;
 		this->node_coords.push_back(p);
 	}
-
-	this->distances.resize(this->n_nodes + 1, std::vector<int>(this->n_nodes + 1, 0));
-	for (int i = 1; i <= this->n_nodes; i++) {
-		this->distances[i][i] = 0;
-		for (int j = i + 1; j <= this->n_nodes; j++) {
-			int dij = dist(this->node_coords[i], this->node_coords[j]);
-			this->distances[i][j] = dij;
-			this->distances[j][i] = dij;
-		}
-	}
-
 }
 void IData::read_distance_matrix_for_explicit(std::ifstream& file) {
 
@@ -195,19 +182,4 @@ void IData::read_lower_diag_row(std::ifstream& file) {
 		}
 	}
 
-}
-
-void IData::read_node_coords_for_ceil_2D(std::ifstream& file) {
-	std::string aux;
-	Point p; p.x = p.y = p.id = 0;
-	this->node_coords.push_back(p);
-	while (file >> aux) {
-		if (aux == "EOF") {
-			break;
-		}
-		p.id = stoi(aux);
-
-		file >> p.x >> p.y;
-		this->node_coords.push_back(p);
-	}
 }
