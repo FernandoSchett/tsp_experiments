@@ -103,7 +103,7 @@ void IData::read_node_coords_for_euc_2D(std::ifstream& file) {
 	for (int i = 1; i <= this->n_nodes; i++) {
 		this->distances[i][i] = 0;
 		for (int j = i + 1; j <= this->n_nodes; j++) {
-			int dij = euc_dist(this->node_coords[i], this->node_coords[j]);
+			int dij = dist(this->node_coords[i], this->node_coords[j]);
 			this->distances[i][j] = dij;
 			this->distances[j][i] = dij;
 		}
