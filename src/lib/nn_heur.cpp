@@ -11,7 +11,7 @@ void Tour::nn_heur(IData& inst, Parameters& params) {
     // Processo adaptativo de escolha do vizinho mais próximo
     while (this->tour.size() < inst.n_nodes) {
         int current_node = this->tour.back();
-        int min_dist = 1000000;
+        int min_dist = INT_MAX;
         int chosen_node = -1;
 
         // Coleta possíveis candidatos

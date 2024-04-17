@@ -8,10 +8,10 @@ fi
 
 for i in $inst
 do
-    ./TSP -f  $i -c  nn_heur >> output.txt
+    ./TSP -f  $i -c nn_heur -i 50 >> output.txt
 done
 
 for i in $inst
 do
-    ./TSP -f  $i -c  dsnn_heur >> output.txt  
+    ./TSP -f  $i -c dsnn_heur -i 50 >> output.txt  
 done
