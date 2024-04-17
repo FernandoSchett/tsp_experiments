@@ -6,6 +6,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <limits.h>
 
 class Tour {
 public:

@@ -5,6 +5,7 @@ std::mt19937 randmt;
 #include "get_sys_time.hpp"
 #include "tour.hpp"
 #include <iostream>
+#include <iomanip>
 #include <getopt.h>
 #include <string>
 
@@ -78,12 +79,6 @@ int32_t main(int argc, char* argv[]) {
 	Parameters param;
 	IData idata;
 	double s_CPU_inicial, s_CPU_final, s_total_inicial, s_total_final;
-	
-	std::ofstream file;
-	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);	
-	
-	if (!file)
-		exit(1);
 
 	read_args(argc, argv, param);
 
@@ -94,31 +89,47 @@ int32_t main(int argc, char* argv[]) {
 	idata.read_input(param);
 
 	Tour tour;
-	
 
-	if(param.choice_method == "nn_heur"){
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		tour.nn_heur(idata, param);
-		get_cpu_time(&s_CPU_final, &s_total_final);
-	}else if(param.choice_method == "dsnn_heur"){
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		tour.double_sided_nn_heur(idata, param);
-		get_cpu_time(&s_CPU_final, &s_total_final);
+	double total_s_CPU = 0;
+
+	if (param.choice_method == "nn_heur") {
+		for(int i=0; i<param.iterations; i++){
+			tour.tour.clear();
+			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+			tour.nn_heur(idata, param);
+			get_cpu_time(&s_CPU_final, &s_total_final);
+			total_s_CPU += (s_CPU_final - s_CPU_inicial);
+		}
+	}
+	else if (param.choice_method == "dsnn_heur") {
+		for(int i=0; i<param.iterations; i++){
+			tour.tour.clear();
+			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+			tour.double_sided_nn_heur(idata, param);
+			get_cpu_time(&s_CPU_final, &s_total_final);
+			total_s_CPU += (s_CPU_final - s_CPU_inicial);
+		}
 	}
 
-	file << idata.instance_name << ';';  
-	file << (s_CPU_final - s_CPU_inicial) << '\n';
+	tour.calc_tour_cost(idata);
 	
 
-	tour.calc_tour_cost(idata);
+	std::ofstream file;
+	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);
+
+	if (!file)
+		exit(1);
+		
+	file << idata.instance_name << ';' << param.choice_method << ';' << tour.sol_value << ';';
+	file << std::setprecision(6) << total_s_CPU << '\n';
+	file.close();
+
 	if (tour.is_tour_valid(idata)) {
-		printf("Valid tour! :D\n");
 		tour.print_tour();
+		printf("Valid tour! :D\n");
 	}
 	else {
 		printf("Invalid tour... :(\n");
-	} 
-
-	file.close();
+	}
 	return 0;
 }
