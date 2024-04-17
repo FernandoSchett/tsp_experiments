@@ -1,4 +1,4 @@
-inst=./benchmark/instances/EUC_2D/*
+inst=./benchmark/instances/chosen_inst/*
 make clean
 make 
 
@@ -8,5 +8,10 @@ fi
 
 for i in $inst
 do
-    ./TSP -f  $i >> output.txt  
+    ./TSP -f  $i -c  nn_heur >> output.txt
+done
+
+for i in $inst
+do
+    ./TSP -f  $i -c  dsnn_heur >> output.txt  
 done

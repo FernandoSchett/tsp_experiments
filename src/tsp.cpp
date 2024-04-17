@@ -105,11 +105,8 @@ int32_t main(int argc, char* argv[]) {
 		tour.double_sided_nn_heur(idata, param);
 		get_cpu_time(&s_CPU_final, &s_total_final);
 	}
-
-	file << idata.instance_name << ';';  
-	file << (s_CPU_final - s_CPU_inicial) << '\n';
+	 
 	
-
 	tour.calc_tour_cost(idata);
 	if (tour.is_tour_valid(idata)) {
 		printf("Valid tour! :D\n");
@@ -119,6 +116,9 @@ int32_t main(int argc, char* argv[]) {
 		printf("Invalid tour... :(\n");
 	} 
 
+
+	file << idata.instance_name << ';' << param.choice_method << ';' << tour.sol_value << ';';  
+	file << (s_CPU_final - s_CPU_inicial) << '\n';
 	file.close();
 	return 0;
 }
