@@ -12,12 +12,15 @@ void Tour::saving_heur(IData& inst, Parameters& params) {
         double saving;
     };
 
-    // Inicializa os nós como não visitados
-    std::vector<bool> visited(inst.n_nodes + 1, false);
+    std::vector<std::vector<int>> indicador(inst.n_nodes + 1, std::vector<int>(inst.n_nodes + 1, 0));
+
+    for (int i = 1; i <= inst.n_nodes; i++) {
+        indicador[1][i] = 2;
+    }
 
     // Calcula economias para cada par de nós i e j
     std::vector<Savings> savingsList;
-    for (int i = 1; i <= inst.n_nodes; i++) {
+    for (int i = 2; i <= inst.n_nodes; i++) {
         for (int j = i + 1; j <= inst.n_nodes; j++) {
             double s = inst.distances[1][i] + inst.distances[1][j] - inst.distances[i][j];
             savingsList.push_back({i, j, s});
