@@ -96,7 +96,7 @@ int32_t main(int argc, char* argv[]) {
 	Tour tour;
 	
 	get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-	tour.saving_heur(idata, param);
+	tour.nn_heur(idata, param);
 	get_cpu_time(&s_CPU_final, &s_total_final);
 
 	file << idata.instance_name << ';';  
@@ -107,7 +107,7 @@ int32_t main(int argc, char* argv[]) {
 		tour.print_tour();
 	}else{
 		printf("Invalid tour... :(\n");
-	}
+	} 
 
 	file.close();
 	return 0;
