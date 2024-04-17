@@ -2,9 +2,10 @@
 #define tour_class
 
 #include "io_inst.hpp"
+#include <algorithm>
 #include <iostream>
-#include <vector>
 #include <list>
+#include <vector>
 
 class Tour {
 public:
@@ -13,6 +14,7 @@ public:
 
     void double_sided_nn_heur(IData& inst, Parameters& params);
     void calc_tour_cost(IData& inst);
+    void nn_heur(IData& inst, Parameters& params);
     bool is_tour_valid(IData& inst);
     void print_tour();
 };

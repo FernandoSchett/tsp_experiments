@@ -1,5 +1,6 @@
 #include "tour.hpp"
 
+
 void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
     std::vector<bool> visited(inst.n_nodes + 1, false);
 
@@ -52,4 +53,5 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
             visited[nrst_node_right] = true;
         }
     }
+
 }
