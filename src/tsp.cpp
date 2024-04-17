@@ -95,17 +95,27 @@ int32_t main(int argc, char* argv[]) {
 
 	Tour tour;
 	
-	get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-	tour.nn_heur(idata, param);
-	get_cpu_time(&s_CPU_final, &s_total_final);
+
+	if(param.choice_method == "nn_heur"){
+		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+		tour.nn_heur(idata, param);
+		get_cpu_time(&s_CPU_final, &s_total_final);
+	}else if(param.choice_method == "dsnn_heur"){
+		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+		tour.double_sided_nn_heur(idata, param);
+		get_cpu_time(&s_CPU_final, &s_total_final);
+	}
 
 	file << idata.instance_name << ';';  
 	file << (s_CPU_final - s_CPU_inicial) << '\n';
 	
-	if(tour.is_tour_valid(idata)){
+
+	tour.calc_tour_cost(idata);
+	if (tour.is_tour_valid(idata)) {
 		printf("Valid tour! :D\n");
 		tour.print_tour();
-	}else{
+	}
+	else {
 		printf("Invalid tour... :(\n");
 	} 
 

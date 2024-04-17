@@ -17,7 +17,7 @@ void Tour::nn_heur(IData& inst, Parameters& params) {
         // Coleta possíveis candidatos
         for (int i = 1; i <= inst.n_nodes; i++) {
             if (!visited[i] && i != current_node) {
-                int dist = inst.distances[current_node][i];
+                int dist = inst.dist(inst.node_coords[current_node], inst.node_coords[i]);
                 if (dist < min_dist) {
                     min_dist = dist;
                     chosen_node = i;
@@ -29,15 +29,5 @@ void Tour::nn_heur(IData& inst, Parameters& params) {
         this->tour.push_back(chosen_node);
         visited[chosen_node] = true;
     }
-    
-    this->sol_value = 0;
-    std::list<int>::iterator prev = this->tour.begin();
-    std::list<int>::iterator curr = this->tour.begin(); curr++;
-    while (curr != this->tour.end()) {
-        this->sol_value += inst.distances[*prev][*curr];
-        prev++;
-        curr++;
-    }
-    this->sol_value += inst.distances[*prev][this->tour.front()];
 
 }

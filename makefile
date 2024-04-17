@@ -11,7 +11,7 @@ TARGET := TSP
 INCLUDES := -I src/include
 
 # source files
-SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp src/lib/get_sys_time.cpp src/lib/nn_heur.cpp
+SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp src/lib/get_sys_time.cpp src/lib/nn_heur.cpp src/lib/dists.cpp src/lib/tour_solution.cpp
 
 # object files
 # src/lib/ -> build/
@@ -39,6 +39,14 @@ build/get_sys_time.o: src/lib/get_sys_time.cpp
 build/nn_heur.o: src/lib/nn_heur.cpp
 	mkdir -p $(dir $@)
 	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/nn_heur.cpp -o $@
+
+build/dists.o: src/lib/dists.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/dists.cpp -o $@
+
+build/tour_solution.o: src/lib/tour_solution.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/tour_solution.cpp -o $@
 
 clean:
 	$(RM) -r build
