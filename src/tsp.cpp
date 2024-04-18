@@ -19,6 +19,7 @@ void show_help(const char* name) {
 			-f,  	--filename     		set filename.\n\
 			-c,  	--choice_method     set choice_method.\n\
 			-m, 	--scheme 			set scheme for semi-greedy algorithm.\n\
+			-t, 	--maxtime 			set maxtime in seconds.\n\
 			-i,		--iterations		set multi-start number of iterations.\n", name);
 	exit(-1);
 }
@@ -36,6 +37,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"alpha"			, required_argument , 0 , 'a' },
 		{"filename"			, required_argument , 0 , 'f' },
 		{"iterations"		, required_argument , 0 , 'i' },
+		{"maxtime"			, required_argument , 0 , 'i' },
 		{"choice_method"	, required_argument , 0 , 'c' },
 		{"scheme"			, required_argument , 0 , 'm' },
 		{0       			, 0 				, 0	,  0  },
@@ -45,7 +47,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:i:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:i:t:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -71,6 +73,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		case 'i': /* -i ou --iterations */
 			param.iterations = std::atoi(optarg);
 			break;
+		case 't': /* -t ou --maxtime */
+			param.maxtime = std::atoi(optarg);
+			break;
 		default:
 			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
 			exit(-1);
@@ -83,7 +88,7 @@ int32_t main(int argc, char* argv[]) {
 
 	Parameters param;
 	IData idata;
-	double s_CPU_inicial, s_CPU_final, s_total_inicial, s_total_final;
+	double s_CPU_inicial, s_CPU_during, s_CPU_final, s_total_inicial, s_total_during, s_total_final;
 
 	read_args(argc, argv, param);
 
@@ -131,13 +136,15 @@ int32_t main(int argc, char* argv[]) {
 		best_tour.semi_nn_heur(idata, param, randmt);
 		best_tour.calc_tour_cost(idata);
 		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		for (int i = 0; i < param.iterations; i++) {
+		get_cpu_time(&s_CPU_during, &s_total_during);
+		while (s_CPU_during - s_CPU_inicial < param.maxtime) {
 			Tour tour;
 			tour.semi_nn_heur(idata, param, randmt);
 			tour.calc_tour_cost(idata);
 			if (tour.sol_value < best_tour.sol_value) {
 				best_tour = tour;
 			}
+			get_cpu_time(&s_CPU_during, &s_CPU_inicial);
 		}
 		get_cpu_time(&s_CPU_final, &s_total_final);
 		total_s_CPU += (s_CPU_final - s_CPU_inicial);
@@ -146,13 +153,15 @@ int32_t main(int argc, char* argv[]) {
 		best_tour.semi_double_sided_nn_heur(idata, param, randmt);
 		best_tour.calc_tour_cost(idata);
 		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		for (int i = 0; i < param.iterations; i++) {
+		get_cpu_time(&s_CPU_during, &s_total_during);
+		while (s_CPU_during - s_CPU_inicial < param.maxtime) {
 			Tour tour;
 			tour.semi_double_sided_nn_heur(idata, param, randmt);
 			tour.calc_tour_cost(idata);
 			if (tour.sol_value < best_tour.sol_value) {
 				best_tour = tour;
 			}
+			get_cpu_time(&s_CPU_during, &s_total_during);
 		}
 		get_cpu_time(&s_CPU_final, &s_total_final);
 		total_s_CPU += (s_CPU_final - s_CPU_inicial);
