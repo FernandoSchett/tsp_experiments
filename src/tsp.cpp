@@ -18,6 +18,7 @@ void show_help(const char* name) {
 			-a, 	--alpha=ALPHA 	    set alpha for quality-based randomization.\n\
 			-f,  	--filename     		set filename.\n\
 			-c,  	--choice_method     set choice_method.\n\
+			-m, 	--scheme 			set scheme for semi-greedy algorithm.\n\
 			-i,		--iterations		set multi-start number of iterations.\n", name);
 	exit(-1);
 }
@@ -36,6 +37,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"filename"			, required_argument , 0 , 'f' },
 		{"iterations"		, required_argument , 0 , 'i' },
 		{"choice_method"	, required_argument , 0 , 'c' },
+		{"scheme"			, required_argument , 0 , 'm' },
 		{0       			, 0 				, 0	,  0  },
 	};
 
@@ -43,7 +45,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:i:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:i:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -62,6 +64,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			break;
 		case 'c': /* -c ou --choice_method */
 			param.choice_method = optarg;
+			break;
+		case 'm': /* -m ou --scheme */
+			param.scheme = optarg;
 			break;
 		case 'i': /* -i ou --iterations */
 			param.iterations = std::atoi(optarg);
@@ -93,7 +98,7 @@ int32_t main(int argc, char* argv[]) {
 	double total_s_CPU = 0;
 
 	if (param.choice_method == "nn_heur") {
-		for(int i=0; i<param.iterations; i++){
+		for (int i = 0; i < param.iterations; i++) {
 			tour.tour.clear();
 			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
 			tour.nn_heur(idata, param);
@@ -102,7 +107,7 @@ int32_t main(int argc, char* argv[]) {
 		}
 	}
 	else if (param.choice_method == "dsnn_heur") {
-		for(int i=0; i<param.iterations; i++){
+		for (int i = 0; i < param.iterations; i++) {
 			tour.tour.clear();
 			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
 			tour.double_sided_nn_heur(idata, param);
@@ -110,16 +115,21 @@ int32_t main(int argc, char* argv[]) {
 			total_s_CPU += (s_CPU_final - s_CPU_inicial);
 		}
 	}
+	else if (param.choice_method == "semi_dsnn_heur") {
+		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+		tour.semi_double_sided_nn_heur(idata, param, randmt);
+		get_cpu_time(&s_CPU_final, &s_total_final);
+		total_s_CPU += (s_CPU_final - s_CPU_inicial);
+	}
 
 	tour.calc_tour_cost(idata);
-	
 
 	std::ofstream file;
 	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);
 
 	if (!file)
 		exit(1);
-		
+
 	file << idata.instance_name << ';' << param.choice_method << ';' << tour.sol_value << ';';
 	file << std::setprecision(6) << total_s_CPU << '\n';
 	file.close();
