@@ -115,6 +115,12 @@ int32_t main(int argc, char* argv[]) {
 			total_s_CPU += (s_CPU_final - s_CPU_inicial);
 		}
 	}
+	else if (param.choice_method == "semi_nn_heur") {
+		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+		tour.semi_nn_heur(idata, param, randmt);
+		get_cpu_time(&s_CPU_final, &s_total_final);
+		total_s_CPU += (s_CPU_final - s_CPU_inicial);
+	}
 	else if (param.choice_method == "semi_dsnn_heur") {
 		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
 		tour.semi_double_sided_nn_heur(idata, param, randmt);
