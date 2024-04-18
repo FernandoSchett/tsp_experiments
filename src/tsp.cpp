@@ -93,42 +93,72 @@ int32_t main(int argc, char* argv[]) {
 
 	idata.read_input(param);
 
-	Tour tour;
+	Tour best_tour;
 
 	double total_s_CPU = 0;
 
 	if (param.choice_method == "nn_heur") {
 		for (int i = 0; i < param.iterations; i++) {
-			tour.tour.clear();
+			best_tour.tour.clear();
 			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-			tour.nn_heur(idata, param);
+			best_tour.nn_heur(idata, param);
 			get_cpu_time(&s_CPU_final, &s_total_final);
 			total_s_CPU += (s_CPU_final - s_CPU_inicial);
 		}
 	}
 	else if (param.choice_method == "dsnn_heur") {
 		for (int i = 0; i < param.iterations; i++) {
-			tour.tour.clear();
+			best_tour.tour.clear();
 			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-			tour.double_sided_nn_heur(idata, param);
+			best_tour.double_sided_nn_heur(idata, param);
 			get_cpu_time(&s_CPU_final, &s_total_final);
 			total_s_CPU += (s_CPU_final - s_CPU_inicial);
 		}
 	}
 	else if (param.choice_method == "semi_nn_heur") {
 		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		tour.semi_nn_heur(idata, param, randmt);
+		best_tour.semi_nn_heur(idata, param, randmt);
 		get_cpu_time(&s_CPU_final, &s_total_final);
 		total_s_CPU += (s_CPU_final - s_CPU_inicial);
 	}
 	else if (param.choice_method == "semi_dsnn_heur") {
 		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		tour.semi_double_sided_nn_heur(idata, param, randmt);
+		best_tour.semi_double_sided_nn_heur(idata, param, randmt);
+		get_cpu_time(&s_CPU_final, &s_total_final);
+		total_s_CPU += (s_CPU_final - s_CPU_inicial);
+	}
+	else if (param.choice_method == "multist_semi_nn_heur") {
+		best_tour.semi_nn_heur(idata, param, randmt);
+		best_tour.calc_tour_cost(idata);
+		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+		for (int i = 0; i < param.iterations; i++) {
+			Tour tour;
+			tour.semi_nn_heur(idata, param, randmt);
+			tour.calc_tour_cost(idata);
+			if (tour.sol_value < best_tour.sol_value) {
+				best_tour = tour;
+			}
+		}
+		get_cpu_time(&s_CPU_final, &s_total_final);
+		total_s_CPU += (s_CPU_final - s_CPU_inicial);
+	}
+	else if (param.choice_method == "multist_semi_dsnn_heur") {
+		best_tour.semi_double_sided_nn_heur(idata, param, randmt);
+		best_tour.calc_tour_cost(idata);
+		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
+		for (int i = 0; i < param.iterations; i++) {
+			Tour tour;
+			tour.semi_double_sided_nn_heur(idata, param, randmt);
+			tour.calc_tour_cost(idata);
+			if (tour.sol_value < best_tour.sol_value) {
+				best_tour = tour;
+			}
+		}
 		get_cpu_time(&s_CPU_final, &s_total_final);
 		total_s_CPU += (s_CPU_final - s_CPU_inicial);
 	}
 
-	tour.calc_tour_cost(idata);
+	best_tour.calc_tour_cost(idata);
 
 	std::ofstream file;
 	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);
@@ -136,12 +166,12 @@ int32_t main(int argc, char* argv[]) {
 	if (!file)
 		exit(1);
 
-	file << idata.instance_name << ';' << param.choice_method << ';' << tour.sol_value << ';';
+	file << idata.instance_name << ';' << param.choice_method << ';' << best_tour.sol_value << ';';
 	file << std::setprecision(6) << total_s_CPU << '\n';
 	file.close();
 
-	if (tour.is_tour_valid(idata)) {
-		tour.print_tour();
+	if (best_tour.is_tour_valid(idata)) {
+		best_tour.print_tour();
 		printf("Valid tour! :D\n");
 	}
 	else {
