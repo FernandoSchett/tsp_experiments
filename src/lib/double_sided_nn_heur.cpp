@@ -1,5 +1,5 @@
 #include "tour.hpp"
-
+#include "semi_greedy_schemes.hpp"
 
 void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
     std::vector<bool> visited(inst.n_nodes + 1, false);
@@ -54,4 +54,68 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
         }
     }
 
+}
+
+void Tour::semi_double_sided_nn_heur(IData& inst, Parameters& params, std::mt19937& randmt) {
+    std::vector<bool> visited(inst.n_nodes + 1, false);
+
+    // Initial node
+    int init_idx = randmt() % inst.n_nodes + 1; // integer between 1 <-> inst.n_nodes
+    int init_node = inst.node_coords[init_idx].id;
+    this->tour.push_back(init_node);
+    visited[init_node] = true;
+
+    // Insert nearest node to initial node
+    std::vector<Candidate> rcl;
+    for (int i = 1; i < inst.node_coords.size(); i++) {
+        int dist = inst.dist(inst.node_coords[init_node], inst.node_coords[i]);
+        if (i != init_node && !visited[i]) {
+            Candidate c;
+            c.node_orig = inst.node_coords[init_node].id;
+            c.node = inst.node_coords[i].id;
+            c.dist = dist;
+            rcl.push_back(c);
+        }
+    }
+    std::sort(rcl.begin(), rcl.end(), rcl_dist_lte_cmp);
+    Candidate chosen_candidate = choose_candidate(rcl, params, randmt);
+    this->tour.push_back(chosen_candidate.node);
+    visited[chosen_candidate.node] = true;
+
+    // Keep inserting nearest node of any of the two open extremities
+    while (this->tour.size() < inst.n_nodes) {
+        rcl.clear();
+        for (int i = 1; i < inst.node_coords.size(); i++) {
+            int dist = inst.dist(inst.node_coords[tour.front()], inst.node_coords[i]);
+            if (i != tour.front() && !visited[i]) {
+                Candidate c;
+                c.node_orig = inst.node_coords[tour.front()].id;
+                c.node = inst.node_coords[i].id;
+                c.dist = dist;
+                rcl.push_back(c);
+            }
+        }
+
+        for (int i = 1; i < inst.node_coords.size(); i++) {
+            int dist = inst.dist(inst.node_coords[tour.back()], inst.node_coords[i]);
+            if (i != tour.back() && !visited[i]) {
+                Candidate c;
+                c.node_orig = inst.node_coords[tour.back()].id;
+                c.node = inst.node_coords[i].id;
+                c.dist = dist;
+                rcl.push_back(c);
+            }
+        }
+        std::sort(rcl.begin(), rcl.end(), rcl_dist_lte_cmp);
+        Candidate chosen_candidate = choose_candidate(rcl, params, randmt);
+
+        if (chosen_candidate.node_orig == inst.node_coords[tour.front()].id) {
+            this->tour.push_front(chosen_candidate.node);
+            visited[chosen_candidate.node] = true;
+        }
+        else if (chosen_candidate.node_orig == inst.node_coords[tour.back()].id) {
+            this->tour.push_back(chosen_candidate.node);
+            visited[chosen_candidate.node] = true;
+        }
+    }
 }
