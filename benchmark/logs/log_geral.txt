@@ -1,0 +1,19 @@
+rm -f -r build
+rm -f TSP
+mkdir -p build/
+g++  -I src/include -c src/lib/io_inst.cpp -o build/io_inst.o
+mkdir -p build/
+g++  -I src/include -c src/lib/double_sided_nn_heur.cpp -o build/double_sided_nn_heur.o
+mkdir -p build/
+g++  -I src/include -c src/lib/get_sys_time.cpp -o build/get_sys_time.o
+mkdir -p build/
+g++  -I src/include -c src/lib/nn_heur.cpp -o build/nn_heur.o
+mkdir -p build/
+g++  -I src/include -c src/lib/dists.cpp -o build/dists.o
+mkdir -p build/
+g++  -I src/include -c src/lib/tour_solution.cpp -o build/tour_solution.o
+mkdir -p build/
+g++  -I src/include -c src/lib/semi_greedy_schemes.cpp -o build/semi_greedy_schemes.o
+g++  -I src/include src/tsp.cpp -o TSP build/io_inst.o build/double_sided_nn_heur.o build/get_sys_time.o build/nn_heur.o build/dists.o build/tour_solution.o build/semi_greedy_schemes.o
+./TSP -f  ./benchmark/instances/chosen_inst/bays29.tsp -i 100 -c multist_semi_nn_heur -m alpha --alpha=0.1 --seed=5 >> benchmark/logs/bays29.tsp.txt
+./TSP -f  ./benchmark/instances/chosen_inst/brd14051.tsp -i 100 -c multist_semi_nn_heur -m alpha --alpha=0.1 --seed=5 >> benchmark/logs/brd14051.tsp.txt

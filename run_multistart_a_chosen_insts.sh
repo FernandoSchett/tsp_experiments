@@ -2,20 +2,18 @@ inst=./benchmark/instances/chosen_inst/*
 make clean
 make 
 
-if [ -f "run_multistart_a_chosen_insts.txt" ]; then
-    rm "run_multistart_a_chosen_insts.txt"
-fi
+rm benchmark/logs/*.tsp.txt
 
-echo "---------------" >> results/run_multistart_a_chosen_insts.txt
-date +"%T" >> results/run_multistart_a_chosen_insts.txt
-
-
+alp='0.1'
+echo "--------------- Running with alp = $alp" >> ./results/time_result.txt
+date +"%T" >> ./results/time_result.txt
 
 for i in $inst
 do
-    ./TSP -f  $i -i 100 -c multist_semi_nn_heur -m alpha --alpha=0.1 --seed=5 >> run_multistart_a_chosen_insts.txt
+    inst_name=$( basename $i ) 
+    echo "./TSP -f  $i -i 100 -c multist_semi_nn_heur -m alpha --alpha=$alp --seed=5 >> benchmark/logs/$inst_name.txt" 
+    ./TSP -f  $i -i 100 -c multist_semi_nn_heur -m alpha --alpha=$alp --seed=5 >> benchmark/logs/$inst_name.txt
 done
 
-
-date +"%T" >> results/run_multistart_a_chosen_insts.txt
-echo "---------------" >> results/run_multistart_a_chosen_insts.txt
+date +"%T" >> ./results/time_result.txt
+echo "---------------" >> ./results/time_result.txt

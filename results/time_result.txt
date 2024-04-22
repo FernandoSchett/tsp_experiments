@@ -284,3 +284,37 @@ vm1084;multist_semi_nn_heur;1097280;0.1;2;alpha;14.2061
 ---------------
 14:20:39
 bays29;multist_semi_nn_heur;2399;0;2;k_best;0.012298
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.012983
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.012184
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.013288
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;-0.000402
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;1e-06
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.012319
+bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.011768
+bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.012204
+bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.01173
+bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.011495
+bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;-0.003897
+bays29;multist_semi_nn_heur;2134;0;0;alpha;100;0.011966
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.011321
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.003167
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.011247
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.013779
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.011764
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.011391
+--------------- Running with k = 2
+15:18:32
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.011425
+--------------- Running with k = 2
+15:19:30
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.011259
+--------------- Running with k = 0.1
+15:19:40
+15:19:41
+---------------
+--------------- Running with k = 0.1
+15:20:12
+bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.012498
+--------------- Running with alp = 0.1
+15:20:59
+bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.011793
