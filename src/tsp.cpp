@@ -181,7 +181,7 @@ int32_t main(int argc, char* argv[]) {
 	if (!file)
 		exit(1);
 
-	file << idata.instance_name << ';' << param.choice_method << ';' << best_tour.sol_value << ';';
+	file << idata.instance_name << ';' << param.choice_method << ';' << best_tour.sol_value << ';' << param.alpha << ';' << param.k_best << ';';
 	file << std::setprecision(6) << total_s_CPU << '\n';
 	file.close();
 
