@@ -133,18 +133,24 @@ int32_t main(int argc, char* argv[]) {
 		total_s_CPU += (s_CPU_final - s_CPU_inicial);
 	}
 	else if (param.choice_method == "multist_semi_nn_heur") {
+
+		int contador = 0;
 		best_tour.semi_nn_heur(idata, param, randmt);
 		best_tour.calc_tour_cost(idata);
 		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
 		get_cpu_time(&s_CPU_during, &s_total_during);
-		while (s_CPU_during - s_CPU_inicial < param.maxtime) {
+		while (contador < param.iterations) {
 			Tour tour;
 			tour.semi_nn_heur(idata, param, randmt);
+			
 			tour.calc_tour_cost(idata);
+			get_cpu_time(&s_CPU_during, &s_CPU_inicial);
+
 			if (tour.sol_value < best_tour.sol_value) {
+				printf("%d %lf %d\n", tour.sol_value, s_CPU_during - s_CPU_inicial, contador);
 				best_tour = tour;
 			}
-			get_cpu_time(&s_CPU_during, &s_CPU_inicial);
+			contador++;
 		}
 		get_cpu_time(&s_CPU_final, &s_total_final);
 		total_s_CPU += (s_CPU_final - s_CPU_inicial);
