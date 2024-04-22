@@ -1,3 +1,3 @@
 ./benchmark/instances/reduce_tests/brd14051.tsp
-multist_semi_nn_heurinstance_name: brd14051
+instance_name: brd14051
 n_nodes: 14051
