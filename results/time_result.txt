@@ -318,3 +318,35 @@ bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.012498
 --------------- Running with alp = 0.1
 15:20:59
 bays29;multist_semi_nn_heur;2175;0.1;2;alpha;100;0.011793
+--------------- Running with k = 2
+15:23:13
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.012228
+--------------- Running with k = 2
+15:25:18
+kroA100;multist_semi_nn_heur;30930;0;2;k_best;100;0.10458
+15:25:18
+---------------
+--------------- Running with k = 2
+15:27:26
+bays29;multist_semi_nn_heur;2399;0;2;k_best;100;0.01203
+brd14051;multist_semi_nn_heur;745338;0;2;k_best;100;2906.51
+d15112;multist_semi_nn_heur;2485229;0;2;k_best;100;3415.99
+d18512;multist_semi_nn_heur;1008367;0;2;k_best;100;5105.76
+d2103;multist_semi_nn_heur;143534;0;2;k_best;100;54.1817
+eil76;multist_semi_nn_heur;695;0;2;k_best;100;0.05958
+fl1400;multist_semi_nn_heur;32696;0;2;k_best;100;23.5613
+fl1577;multist_semi_nn_heur;41920;0;2;k_best;100;28.9932
+hk48;multist_semi_nn_heur;14624;0;2;k_best;100;0.018
+kroA100;multist_semi_nn_heur;30930;0;2;k_best;100;0.094374
+nrw1379;multist_semi_nn_heur;88017;0;2;k_best;100;23.4816
+pcb1173;multist_semi_nn_heur;94975;0;2;k_best;100;16.3434
+pla7397;multist_semi_nn_heur;39669603;0;2;k_best;100;749.269
+rl11849;multist_semi_nn_heur;1656635;0;2;k_best;100;2077.36
+rl1304;multist_semi_nn_heur;482849;0;2;k_best;100;21.1992
+rl1323;multist_semi_nn_heur;495155;0;2;k_best;100;21.7967
+si1032;multist_semi_nn_heur;105409;0;2;k_best;100;11.4277
+st70;multist_semi_nn_heur;950;0;2;k_best;100;0.050878
+u1060;multist_semi_nn_heur;370195;0;2;k_best;100;13.7779
+vm1084;multist_semi_nn_heur;414202;0;2;k_best;100;14.5165
+19:29:13
+---------------
