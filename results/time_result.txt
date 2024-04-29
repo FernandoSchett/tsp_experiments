@@ -377,3 +377,8 @@ fl1400;multist_semi_nn_heur;31091;0;2;k_best;500;112.594
 fl1400;multist_semi_nn_heur;107368;0.1;2;alpha;500;111.549
 fl1400;multist_semi_nn_heur;70983;0.05;2;alpha;500;112.636
 hk48;multist_semi_nn_heur;13181;0.1;2;alpha;500;0.124572
+bays29;multist_semi_nn_heur;2169;0.1;2;alpha;500;0.046207
+bays29;multist_semi_nn_heur;2169;0.1;2;alpha;500;0.045601
+bays29;multist_semi_nn_heur;2169;0.1;2;alpha;500;0.050381
+bays29;multist_semi_nn_heur;2169;0.1;2;alpha;500;0.051538
+bays29;multist_semi_nn_heur;2169;0.1;2;alpha;500;0.048536

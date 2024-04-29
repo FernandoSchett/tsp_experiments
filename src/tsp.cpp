@@ -8,6 +8,7 @@ std::mt19937 randmt;
 #include <iomanip>
 #include <getopt.h>
 #include <string>
+#include <filesystem>
 
 void show_help(const char* name) {
 	fprintf(stderr, "\
@@ -188,11 +189,39 @@ int32_t main(int argc, char* argv[]) {
 	file << std::setprecision(6) << total_s_CPU << '\n';
 	file.close();
 
+	
+
 	if (best_tour.is_tour_valid(idata)) {
 		best_tour.print_tour();
 		printf("Valid tour! :D\n");
-	}
-	else {
+		std::string caminho;
+
+		if(param.scheme == "alpha"){
+			caminho = "benchmark/solutions/" + param.choice_method + "_" + param.scheme + "_" + std::to_string(param.alpha);
+		}else if(param.scheme == "k_best"){
+			
+			caminho = "benchmark/solutions/" + param.choice_method + "_" + param.scheme + "_" + std::to_string(param.k_best);
+		}else{
+			
+			caminho = "benchmark/solutions/" + param.choice_method;
+		}
+
+		std::filesystem::path caminho_dir = caminho;
+		
+		std::filesystem::create_directory(caminho_dir);
+		std::ofstream ac_solution;
+		ac_solution.open(caminho + "/" + idata.instance_name + ".txt");
+		if (!file)
+			exit(1);
+
+		ac_solution << "TOUR:\n";
+		for (int node : best_tour.tour) {
+			ac_solution << " " << node;
+		}
+		ac_solution << "\n";
+		ac_solution << "COST = " << best_tour.sol_value << "\n";
+	
+	}else {
 		printf("Invalid tour... :(\n");
 	}
 	return 0;
