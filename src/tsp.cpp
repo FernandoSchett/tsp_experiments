@@ -20,6 +20,7 @@ void show_help(const char* name) {
 			-f,  	--filename     		set filename.\n\
 			-c,  	--choice_method     set choice_method.\n\
 			-m, 	--scheme 			set scheme for semi-greedy algorithm.\n\
+			-p, 	--stop_crit 		set stop criterion for choice_method.\n\
 			-t, 	--maxtime 			set maxtime in seconds.\n\
 			-i,		--iterations		set multi-start number of iterations.\n", name);
 	exit(-1);
@@ -38,9 +39,10 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"alpha"			, required_argument , 0 , 'a' },
 		{"filename"			, required_argument , 0 , 'f' },
 		{"iterations"		, required_argument , 0 , 'i' },
-		{"maxtime"			, required_argument , 0 , 'i' },
+		{"maxtime"			, required_argument , 0 , 't' },
 		{"choice_method"	, required_argument , 0 , 'c' },
 		{"scheme"			, required_argument , 0 , 'm' },
+		{"stop_crit"		, required_argument , 0 , 'p' },
 		{0       			, 0 				, 0	,  0  },
 	};
 
@@ -48,7 +50,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:i:t:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:p:i:t:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -70,6 +72,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			break;
 		case 'm': /* -m ou --scheme */
 			param.scheme = optarg;
+			break;
+		case 'p': /* -p ou --stop_crit */
+			param.stop_criterion = optarg;
 			break;
 		case 'i': /* -i ou --iterations */
 			param.iterations = std::atoi(optarg);
