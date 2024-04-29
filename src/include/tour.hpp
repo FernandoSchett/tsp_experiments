@@ -8,6 +8,7 @@
 #include <vector>
 #include <limits.h>
 #include <algorithm>
+#include <filesystem>
 
 struct Candidate {
     int node_orig;
@@ -27,6 +28,7 @@ public:
     void calc_tour_cost(IData& inst);
     bool is_tour_valid(IData& inst);
     void print_tour();
+    void save_solution_to_file(IData& idata, Parameters& params);
 };
 
 #endif

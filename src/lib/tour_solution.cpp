@@ -41,3 +41,30 @@ void Tour::print_tour() {
     printf("\n");
     printf("COST = %d\n", this->sol_value);
 }
+
+void Tour::save_solution_to_file(IData& idata, Parameters& params) {
+    std::string caminho;
+
+    if (params.scheme == "alpha") {
+        caminho = "benchmark/solutions/" + params.choice_method + "_" + params.scheme + "_" + std::to_string(params.alpha) + "_" + std::to_string(params.iterations);
+    }
+    else if (params.scheme == "k_best") {
+        caminho = "benchmark/solutions/" + params.choice_method + "_" + params.scheme + "_" + std::to_string(params.k_best) + "_" + std::to_string(params.iterations);
+    }
+    else {
+        caminho = "benchmark/solutions/" + params.choice_method + "_" + std::to_string(params.iterations);
+    }
+
+    std::filesystem::create_directory(caminho);
+    std::ofstream ac_solution;
+    ac_solution.open(caminho + "/" + idata.instance_name + ".txt");
+    if (!ac_solution)
+        exit(1);
+
+    ac_solution << "TOUR:\n";
+    for (int node : this->tour) {
+        ac_solution << " " << node;
+    }
+    ac_solution << "\n";
+    ac_solution << "COST = " << this->sol_value << "\n";
+}

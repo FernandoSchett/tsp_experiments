@@ -1,6 +1,6 @@
 #include "choice_method.hpp"
 
-void run_choice_method(Tour &best_tour, IData &idata, Parameters &param, CPUTime &cpu_time, std::mt19937& randmt){
+void run_choice_method(Tour& best_tour, IData& idata, Parameters& param, CPUTime& cpu_time, std::mt19937& randmt) {
 	cpu_time.total_s_CPU = 0;
 
 	if (param.choice_method == "nn_heur") {
@@ -74,6 +74,10 @@ void run_choice_method(Tour &best_tour, IData &idata, Parameters &param, CPUTime
 		}
 		get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
 		cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
+	}
+	else {
+		printf("ERROR: No choice method selected.\n");
+		exit(0);
 	}
 
 	best_tour.calc_tour_cost(idata);

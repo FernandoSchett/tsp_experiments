@@ -14,7 +14,7 @@ INCLUDES := -I src/include
 SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp \
 	src/lib/get_sys_time.cpp src/lib/nn_heur.cpp \
 	src/lib/dists.cpp src/lib/tour_solution.cpp \
-	src/lib/semi_greedy_schemes.cpp src/lib/heuristic_selector.cpp
+	src/lib/semi_greedy_schemes.cpp src/lib/choice_method.cpp
 
 # object files
 # src/lib/ -> build/
@@ -55,9 +55,9 @@ build/semi_greedy_schemes.o: src/lib/semi_greedy_schemes.cpp
 	mkdir -p $(dir $@)
 	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/semi_greedy_schemes.cpp -o $@
 
-build/heuristic_selector.o: src/lib/heuristic_selector.cpp
+build/choice_method.o: src/lib/choice_method.cpp
 	mkdir -p $(dir $@)
-	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/heuristic_selector.cpp -o $@
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/choice_method.cpp -o $@
 
 clean:
 	$(RM) -r build
