@@ -4,6 +4,7 @@ std::mt19937 randmt;
 #include "io_inst.hpp"
 #include "get_sys_time.hpp"
 #include "tour.hpp"
+#include "choice_method.hpp"
 #include <iostream>
 #include <iomanip>
 #include <getopt.h>
@@ -89,7 +90,7 @@ int32_t main(int argc, char* argv[]) {
 
 	Parameters param;
 	IData idata;
-	double s_CPU_inicial, s_CPU_during, s_CPU_final, s_total_inicial, s_total_during, s_total_final;
+	CPUTime cpu_time;
 
 	read_args(argc, argv, param);
 
@@ -100,84 +101,7 @@ int32_t main(int argc, char* argv[]) {
 	idata.read_input(param);
 
 	Tour best_tour;
-
-	double total_s_CPU = 0;
-
-	if (param.choice_method == "nn_heur") {
-		for (int i = 0; i < param.iterations; i++) {
-			best_tour.tour.clear();
-			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-			best_tour.nn_heur(idata, param);
-			get_cpu_time(&s_CPU_final, &s_total_final);
-			total_s_CPU += (s_CPU_final - s_CPU_inicial);
-		}
-	}
-	else if (param.choice_method == "dsnn_heur") {
-		for (int i = 0; i < param.iterations; i++) {
-			best_tour.tour.clear();
-			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-			best_tour.double_sided_nn_heur(idata, param);
-			get_cpu_time(&s_CPU_final, &s_total_final);
-			total_s_CPU += (s_CPU_final - s_CPU_inicial);
-		}
-	}
-	else if (param.choice_method == "semi_nn_heur") {
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		best_tour.semi_nn_heur(idata, param, randmt);
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-	else if (param.choice_method == "semi_dsnn_heur") {
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		best_tour.semi_double_sided_nn_heur(idata, param, randmt);
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-	else if (param.choice_method == "multist_semi_nn_heur") {
-
-		int contador = 0;
-		best_tour.nn_heur(idata, param);
-
-		best_tour.calc_tour_cost(idata);
-		printf("%d %d\n", best_tour.sol_value, contador);
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		get_cpu_time(&s_CPU_during, &s_total_during);
-		while (contador < param.iterations) {
-			Tour tour;
-			tour.semi_nn_heur(idata, param, randmt);
-			
-			tour.calc_tour_cost(idata);
-
-			get_cpu_time(&s_CPU_during, &s_CPU_inicial);
-			if (tour.sol_value < best_tour.sol_value) {
-				best_tour = tour;
-			}
-
-			printf("%d %d %lf %d\n", best_tour.sol_value, tour.sol_value, s_CPU_during - s_CPU_inicial, contador);
-			contador++;
-		}
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-	else if (param.choice_method == "multist_semi_dsnn_heur") {
-		best_tour.double_sided_nn_heur(idata, param);
-		best_tour.calc_tour_cost(idata);
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		get_cpu_time(&s_CPU_during, &s_total_during);
-		while (s_CPU_during - s_CPU_inicial < param.maxtime) {
-			Tour tour;
-			tour.semi_double_sided_nn_heur(idata, param, randmt);
-			tour.calc_tour_cost(idata);
-			if (tour.sol_value < best_tour.sol_value) {
-				best_tour = tour;
-			}
-			get_cpu_time(&s_CPU_during, &s_total_during);
-		}
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-
-	best_tour.calc_tour_cost(idata);
+	run_choice_method(best_tour, idata, param, cpu_time, randmt);
 
 	std::ofstream file;
 	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);
@@ -186,7 +110,7 @@ int32_t main(int argc, char* argv[]) {
 		exit(1);
 
 	file << idata.instance_name << ';' << param.choice_method << ';' << best_tour.sol_value << ';' << param.alpha << ';' << param.k_best << ';' << param.scheme << ';' << param.iterations << ';';
-	file << std::setprecision(6) << total_s_CPU << '\n';
+	file << std::setprecision(6) << cpu_time.total_s_CPU << '\n';
 	file.close();
 
 	
