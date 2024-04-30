@@ -4,43 +4,25 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 	cpu_time.total_s_CPU = 0;
 
 	if (params.choice_method == "nn_heur") {
-		if (params.stop_criterion == "iter") {
-			for (int i = 0; i < params.iterations; i++) {
-				best_tour.tour.clear();
-				get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
-				best_tour.nn_heur(idata, params);
-				get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
-				cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
-			}
-		}
-		else if (params.stop_criterion == "time") {
-			while (cpu_time.total_s_CPU < params.maxtime) {
-				best_tour.tour.clear();
-				get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
-				best_tour.nn_heur(idata, params);
-				get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
-				cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
-			}
+		int i = 0;
+		while (!is_stop_criterion_satsfied(params, cpu_time.total_s_CPU, i)) {
+			best_tour.tour.clear();
+			get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
+			best_tour.nn_heur(idata, params);
+			get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
+			cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
+			i++;
 		}
 	}
 	else if (params.choice_method == "dsnn_heur") {
-		if (params.stop_criterion == "iter") {
-			for (int i = 0; i < params.iterations; i++) {
-				best_tour.tour.clear();
-				get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
-				best_tour.double_sided_nn_heur(idata, params);
-				get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
-				cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
-			}
-		}
-		else if (params.stop_criterion == "time") {
-			while (cpu_time.total_s_CPU < params.maxtime) {
-				best_tour.tour.clear();
-				get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
-				best_tour.double_sided_nn_heur(idata, params);
-				get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
-				cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
-			}
+		int i = 0;
+		while (!is_stop_criterion_satsfied(params, cpu_time.total_s_CPU, i)) {
+			best_tour.tour.clear();
+			get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
+			best_tour.double_sided_nn_heur(idata, params);
+			get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
+			cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
+			i++;
 		}
 	}
 	else if (params.choice_method == "semi_nn_heur") {
@@ -69,12 +51,12 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 	best_tour.calc_tour_cost(idata);
 }
 
-bool is_stop_criterion_satsfied(Parameters& params, CPUTime& cpu_time, int i) {
+bool is_stop_criterion_satsfied(Parameters& params, double t, int i) {
 	if (params.stop_criterion == "iter") {
 		return i >= params.iterations;
 	}
 	else if (params.stop_criterion == "time") {
-		return cpu_time.s_CPU_during - cpu_time.s_CPU_inicial >= params.maxtime;
+		return t >= params.maxtime;
 	}
 	else {
 		printf("ERROR: stop criterion selected is not available\n");
@@ -90,7 +72,7 @@ void multist_semi_nn_heur(Tour& best_tour, IData& idata, Parameters& params, CPU
 	int i = 0;
 	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-	while (!is_stop_criterion_satsfied(params, cpu_time, i)) {
+	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_nn_heur(idata, params, randmt);
 		tour.calc_tour_cost(idata);
@@ -115,7 +97,7 @@ void multist_semi_dsnn_heur(Tour& best_tour, IData& idata, Parameters& params, C
 	int i = 0;
 	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-	while (!is_stop_criterion_satsfied(params, cpu_time, i)) {
+	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_double_sided_nn_heur(idata, params, randmt);
 		tour.calc_tour_cost(idata);
