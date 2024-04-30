@@ -41,3 +41,18 @@ void Tour::print_tour() {
     printf("\n");
     printf("COST = %d\n", this->sol_value);
 }
+
+void Tour::save_solution_to_file(IData& idata, Parameters& params) {
+    std::filesystem::create_directory("benchmark/solutions/" + params.path_to);
+    std::ofstream ac_solution;
+    ac_solution.open("benchmark/solutions/" + params.path_to + "/" + idata.instance_name + ".txt");
+    if (!ac_solution)
+        exit(1);
+
+    ac_solution << "TOUR:\n";
+    for (int node : this->tour) {
+        ac_solution << " " << node;
+    }
+    ac_solution << "\n";
+    ac_solution << "COST = " << this->sol_value << "\n";
+}

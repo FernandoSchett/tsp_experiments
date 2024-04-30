@@ -1,3 +1,4 @@
+cd ..
 inst=./benchmark/instances/reduce_tests/*
 make clean
 make 
@@ -7,7 +8,7 @@ if [ -f "testes_reduzidos.txt" ]; then
 fi
 
 echo "---------------" >> results/testes_reduzidos.txt
-date +"%T" >> results/testes_reduzidos.txt
+date >> results/testes_reduzidos.txt
 
 alpha="0.1 0.2 0.3"
 k="2 3 4"
@@ -28,5 +29,5 @@ do
     done
 done
 
-date +"%T" >> results/testes_reduzidos.txt
+date >> results/testes_reduzidos.txt
 echo "---------------" >> results/testes_reduzidos.txt

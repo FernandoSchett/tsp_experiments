@@ -4,11 +4,11 @@ std::mt19937 randmt;
 #include "io_inst.hpp"
 #include "get_sys_time.hpp"
 #include "tour.hpp"
+#include "choice_method.hpp"
 #include <iostream>
 #include <iomanip>
 #include <getopt.h>
 #include <string>
-#include <filesystem>
 
 void show_help(const char* name) {
 	fprintf(stderr, "\
@@ -20,6 +20,7 @@ void show_help(const char* name) {
 			-f,  	--filename     		set filename.\n\
 			-c,  	--choice_method     set choice_method.\n\
 			-m, 	--scheme 			set scheme for semi-greedy algorithm.\n\
+			-p, 	--stop_crit 		set stop criterion for choice_method.\n\
 			-t, 	--maxtime 			set maxtime in seconds.\n\
 			-i,		--iterations		set multi-start number of iterations.\n", name);
 	exit(-1);
@@ -38,9 +39,10 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"alpha"			, required_argument , 0 , 'a' },
 		{"filename"			, required_argument , 0 , 'f' },
 		{"iterations"		, required_argument , 0 , 'i' },
-		{"maxtime"			, required_argument , 0 , 'i' },
+		{"maxtime"			, required_argument , 0 , 't' },
 		{"choice_method"	, required_argument , 0 , 'c' },
 		{"scheme"			, required_argument , 0 , 'm' },
+		{"stop_crit"		, required_argument , 0 , 'p' },
 		{0       			, 0 				, 0	,  0  },
 	};
 
@@ -48,7 +50,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:i:t:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:p:i:t:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -71,6 +73,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		case 'm': /* -m ou --scheme */
 			param.scheme = optarg;
 			break;
+		case 'p': /* -p ou --stop_crit */
+			param.stop_criterion = optarg;
+			break;
 		case 'i': /* -i ou --iterations */
 			param.iterations = std::atoi(optarg);
 			break;
@@ -82,6 +87,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			exit(-1);
 		}
 	}
+	param.build_path_to();
 }
 
 int32_t main(int argc, char* argv[]) {
@@ -89,7 +95,7 @@ int32_t main(int argc, char* argv[]) {
 
 	Parameters param;
 	IData idata;
-	double s_CPU_inicial, s_CPU_during, s_CPU_final, s_total_inicial, s_total_during, s_total_final;
+	CPUTime cpu_time;
 
 	read_args(argc, argv, param);
 
@@ -100,128 +106,25 @@ int32_t main(int argc, char* argv[]) {
 	idata.read_input(param);
 
 	Tour best_tour;
+	run_choice_method(best_tour, idata, param, cpu_time, randmt);
 
-	double total_s_CPU = 0;
-
-	if (param.choice_method == "nn_heur") {
-		for (int i = 0; i < param.iterations; i++) {
-			best_tour.tour.clear();
-			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-			best_tour.nn_heur(idata, param);
-			get_cpu_time(&s_CPU_final, &s_total_final);
-			total_s_CPU += (s_CPU_final - s_CPU_inicial);
-		}
-	}
-	else if (param.choice_method == "dsnn_heur") {
-		for (int i = 0; i < param.iterations; i++) {
-			best_tour.tour.clear();
-			get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-			best_tour.double_sided_nn_heur(idata, param);
-			get_cpu_time(&s_CPU_final, &s_total_final);
-			total_s_CPU += (s_CPU_final - s_CPU_inicial);
-		}
-	}
-	else if (param.choice_method == "semi_nn_heur") {
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		best_tour.semi_nn_heur(idata, param, randmt);
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-	else if (param.choice_method == "semi_dsnn_heur") {
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		best_tour.semi_double_sided_nn_heur(idata, param, randmt);
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-	else if (param.choice_method == "multist_semi_nn_heur") {
-
-		int contador = 0;
-		best_tour.nn_heur(idata, param);
-
-		best_tour.calc_tour_cost(idata);
-		printf("%d %d\n", best_tour.sol_value, contador);
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		get_cpu_time(&s_CPU_during, &s_total_during);
-		while (contador < param.iterations) {
-			Tour tour;
-			tour.semi_nn_heur(idata, param, randmt);
-			
-			tour.calc_tour_cost(idata);
-
-			get_cpu_time(&s_CPU_during, &s_CPU_inicial);
-			if (tour.sol_value < best_tour.sol_value) {
-				best_tour = tour;
-			}
-
-			printf("%d %d %lf %d\n", best_tour.sol_value, tour.sol_value, s_CPU_during - s_CPU_inicial, contador);
-			contador++;
-		}
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-	else if (param.choice_method == "multist_semi_dsnn_heur") {
-		best_tour.double_sided_nn_heur(idata, param);
-		best_tour.calc_tour_cost(idata);
-		get_cpu_time(&s_CPU_inicial, &s_total_inicial);
-		get_cpu_time(&s_CPU_during, &s_total_during);
-		while (s_CPU_during - s_CPU_inicial < param.maxtime) {
-			Tour tour;
-			tour.semi_double_sided_nn_heur(idata, param, randmt);
-			tour.calc_tour_cost(idata);
-			if (tour.sol_value < best_tour.sol_value) {
-				best_tour = tour;
-			}
-			get_cpu_time(&s_CPU_during, &s_total_during);
-		}
-		get_cpu_time(&s_CPU_final, &s_total_final);
-		total_s_CPU += (s_CPU_final - s_CPU_inicial);
-	}
-
-	best_tour.calc_tour_cost(idata);
-
+	std::filesystem::create_directory("./results/" + param.path_to);
 	std::ofstream file;
-	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);
+	file.open("./results/" + param.path_to + "/time_result.txt", std::ofstream::out | std::ofstream::app);
 
 	if (!file)
 		exit(1);
 
 	file << idata.instance_name << ';' << param.choice_method << ';' << best_tour.sol_value << ';' << param.alpha << ';' << param.k_best << ';' << param.scheme << ';' << param.iterations << ';';
-	file << std::setprecision(6) << total_s_CPU << '\n';
+	file << std::setprecision(6) << cpu_time.total_s_CPU << '\n';
 	file.close();
-
-	
 
 	if (best_tour.is_tour_valid(idata)) {
 		best_tour.print_tour();
 		printf("Valid tour! :D\n");
-		std::string caminho;
-
-		if(param.scheme == "alpha"){
-			caminho = "benchmark/solutions/" + param.choice_method + "_" + param.scheme + "_" + std::to_string(param.alpha);
-		}else if(param.scheme == "k_best"){
-			
-			caminho = "benchmark/solutions/" + param.choice_method + "_" + param.scheme + "_" + std::to_string(param.k_best);
-		}else{
-			
-			caminho = "benchmark/solutions/" + param.choice_method;
-		}
-
-		std::filesystem::path caminho_dir = caminho;
-		
-		std::filesystem::create_directory(caminho_dir);
-		std::ofstream ac_solution;
-		ac_solution.open(caminho + "/" + idata.instance_name + ".txt");
-		if (!file)
-			exit(1);
-
-		ac_solution << "TOUR:\n";
-		for (int node : best_tour.tour) {
-			ac_solution << " " << node;
-		}
-		ac_solution << "\n";
-		ac_solution << "COST = " << best_tour.sol_value << "\n";
-	
-	}else {
+		best_tour.save_solution_to_file(idata, param);
+	}
+	else {
 		printf("Invalid tour... :(\n");
 	}
 	return 0;
