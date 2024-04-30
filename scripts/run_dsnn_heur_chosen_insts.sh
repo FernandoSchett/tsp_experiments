@@ -12,6 +12,7 @@ rm benchmark/logs/dsnn_heur_i${iter}/*.tsp.txt
 
 echo "--------------- Running dsnn_heur with $iter iter" >> ./results/dsnn_heur_i${iter}/time_result.txt
 date >> ./results/dsnn_heur_i${iter}/time_result.txt
+echo $USER >> ./results/dsnn_heur_i${iter}/time_result.txt
 
 for i in $inst
 do
@@ -21,4 +22,5 @@ do
 done
 
 date >> ./results/dsnn_heur_i${iter}/time_result.txt
+echo $USER >> ./results/dsnn_heur_i${iter}/time_result.txt
 echo "---------------" >> ./results/dsnn_heur_i${iter}/time_result.txt

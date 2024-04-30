@@ -9,6 +9,7 @@ fi
 
 echo "---------------" >> results/testes_reduzidos.txt
 date >> results/testes_reduzidos.txt
+echo $USER >> results/testes_reduzidos.txt
 
 alpha="0.1 0.2 0.3"
 k="2 3 4"
@@ -30,4 +31,5 @@ do
 done
 
 date >> results/testes_reduzidos.txt
+echo $USER >> results/testes_reduzidos.txt
 echo "---------------" >> results/testes_reduzidos.txt

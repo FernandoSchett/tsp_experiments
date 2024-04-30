@@ -14,6 +14,7 @@ rm benchmark/logs/multist_semi_nn_heur_i${iter}_k${k}_s${s}/*.tsp.txt
 
 echo "--------------- Running with k = $k" >> ./results/multist_semi_nn_heur_i${iter}_k${k}_s${s}/time_result.txt
 date >> ./results/multist_semi_nn_heur_i${iter}_k${k}_s${s}/time_result.txt
+echo $USER >> ./results/multist_semi_nn_heur_i${iter}_k${k}_s${s}/time_result.txt
 
 for i in $inst
 do
@@ -23,4 +24,5 @@ do
 done
 
 date >> ./results/multist_semi_nn_heur_i${iter}_k${k}_s${s}/time_result.txt
+echo $USER >> ./results/multist_semi_nn_heur_i${iter}_k${k}_s${s}/time_result.txt
 echo "---------------" >> ./results/multist_semi_nn_heur_i${iter}_k${k}_s${s}/time_result.txt
