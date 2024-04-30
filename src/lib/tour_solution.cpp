@@ -43,21 +43,9 @@ void Tour::print_tour() {
 }
 
 void Tour::save_solution_to_file(IData& idata, Parameters& params) {
-    std::string path_to;
-
-    if (params.scheme == "alpha") {
-        path_to = "benchmark/solutions/" + params.choice_method + "_" + params.stop_criterion + "_" + std::to_string(params.iterations) + "_" + params.scheme + "_" + std::to_string(params.alpha);
-    }
-    else if (params.scheme == "k_best") {
-        path_to = "benchmark/solutions/" + params.choice_method + "_" + params.stop_criterion + "_" + std::to_string(params.iterations) + "_" + params.scheme + "_" + std::to_string(params.k_best);
-    }
-    else {
-        path_to = "benchmark/solutions/" + params.choice_method + "_" + params.stop_criterion + "_" + std::to_string(params.iterations);
-    }
-
-    std::filesystem::create_directory(path_to);
+    std::filesystem::create_directory("benchmark/solutions/" + params.path_to);
     std::ofstream ac_solution;
-    ac_solution.open(path_to + "/" + idata.instance_name + ".txt");
+    ac_solution.open("benchmark/solutions/" + params.path_to + "/" + idata.instance_name + ".txt");
     if (!ac_solution)
         exit(1);
 

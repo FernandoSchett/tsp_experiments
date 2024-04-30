@@ -87,6 +87,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			exit(-1);
 		}
 	}
+	param.build_path_to();
 }
 
 int32_t main(int argc, char* argv[]) {
@@ -107,8 +108,9 @@ int32_t main(int argc, char* argv[]) {
 	Tour best_tour;
 	run_choice_method(best_tour, idata, param, cpu_time, randmt);
 
+	std::filesystem::create_directory("./results/" + param.path_to);
 	std::ofstream file;
-	file.open("./results/time_result.txt", std::ofstream::out | std::ofstream::app);
+	file.open("./results/" + param.path_to + "/time_result.txt", std::ofstream::out | std::ofstream::app);
 
 	if (!file)
 		exit(1);
@@ -120,8 +122,9 @@ int32_t main(int argc, char* argv[]) {
 	if (best_tour.is_tour_valid(idata)) {
 		best_tour.print_tour();
 		printf("Valid tour! :D\n");
-		best_tour.save_solution_to_file(idata, param);	
-	}else {
+		best_tour.save_solution_to_file(idata, param);
+	}
+	else {
 		printf("Invalid tour... :(\n");
 	}
 	return 0;
