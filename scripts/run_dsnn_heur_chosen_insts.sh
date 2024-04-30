@@ -10,7 +10,7 @@ mkdir results/dsnn_heur_i${iter}
 
 rm benchmark/logs/dsnn_heur_i${iter}/*.tsp.txt
 
-echo "--------------- Running dsnn_heur with 50 iter" >> ./results/dsnn_heur_i${iter}/time_result.txt
+echo "--------------- Running dsnn_heur with $iter iter" >> ./results/dsnn_heur_i${iter}/time_result.txt
 date >> ./results/dsnn_heur_i${iter}/time_result.txt
 
 for i in $inst
