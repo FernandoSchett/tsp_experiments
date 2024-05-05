@@ -29,6 +29,7 @@ public:
     bool is_tour_valid(IData& inst);
     void print_tour();
     void save_solution_to_file(IData& idata, Parameters& params);
+    void read_solution_file(IData& idata, Parameters& params);
 };
 
 #endif

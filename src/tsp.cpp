@@ -21,6 +21,7 @@ void show_help(const char* name) {
 			-c,  	--choice_method     set choice_method.\n\
 			-m, 	--scheme 			set scheme for semi-greedy algorithm.\n\
 			-p, 	--stop_crit 		set stop criterion for choice_method.\n\
+			-l, 	--path_load_sol		set path to load solution.\n\
 			-t, 	--maxtime 			set maxtime in seconds.\n\
 			-i,		--iterations		set multi-start number of iterations.\n", name);
 	exit(-1);
@@ -43,6 +44,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"choice_method"	, required_argument , 0 , 'c' },
 		{"scheme"			, required_argument , 0 , 'm' },
 		{"stop_crit"		, required_argument , 0 , 'p' },
+		{"path_load_sol" 	, required_argument , 0 , 'l' },
 		{0       			, 0 				, 0	,  0  },
 	};
 
@@ -50,7 +52,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:p:i:t:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:p:i:t:l:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -81,6 +83,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			break;
 		case 't': /* -t ou --maxtime */
 			param.maxtime = std::atoi(optarg);
+			break;
+		case 'l': /* -l ou --path_load_sol */
+			param.path_load_solution = optarg;
 			break;
 		default:
 			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
