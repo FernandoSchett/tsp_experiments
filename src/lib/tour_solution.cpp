@@ -47,7 +47,7 @@ void Tour::save_solution_to_file(IData& idata, Parameters& params) {
     std::ofstream ac_solution;
     ac_solution.open("benchmark/solutions/" + params.path_to + "/" + idata.instance_name + ".txt");
     if (!ac_solution){
-        printf("The solution file was not opened, thus solution couldn't be written into a file.\n")
+        printf("The solution file was not opened, thus solution couldn't be written into a file.\n");
         exit(1);
     }
 
@@ -64,7 +64,7 @@ void Tour::read_solution_file(IData& idata, Parameters& params) {
     std::ifstream ac_solution;
     ac_solution.open("benchmark/solutions/" + params.path_load_solution + "/" + idata.instance_name + ".txt", std::ifstream::in);
     if (!ac_solution)
-        printf("The solution file was not opened, thus solution file couldn't be read.\n")
+        printf("The solution file was not opened, thus solution file couldn't be read.\n");
         exit(1);
 
     this->tour.clear();
