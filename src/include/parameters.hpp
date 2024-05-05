@@ -14,6 +14,7 @@ public:
 	std::string choice_method;
 	std::string stop_criterion; // "iter" or "time"
 	std::string path_to;
+	std::string path_load_solution;
 
 	void build_path_to();
 };
