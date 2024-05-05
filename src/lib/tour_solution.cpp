@@ -67,6 +67,8 @@ void Tour::read_solution_file(IData& idata, Parameters& params) {
         printf("The solution file was not opened, thus solution file couldn't be read.\n")
         exit(1);
 
+    this->tour.clear();
+
     std::string aux;
     ac_solution >> aux;
     assert(aux == "TOUR:");
