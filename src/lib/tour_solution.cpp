@@ -63,9 +63,10 @@ void Tour::save_solution_to_file(IData& idata, Parameters& params) {
 void Tour::read_solution_file(IData& idata, Parameters& params) {
     std::ifstream ac_solution;
     ac_solution.open("benchmark/solutions/" + params.path_load_solution + "/" + idata.instance_name + ".txt", std::ifstream::in);
-    if (!ac_solution)
+    if (!ac_solution){
         printf("The solution file was not opened, thus solution file couldn't be read.\n");
         exit(1);
+    }
 
     this->tour.clear();
 
