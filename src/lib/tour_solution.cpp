@@ -13,7 +13,7 @@ void Tour::calc_tour_cost(IData& inst) {
 }
 
 bool Tour::is_tour_valid(IData& inst) {
-
+    
     if (this->tour.size() != inst.n_nodes) {
         return false;
     }
@@ -29,6 +29,22 @@ bool Tour::is_tour_valid(IData& inst) {
         if (visited[i] != 1) {
             return false;
         }
+    }
+    
+    int cost = 0;
+    std::list<int>::iterator prev = this->tour.begin();
+    std::list<int>::iterator curr = this->tour.begin(); curr++;
+
+    while (curr != this->tour.end()) {
+        cost += inst.dist(inst.node_coords[*prev], inst.node_coords[*curr]);
+        prev++;
+        curr++;
+    }
+    cost += inst.dist(inst.node_coords[*prev], inst.node_coords[this->tour.front()]);
+
+    if (cost != this->sol_value){
+        printf("Sol value is incorrect: expected (%d) - calculated (%d)", cost, this->sol_value);
+        return false;
     }
     return true;
 }

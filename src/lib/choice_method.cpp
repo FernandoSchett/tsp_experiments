@@ -45,17 +45,9 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 		multist_semi_dsnn_heur(best_tour, idata, params, cpu_time, randmt);
 	}
 	else if(params.choice_method == "local_search"){
-		if(params.scheme == "best_improvement"){
-			best_improvement(best_tour, idata, params, cpu_time);
-		}else if(params.scheme == "first_improvement"){
-			first_improvement(best_tour, idata, params, cpu_time);
-		
-		}else{
-			printf("ERROR: No scheme detected.\n");
-			exit(0);
-		}
-	}
-	else {
+		best_tour.read_solution_file(idata, params);
+		local_search(best_tour, idata, params, cpu_time);
+	}else {
 		printf("ERROR: No choice method selected.\n");
 		exit(0);
 	}
@@ -126,29 +118,17 @@ void multist_semi_dsnn_heur(Tour& best_tour, IData& idata, Parameters& params, C
 	cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
 }
 
-
-void best_improvement(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time) {
+void local_search(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time) {
+	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
+	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
 	
-	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
-	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-
-	while(!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)){
-
-	}
-
-	cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
-}
-
-void first_improvement(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time) {
-	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
-	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
 	bool improvement = true;
 	
 	while(improvement){
 		improvement = false;
-		best_tour.two_opt(idata, params);
+		best_tour.two_opt(idata, params, improvement);
+		//best_tour.print_tour();
 	}
-
 	cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
 
 }

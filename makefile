@@ -15,7 +15,8 @@ SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp \
 	src/lib/get_sys_time.cpp src/lib/nn_heur.cpp \
 	src/lib/dists.cpp src/lib/tour_solution.cpp \
 	src/lib/semi_greedy_schemes.cpp src/lib/choice_method.cpp \
-	src/lib/parameters.cpp
+	src/lib/parameters.cpp \
+	src/lib/local_search.cpp
 
 # object files
 # src/lib/ -> build/
@@ -63,6 +64,10 @@ build/choice_method.o: src/lib/choice_method.cpp
 build/parameters.o: src/lib/parameters.cpp
 	mkdir -p $(dir $@)
 	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/parameters.cpp -o $@
+
+build/local_search.o: src/lib/local_search.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/local_search.cpp -o $@
 
 clean:
 	$(RM) -r build

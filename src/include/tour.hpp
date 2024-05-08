@@ -25,6 +25,8 @@ public:
     void semi_double_sided_nn_heur(IData& inst, Parameters& params, std::mt19937& randmt);
     void nn_heur(IData& inst, Parameters& params);
     void semi_nn_heur(IData& inst, Parameters& params, std::mt19937& randmt);
+
+    void two_opt(IData& inst, Parameters& params, bool& improvement);
     void calc_tour_cost(IData& inst);
     bool is_tour_valid(IData& inst);
     void print_tour();
