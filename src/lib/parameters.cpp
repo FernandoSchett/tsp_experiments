@@ -16,9 +16,9 @@ void Parameters::build_path_to(){
     }else if (this->scheme == "k_best") {
         this->path_to += "_k" + std::to_string(this->k_best);
         this->path_to += "_s" + std::to_string(this->seed_rand);
-    }else if (this->scheme == "first_improvement") {
-        this->path_to += "_first_improvement";
-    }else if (this->scheme == "best_improvement") {
-        this->path_to += "_best_improvement"; 
+    }
+    
+    if (this->choice_method == "local_search") {
+        this->path_to += "_" + this->local_search;
     }
 }
