@@ -28,8 +28,11 @@ public:
     void nn_heur(IData& inst, Parameters& params);
     void semi_nn_heur(IData& inst, Parameters& params, std::mt19937& randmt);
 
-    void two_opt_first_imprv(IData& inst, Parameters& params, bool& improvement);
-    void two_opt_best_imprv(IData& inst, Parameters& params, bool& improvement);
+    void two_opt_first_imprv(IData& inst, Parameters& params, CPUTime& cpu_time);
+    void two_opt_best_imprv(IData& inst, Parameters& params, CPUTime& cpu_time);
+
+    void two_opt_best_imprv_cand_list(IData& inst, Parameters& params, CPUTime& cpu_time);
+    void two_opt_first_imprv_circ_search(IData& inst, Parameters& params, CPUTime& cpu_time);
 
     void calc_tour_cost(IData& inst);
     bool is_tour_valid(IData& inst);

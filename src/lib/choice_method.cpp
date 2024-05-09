@@ -119,28 +119,23 @@ void multist_semi_dsnn_heur(Tour& best_tour, IData& idata, Parameters& params, C
 }
 
 void local_search(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time) {
-	bool improvement = true;
-	void (Tour:: * apply_local_search)(IData&, Parameters&, bool&);
+
 	if (params.local_search == "two_opt_best_imprv") {
-		apply_local_search = &Tour::two_opt_best_imprv;
+		best_tour.two_opt_best_imprv(idata, params, cpu_time);
 	}
 	else if (params.local_search == "two_opt_first_imprv") {
-		apply_local_search = &Tour::two_opt_first_imprv;
+		best_tour.two_opt_first_imprv(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_best_imprv_cand_list") {
+		best_tour.two_opt_best_imprv_cand_list(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_best_imprv_circ_search") {
+		best_tour.two_opt_first_imprv_circ_search(idata, params, cpu_time);
 	}
 	else {
 		printf("ERROR: Local search provided does not exist.");
 		exit(0);
 	}
 
-	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
-	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-	while (improvement) {
-		improvement = false;
-		(best_tour.*apply_local_search)(idata, params, improvement);
-		std::cout << "COST = " << best_tour.sol_value << "\n";
-		get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-		// best_tour.print_tour();
-	}
-	get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
-	cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
+	return;
 }
