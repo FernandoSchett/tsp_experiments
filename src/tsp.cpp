@@ -118,16 +118,7 @@ int32_t main(int argc, char* argv[]) {
 	Tour best_tour;
 	run_choice_method(best_tour, idata, param, cpu_time, randmt);
 
-	std::filesystem::create_directory("./results/" + param.path_to);
-	std::ofstream file;
-	file.open("./results/" + param.path_to + "/time_result.txt", std::ofstream::out | std::ofstream::app);
-
-	if (!file)
-		exit(1);
-
-	file << idata.instance_name << ';' << param.choice_method << ';' << best_tour.sol_value << ';' << param.alpha << ';' << param.k_best << ';' << param.scheme << ';' << param.iterations << ';';
-	file << std::setprecision(6) << cpu_time.total_s_CPU << '\n';
-	file.close();
+	best_tour.save_time_result(idata, param, cpu_time);
 
 	if (best_tour.is_tour_valid(idata)) {
 		best_tour.print_tour();

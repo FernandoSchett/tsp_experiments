@@ -58,6 +58,19 @@ void Tour::print_tour() {
     printf("COST = %d\n", this->sol_value);
 }
 
+void Tour::save_time_result(IData& idata, Parameters& params, CPUTime& cpu_time){
+    std::filesystem::create_directory("./results/" + params.path_to);
+	std::ofstream file;
+	file.open("./results/" + params.path_to + "/time_result.txt", std::ofstream::out | std::ofstream::app);
+
+	if (!file)
+		exit(1);
+
+	file << idata.instance_name << ';' << params.choice_method << ';' << this->sol_value << ';' << params.alpha << ';' << params.k_best << ';' << params.scheme << ';' << params.iterations << ';' << params.local_search << ';';
+	file << std::setprecision(6) << cpu_time.total_s_CPU << '\n';
+	file.close();
+}
+
 void Tour::save_solution_to_file(IData& idata, Parameters& params) {
     std::filesystem::create_directory("benchmark/solutions/" + params.path_to);
     std::ofstream ac_solution;
@@ -81,6 +94,9 @@ void Tour::read_solution_file(IData& idata, Parameters& params) {
     ac_solution.open("benchmark/solutions/" + params.path_load_solution + "/" + idata.instance_name + ".txt", std::ifstream::in);
     if (!ac_solution){
         printf("The solution file was not opened, thus solution file couldn't be read.\n");
+        // this->nn_heur(idata, params);
+        // this->calc_tour_cost(idata);
+        // return;
         exit(1);
     }
 
