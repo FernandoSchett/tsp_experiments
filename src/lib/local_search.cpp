@@ -208,12 +208,87 @@ void Tour::two_opt_best_imprv_cand_list(IData& inst, Parameters& params, CPUTime
     
 }
 
-void Tour::two_opt_first_imprv_circ_search(IData& inst, Parameters& params, CPUTime& cpu_time)
-{
+void Tour::two_opt_first_imprv_circ_search(IData& inst, Parameters& params, CPUTime& cpu_time){
+    get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
+    get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
+    
+     
+    std::pair<std::list<int>::iterator,std::list<int>::iterator> closest_neighbor;
+    closest_neighbor.first = this->tour.begin();
+    closest_neighbor.second = this->tour.begin(); closest_neighbor.second++; closest_neighbor.second++;
+
+    bool improvement = true;
+    while (improvement)
+    {
+        improvement = false;
+        // this->print_tour();
+
+        // std::cout << "ELEMENTO DA FRENTE: "<< this->tour.front() << std::endl;
+        this->tour.push_back(this->tour.front());
+
+        closest_neighbor = search_neighbors(inst, improvement, closest_neighbor.first , closest_neighbor.second);
+        std::cout << *closest_neighbor.first << " " << *closest_neighbor.second  << std::endl;
+
+
+        this->tour.pop_back();
+        // this->calc_tour_cost(inst);
+        // this->print_tour();
+        std::cout << "COST = " << this->sol_value << std::endl;
+        get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
+    }
+
+    get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
+    cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
+
+    return;
 }
 
+std::pair<std::list<int>::iterator,std::list<int>::iterator> Tour::search_neighbors(IData& inst, bool& improvement, std::list<int>::iterator& init_i, std::list<int>::iterator& init_k){
 
+    std::list<int>::iterator i = init_i;
+    std::list<int>::iterator end_i = init_i;
 
+    std::list<int>::iterator j = i; j++;
+
+    std::list<int>::iterator k = init_k;
+    std::list<int>::iterator end_k = init_k; 
+
+    std::list<int>::iterator l = k; l++;
+    
+    while (end_k){
+        while (l != this->tour.end() && *i != *l){
+            int delta = inst.dist(inst.node_coords[*i], inst.node_coords[*j]) + inst.dist(inst.node_coords[*k], inst.node_coords[*l]) - inst.dist(inst.node_coords[*i], inst.node_coords[*k]) - inst.dist(inst.node_coords[*j], inst.node_coords[*l]);
+            if (delta > 0)
+            // std::cout << "I, J,  K e L: " << *i << " " << *j << " " << *k << " " << *l << std::endl;
+            {
+                improvement = true;
+                // this->print_tour();
+                std::cout << *i << " " << *j << " " << *k << " " << *l << std::endl; 
+                std::reverse(j, l);
+                std::cout << *i << " " << *j << " " << *k << " " << *l << std::endl; 
+                //std::cout << "J e K: " << *j << " " << *k << std::endl;
+                this->sol_value -= delta;
+                return make_pair(i, j);
+                // std::cout << "Improvement found: " << delta << std::endl;
+            }
+            k++;
+            l++;
+        }
+        i++;
+        j++;
+        k = j;
+        k++;
+        l = k;
+        l++;
+        if(l != this->tour.end()){
+            i = this->tour.begin();
+            j = i; j++;
+            k = j; k++;
+            l = k; l++;
+        }
+    }
+    return make_pair(this->tour.begin(), this->tour.begin()++++);
+}
 
 std::list<Candidate_ls> Tour::get_candidate_list(IData& inst){
 

@@ -22,3 +22,5 @@ bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_
 sex 10 mai 2024 15:56:12 -03
 fernando
 bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000216
+brd14051;local_search;494242;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;865.18
+d15112;local_search;1663383;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;1133.64

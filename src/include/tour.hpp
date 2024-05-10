@@ -44,6 +44,7 @@ public:
     std::list<Candidate_ls> get_candidate_list(IData& inst);
     
     void two_opt_first_imprv_circ_search(IData& inst, Parameters& params, CPUTime& cpu_time);
+    std::pair<std::list<int>::iterator, std::list<int>::iterator> search_neighbors(IData& inst, bool& improvement, std::list<int>::iterator& init_i, std::list<int>::iterator & init_k);
 
     void calc_tour_cost(IData& inst);
     bool is_tour_valid(IData& inst);
