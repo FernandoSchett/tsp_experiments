@@ -1,0 +1,6 @@
+--------------- Running local_search
+qui 09 mai 2024 11:10:28 -03
+fernando
+bays29;local_search;2064;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;0
+brd14051;local_search;498425;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;33084
+d15112;local_search;1675314;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;41316.5

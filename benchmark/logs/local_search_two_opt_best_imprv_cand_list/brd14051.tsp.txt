@@ -1,0 +1,3 @@
+./benchmark/instances/chosen_inst/brd14051.tsp
+instance_name: brd14051
+n_nodes: 14051

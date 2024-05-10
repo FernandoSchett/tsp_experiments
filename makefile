@@ -5,7 +5,7 @@ GXX := g++
 GXXFLAGS :=
 
 # target executable
-TARGET := TSP
+TARGET := TSP2
 
 # header files
 INCLUDES := -I src/include

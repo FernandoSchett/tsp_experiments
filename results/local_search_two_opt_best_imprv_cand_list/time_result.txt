@@ -1,0 +1,24 @@
+bays29;local_search;2035;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.003257
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000377
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000337
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.00044
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000277
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000278
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000348
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000269
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000443
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000394
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000139
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000278
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000262
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000209
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000201
+--------------- Running local_search
+sex 10 mai 2024 15:56:12 -03
+fernando
+bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000216

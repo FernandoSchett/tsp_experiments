@@ -1,0 +1,22 @@
+--------------- Running local_search
+qui 09 mai 2024 11:09:55 -03
+fernando
+bays29;local_search;2039;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.0006
+--------------- Running local_search
+qui 09 mai 2024 11:21:47 -03
+fernando
+bays29;local_search;2039;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.0004
+--------------- Running local_search
+qui 09 mai 2024 11:23:59 -03
+fernando
+bays29;local_search;2039;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.000463
+brd14051;local_search;493948;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;28211.5
+--------------- Running local_search
+qui 09 mai 2024 23:06:14 -03
+fernando
+bays29;local_search;2039;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.000554
+--------------- Running local_search
+qui 09 mai 2024 23:07:19 -03
+fernando
+bays29;local_search;2039;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.000478
+brd14051;local_search;493948;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;27195.1
