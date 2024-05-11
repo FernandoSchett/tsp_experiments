@@ -1,0 +1,3 @@
+./benchmark/instances/chosen_inst/rl11849.tsp
+instance_name: rl11849
+n_nodes: 11849

@@ -24,3 +24,23 @@ fernando
 bays29;local_search;2067;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000216
 brd14051;local_search;494242;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;865.18
 d15112;local_search;1663383;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;1133.64
+d18512;local_search;680754;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;1771.4
+d2103;local_search;82005;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;7.0962
+eil76;local_search;564;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.002315
+fl1400;local_search;21120;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;2.67677
+fl1577;local_search;23121;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;3.78379
+hk48;local_search;11525;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.000991
+kroA100;local_search;22121;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0.006337
+nrw1379;local_search;59653;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;2.73833
+pcb1173;local_search;61478;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;2.30746
+pla7397;local_search;24528293;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;195.645
+rl11849;local_search;972526;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;555.266
+rl1304;local_search;272976;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;2.35607
+rl1323;local_search;283839;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;2.27657
+si1032;local_search;93021;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;1.5793
+st70;local_search;745;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;0
+u1060;local_search;239032;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;1.54568
+vm1084;local_search;254874;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_cand_list;1.65449
+sex 10 mai 2024 17:12:05 -03
+fernando
+---------------

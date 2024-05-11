@@ -20,3 +20,14 @@ qui 09 mai 2024 23:07:19 -03
 fernando
 bays29;local_search;2039;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.000478
 brd14051;local_search;493948;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;27195.1
+d15112;local_search;1659003;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;36838.4
+d18512;local_search;678841;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;61777
+d2103;local_search;82197;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;27.0245
+eil76;local_search;562;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.003986
+fl1400;local_search;21058;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;41.8016
+fl1577;local_search;22877;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;23.7396
+hk48;local_search;11525;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.001382
+kroA100;local_search;21919;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.015313
+nrw1379;local_search;59704;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;27.7708
+pcb1173;local_search;60421;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;18.9861
+pla7397;local_search;24477049;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;2585.51
