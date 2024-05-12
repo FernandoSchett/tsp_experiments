@@ -221,6 +221,7 @@ void Tour::two_opt_first_imprv_circ_search(IData& inst, Parameters& params, CPUT
         // std::cout << "ELEMENTO DA FRENTE: "<< this->tour.front() << std::endl;
 
         closest_neighbor = search_neighbors(inst, improvement, closest_neighbor.first, closest_neighbor.second);
+        std::cout << "COST = " << this->sol_value << std::endl;
 
         // this->calc_tour_cost(inst);
         // this->print_tour();
