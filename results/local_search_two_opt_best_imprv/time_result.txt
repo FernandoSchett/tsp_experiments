@@ -31,3 +31,13 @@ kroA100;local_search;21919;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.0
 nrw1379;local_search;59704;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;27.7708
 pcb1173;local_search;60421;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;18.9861
 pla7397;local_search;24477049;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;2585.51
+rl11849;local_search;967321;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;11307.6
+rl1304;local_search;272037;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;17.6701
+rl1323;local_search;284279;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;12.6307
+si1032;local_search;92971;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;4.66338
+st70;local_search;738;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;0.004803
+u1060;local_search;237530;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;15.7454
+vm1084;local_search;254490;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv;10.7816
+sáb 11 mai 2024 14:00:57 -03
+fernando
+---------------
