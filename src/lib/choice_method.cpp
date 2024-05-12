@@ -129,7 +129,7 @@ void local_search(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cp
 	else if (params.local_search == "two_opt_best_imprv_cand_list") {
 		best_tour.two_opt_best_imprv_cand_list(idata, params, cpu_time);
 	}
-	else if (params.local_search == "two_opt_best_imprv_circ_search") {
+	else if (params.local_search == "two_opt_first_imprv_circ_search") {
 		best_tour.two_opt_first_imprv_circ_search(idata, params, cpu_time);
 	}
 	else {
