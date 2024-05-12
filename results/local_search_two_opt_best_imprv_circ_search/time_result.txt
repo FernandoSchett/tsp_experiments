@@ -1,3 +1,0 @@
-bays29;local_search;2064;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_circ_search;0.000554
-bays29;local_search;2064;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_circ_search;0
-bays29;local_search;2064;-3.6452e-4951;1822720;;1819457;two_opt_best_imprv_circ_search;0.000789

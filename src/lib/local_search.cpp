@@ -255,7 +255,7 @@ std::pair<std::list<int>::iterator,std::list<int>::iterator> Tour::search_neighb
 
     std::list<int>::iterator l = k; l++;
     
-    while (end_k){
+    while (1){
         while (l != this->tour.end() && *i != *l){
             int delta = inst.dist(inst.node_coords[*i], inst.node_coords[*j]) + inst.dist(inst.node_coords[*k], inst.node_coords[*l]) - inst.dist(inst.node_coords[*i], inst.node_coords[*k]) - inst.dist(inst.node_coords[*j], inst.node_coords[*l]);
             if (delta > 0)
