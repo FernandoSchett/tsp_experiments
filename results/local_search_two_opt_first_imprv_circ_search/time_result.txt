@@ -1,0 +1,26 @@
+--------------- Running local_search
+dom 12 mai 2024 00:57:02 -03
+fernando
+bays29;local_search;2064;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0
+brd14051;local_search;506981;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;107.294
+d15112;local_search;1694205;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;125.778
+d18512;local_search;695191;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;174.093
+d2103;local_search;82640;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;1.71645
+eil76;local_search;571;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0
+fl1400;local_search;21425;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.847262
+fl1577;local_search;23793;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;1.46593
+hk48;local_search;12163;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.000387
+kroA100;local_search;23239;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.003022
+nrw1379;local_search;60760;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.83459
+pcb1173;local_search;62165;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.559048
+pla7397;local_search;25104603;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;36.5995
+rl11849;local_search;1003992;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;74.4397
+rl1304;local_search;284007;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.76315
+rl1323;local_search;297103;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.689231
+si1032;local_search;93027;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.433287
+st70;local_search;726;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.001243
+u1060;local_search;244847;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.565967
+vm1084;local_search;255546;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv_circ_search;0.555075
+dom 12 mai 2024 01:05:50 -03
+fernando
+---------------
