@@ -43,9 +43,9 @@ void Tour::semi_nn_heur(IData& inst, Parameters& params, std::mt19937& randmt) {
     visited[init_node] = true;
 
     // Processo adaptativo de escolha do vizinho mais próximo
-    std::vector<Candidate> rcl;
+    std::vector<Candidate> cl;
     while (this->tour.size() < inst.n_nodes) {
-        rcl.clear();
+        cl.clear();
         int current_node = this->tour.back();
         int min_dist = INT_MAX;
         int chosen_node = -1;
@@ -58,11 +58,10 @@ void Tour::semi_nn_heur(IData& inst, Parameters& params, std::mt19937& randmt) {
                 c.node_orig = current_node;
                 c.node = inst.node_coords[i].id;
                 c.dist = dist;
-                rcl.push_back(c);
+                cl.push_back(c);
             }
         }
-        std::sort(rcl.begin(), rcl.end(), rcl_dist_lte_cmp);
-        Candidate chosen_candidate = choose_candidate(rcl, params, randmt);
+        Candidate chosen_candidate = choose_candidate(cl, params, randmt);
 
         // Adiciona o nó escolhido ao tour e marca como visitado
         this->tour.push_back(chosen_candidate.node);

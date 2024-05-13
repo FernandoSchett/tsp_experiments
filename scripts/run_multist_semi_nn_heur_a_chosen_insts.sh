@@ -4,7 +4,7 @@ make clean
 make 
 
 iter=100
-alp="0.000001"
+alp="0.10000"
 s=5
 
 mkdir benchmark/logs/multist_semi_nn_heur_i${iter}_a${alp}_s${s}
