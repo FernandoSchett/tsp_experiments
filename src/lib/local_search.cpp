@@ -172,7 +172,6 @@ void Tour::two_opt_best_imprv_cand_list(IData& inst, Parameters& params, CPUTime
 
 
             int delta = inst.dist(inst.node_coords[*candidate.i], inst.node_coords[*candidate.j]) + inst.dist(inst.node_coords[*candidate.k], inst.node_coords[*candidate.l]) - inst.dist(inst.node_coords[*candidate.i], inst.node_coords[*candidate.k]) - inst.dist(inst.node_coords[*candidate.j], inst.node_coords[*candidate.l]);
-            candidate = candidate_list.front();
             std::reverse(candidate.j, candidate.l);
             this->sol_value -= delta;
             candidate_list.pop_front();
