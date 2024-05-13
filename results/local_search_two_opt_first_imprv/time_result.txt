@@ -1,0 +1,26 @@
+--------------- Running local_search
+qui 09 mai 2024 11:10:28 -03
+fernando
+bays29;local_search;2064;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;0
+brd14051;local_search;498425;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;33084
+d15112;local_search;1675314;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;41316.5
+d18512;local_search;685771;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;79386.2
+d2103;local_search;82809;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;27.502
+eil76;local_search;558;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;0.003891
+fl1400;local_search;21358;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;57.6715
+fl1577;local_search;23096;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;33.0068
+hk48;local_search;12163;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;0.000517
+kroA100;local_search;22437;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;0.01882
+nrw1379;local_search;60382;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;27.2686
+pcb1173;local_search;61368;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;18.4157
+pla7397;local_search;24883802;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;2835.44
+rl11849;local_search;986633;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;12040.2
+rl1304;local_search;279155;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;20.1527
+rl1323;local_search;287629;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;13.3688
+si1032;local_search;92910;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;3.42101
+st70;local_search;691;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;0.004658
+u1060;local_search;241750;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;15.7967
+vm1084;local_search;258101;-3.6452e-4951;1822720;;1819457;two_opt_first_imprv;11.367
+sáb 11 mai 2024 10:07:22 -03
+fernando
+---------------

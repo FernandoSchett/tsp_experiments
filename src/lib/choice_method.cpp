@@ -43,6 +43,10 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 	else if (params.choice_method == "multist_semi_dsnn_heur") {
 		multist_semi_dsnn_heur(best_tour, idata, params, cpu_time, randmt);
 	}
+	else if (params.choice_method == "local_search") {
+		best_tour.read_solution_file(idata, params);
+		local_search(best_tour, idata, params, cpu_time);
+	}
 	else {
 		printf("ERROR: No choice method selected.\n");
 		exit(0);
@@ -112,4 +116,26 @@ void multist_semi_dsnn_heur(Tour& best_tour, IData& idata, Parameters& params, C
 	}
 	get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
 	cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
+}
+
+void local_search(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time) {
+
+	if (params.local_search == "two_opt_best_imprv") {
+		best_tour.two_opt_best_imprv(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_first_imprv") {
+		best_tour.two_opt_first_imprv(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_best_imprv_cand_list") {
+		best_tour.two_opt_best_imprv_cand_list(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_first_imprv_circ_search") {
+		best_tour.two_opt_first_imprv_circ_search(idata, params, cpu_time);
+	}
+	else {
+		printf("ERROR: Local search provided does not exist.");
+		exit(0);
+	}
+
+	return;
 }

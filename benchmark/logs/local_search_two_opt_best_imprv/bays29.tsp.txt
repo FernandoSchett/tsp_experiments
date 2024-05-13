@@ -1,0 +1,14 @@
+./benchmark/instances/chosen_inst/bays29.tsp
+instance_name: bays29
+n_nodes: 29
+COST = 2179
+COST = 2107
+COST = 2060
+COST = 2053
+COST = 2041
+COST = 2039
+COST = 2039
+TOUR:
+ 1 28 6 12 9 5 26 29 3 2 21 20 10 4 15 18 17 14 22 11 19 25 7 23 27 8 24 16 13
+COST = 2039
+Valid tour! :D

@@ -14,12 +14,13 @@ void show_help(const char* name) {
 	fprintf(stderr, "\
 			[uso] %s <opcoes>\n\
 			-h,		--help				show this screen.\n\
+			-r      --local_search      set local search. \n\
 			-s, 	--seed=SEED 		set seed for randomized selection.\n\
 			-k, 	--k_best=K_BEST		set k for cardinality-based randomization.\n\
 			-a, 	--alpha=ALPHA 	    set alpha for quality-based randomization.\n\
 			-f,  	--filename     		set filename.\n\
 			-c,  	--choice_method     set choice_method.\n\
-			-m, 	--scheme 			set scheme for semi-greedy algorithm.\n\
+			-m, 	--scheme 			set scheme for algorithms.\n\
 			-p, 	--stop_crit 		set stop criterion for choice_method.\n\
 			-l, 	--path_load_sol		set path to load solution.\n\
 			-t, 	--maxtime 			set maxtime in seconds.\n\
@@ -35,6 +36,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 	*/
 	const option options[] = {
 		{"help"				, no_argument       , 0 , 'h' },
+		{"local_search"		, required_argument , 0 , 'r' },
 		{"seed"				, required_argument , 0 , 's' },
 		{"k_best"			, required_argument , 0 , 'k' },
 		{"alpha"			, required_argument , 0 , 'a' },
@@ -52,7 +54,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:a:f:c:m:p:i:t:l:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:r:a:f:c:m:p:i:t:l:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -87,6 +89,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		case 'l': /* -l ou --path_load_sol */
 			param.path_load_solution = optarg;
 			break;
+		case 'r': /* -r ou --local_search */
+			param.local_search = optarg;
+			break;
 		default:
 			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
 			exit(-1);
@@ -113,16 +118,7 @@ int32_t main(int argc, char* argv[]) {
 	Tour best_tour;
 	run_choice_method(best_tour, idata, param, cpu_time, randmt);
 
-	std::filesystem::create_directory("./results/" + param.path_to);
-	std::ofstream file;
-	file.open("./results/" + param.path_to + "/time_result.txt", std::ofstream::out | std::ofstream::app);
-
-	if (!file)
-		exit(1);
-
-	file << idata.instance_name << ';' << param.choice_method << ';' << best_tour.sol_value << ';' << param.alpha << ';' << param.k_best << ';' << param.scheme << ';' << param.iterations << ';';
-	file << std::setprecision(6) << cpu_time.total_s_CPU << '\n';
-	file.close();
+	best_tour.save_time_result(idata, param, cpu_time);
 
 	if (best_tour.is_tour_valid(idata)) {
 		best_tour.print_tour();

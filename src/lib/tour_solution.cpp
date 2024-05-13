@@ -13,7 +13,7 @@ void Tour::calc_tour_cost(IData& inst) {
 }
 
 bool Tour::is_tour_valid(IData& inst) {
-
+    
     if (this->tour.size() != inst.n_nodes) {
         return false;
     }
@@ -30,6 +30,22 @@ bool Tour::is_tour_valid(IData& inst) {
             return false;
         }
     }
+    
+    int cost = 0;
+    std::list<int>::iterator prev = this->tour.begin();
+    std::list<int>::iterator curr = this->tour.begin(); curr++;
+
+    while (curr != this->tour.end()) {
+        cost += inst.dist(inst.node_coords[*prev], inst.node_coords[*curr]);
+        prev++;
+        curr++;
+    }
+    cost += inst.dist(inst.node_coords[*prev], inst.node_coords[this->tour.front()]);
+
+    if (cost != this->sol_value){
+        printf("Sol value is incorrect: expected (%d) - calculated (%d)", cost, this->sol_value);
+        return false;
+    }
     return true;
 }
 
@@ -40,6 +56,19 @@ void Tour::print_tour() {
     }
     printf("\n");
     printf("COST = %d\n", this->sol_value);
+}
+
+void Tour::save_time_result(IData& idata, Parameters& params, CPUTime& cpu_time){
+    std::filesystem::create_directory("./results/" + params.path_to);
+	std::ofstream file;
+	file.open("./results/" + params.path_to + "/time_result.txt", std::ofstream::out | std::ofstream::app);
+
+	if (!file)
+		exit(1);
+
+	file << idata.instance_name << ';' << params.choice_method << ';' << this->sol_value << ';' << params.alpha << ';' << params.k_best << ';' << params.scheme << ';' << params.iterations << ';' << params.local_search << ';';
+	file << std::setprecision(6) << cpu_time.total_s_CPU << '\n';
+	file.close();
 }
 
 void Tour::save_solution_to_file(IData& idata, Parameters& params) {
@@ -65,6 +94,9 @@ void Tour::read_solution_file(IData& idata, Parameters& params) {
     ac_solution.open("benchmark/solutions/" + params.path_load_solution + "/" + idata.instance_name + ".txt", std::ifstream::in);
     if (!ac_solution){
         printf("The solution file was not opened, thus solution file couldn't be read.\n");
+        // this->nn_heur(idata, params);
+        // this->calc_tour_cost(idata);
+        // return;
         exit(1);
     }
 

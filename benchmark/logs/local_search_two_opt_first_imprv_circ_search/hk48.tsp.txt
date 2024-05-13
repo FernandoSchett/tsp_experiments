@@ -1,0 +1,17 @@
+./benchmark/instances/chosen_inst/hk48.tsp
+instance_name: hk48
+n_nodes: 48
+COST = 12888
+COST = 12799
+COST = 12747
+COST = 12730
+COST = 12723
+COST = 12607
+COST = 12505
+COST = 12225
+COST = 12163
+COST = 12163
+TOUR:
+ 1 19 43 15 21 33 30 23 9 10 40 36 34 6 8 47 7 38 14 18 13 28 32 25 3 5 29 26 41 22 12 31 20 17 35 24 48 2 16 11 4 46 45 39 44 27 37 42
+COST = 12163
+Valid tour! :D
