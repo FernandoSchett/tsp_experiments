@@ -52,7 +52,6 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 		exit(0);
 	}
 
-	best_tour.calc_tour_cost(idata);
 }
 
 bool is_stop_criterion_satsfied(Parameters& params, double t, int i) {

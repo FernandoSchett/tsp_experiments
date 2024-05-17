@@ -40,6 +40,7 @@ Candidate choose_candidate(std::vector<Candidate>& cl, Parameters& params, std::
         chosen_candidate = quality_scheme(cl, params, randmt);
     }
     else {
+        printf("Scheme provided is not available.\n");
         exit(0);
     }
     return chosen_candidate;
