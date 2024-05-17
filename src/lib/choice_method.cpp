@@ -47,6 +47,14 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 		best_tour.read_solution_file(idata, params);
 		local_search(best_tour, idata, params, cpu_time);
 	}
+	else if (params.choice_method == "grasp"){
+		if (idata.n_nodes <= 100){
+			params.maxtime /= 4;
+		}else if(idata.n_nodes <= 1500){
+			params.maxtime /= 2;
+		}
+		grasp(best_tour, idata, params, cpu_time, randmt);
+	}
 	else {
 		printf("ERROR: No choice method selected.\n");
 		exit(0);
@@ -69,7 +77,6 @@ bool is_stop_criterion_satsfied(Parameters& params, double t, int i) {
 
 void multist_semi_nn_heur(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt) {
 	best_tour.nn_heur(idata, params);
-	best_tour.calc_tour_cost(idata);
 	printf("%d\n", best_tour.sol_value);
 
 	int i = 0;
@@ -78,7 +85,6 @@ void multist_semi_nn_heur(Tour& best_tour, IData& idata, Parameters& params, CPU
 	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_nn_heur(idata, params, randmt);
-		tour.calc_tour_cost(idata);
 
 		if (tour.sol_value < best_tour.sol_value) {
 			best_tour = tour;
@@ -94,7 +100,6 @@ void multist_semi_nn_heur(Tour& best_tour, IData& idata, Parameters& params, CPU
 
 void multist_semi_dsnn_heur(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt) {
 	best_tour.double_sided_nn_heur(idata, params);
-	best_tour.calc_tour_cost(idata);
 	printf("%d\n", best_tour.sol_value);
 
 	int i = 0;
@@ -103,7 +108,6 @@ void multist_semi_dsnn_heur(Tour& best_tour, IData& idata, Parameters& params, C
 	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_double_sided_nn_heur(idata, params, randmt);
-		tour.calc_tour_cost(idata);
 
 		if (tour.sol_value < best_tour.sol_value) {
 			best_tour = tour;
@@ -137,4 +141,30 @@ void local_search(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cp
 	}
 
 	return;
+}
+
+void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt) {
+	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
+	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
+
+	best_tour.nn_heur(idata, params);
+	printf("%d\n", best_tour.sol_value);
+	printf("bestsol;currsol;semi_nn_sol_value;currtime;iteration\n");
+	int i = 0;
+	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
+		Tour tour;
+		tour.semi_nn_heur(idata, params, randmt);
+		int semi_greedy_sol_value = tour.sol_value;
+		local_search(tour, idata, params, cpu_time);
+
+		if (tour.sol_value < best_tour.sol_value) {
+			best_tour = tour;
+		}
+
+		get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_CPU_inicial);
+		printf("%d;%d;%d;%lf;%d\n", best_tour.sol_value, tour.sol_value, semi_greedy_sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i);
+		i++;
+	}
+	get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
+	cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
 }
