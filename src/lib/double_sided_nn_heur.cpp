@@ -7,6 +7,7 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
     // Initial node
     int init_node = inst.node_coords[1].id;
     this->tour.push_back(init_node);
+    this->sol_value = 0;
     visited[init_node] = true;
 
     // Insert nearest node to initial node
@@ -20,6 +21,7 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
         }
     }
     this->tour.push_back(nrst_node);
+    this->sol_value += nrst_dist;
     visited[nrst_node] = true;
 
     // Keep inserting nearest node of any of the two open extremities
@@ -46,13 +48,16 @@ void Tour::double_sided_nn_heur(IData& inst, Parameters& params) {
 
         if (nrst_dist_left < nrst_dist_right) {
             this->tour.push_front(nrst_node_left);
+            this->sol_value += nrst_dist_left;
             visited[nrst_node_left] = true;
         }
         else {
             this->tour.push_back(nrst_node_right);
+            this->sol_value += nrst_dist_right;
             visited[nrst_node_right] = true;
         }
     }
+    this->sol_value += inst.dist(inst.node_coords[this->tour.back()], inst.node_coords[this->tour.front()]);
 
 }
 
@@ -63,10 +68,11 @@ void Tour::semi_double_sided_nn_heur(IData& inst, Parameters& params, std::mt199
     int init_idx = randmt() % inst.n_nodes + 1; // integer between 1 <-> inst.n_nodes
     int init_node = inst.node_coords[init_idx].id;
     this->tour.push_back(init_node);
+    this->sol_value = 0;
     visited[init_node] = true;
 
     // Insert nearest node to initial node
-    std::vector<Candidate> rcl;
+    std::vector<Candidate> cl;
     for (int i = 1; i < inst.node_coords.size(); i++) {
         int dist = inst.dist(inst.node_coords[init_node], inst.node_coords[i]);
         if (i != init_node && !visited[i]) {
@@ -74,17 +80,17 @@ void Tour::semi_double_sided_nn_heur(IData& inst, Parameters& params, std::mt199
             c.node_orig = inst.node_coords[init_node].id;
             c.node = inst.node_coords[i].id;
             c.dist = dist;
-            rcl.push_back(c);
+            cl.push_back(c);
         }
     }
-    std::sort(rcl.begin(), rcl.end(), rcl_dist_lte_cmp);
-    Candidate chosen_candidate = choose_candidate(rcl, params, randmt);
+    Candidate chosen_candidate = choose_candidate(cl, params, randmt);
     this->tour.push_back(chosen_candidate.node);
+    this->sol_value += chosen_candidate.dist;
     visited[chosen_candidate.node] = true;
 
     // Keep inserting nearest node of any of the two open extremities
     while (this->tour.size() < inst.n_nodes) {
-        rcl.clear();
+        cl.clear();
         for (int i = 1; i < inst.node_coords.size(); i++) {
             int dist = inst.dist(inst.node_coords[tour.front()], inst.node_coords[i]);
             if (i != tour.front() && !visited[i]) {
@@ -92,7 +98,7 @@ void Tour::semi_double_sided_nn_heur(IData& inst, Parameters& params, std::mt199
                 c.node_orig = inst.node_coords[tour.front()].id;
                 c.node = inst.node_coords[i].id;
                 c.dist = dist;
-                rcl.push_back(c);
+                cl.push_back(c);
             }
         }
 
@@ -103,19 +109,22 @@ void Tour::semi_double_sided_nn_heur(IData& inst, Parameters& params, std::mt199
                 c.node_orig = inst.node_coords[tour.back()].id;
                 c.node = inst.node_coords[i].id;
                 c.dist = dist;
-                rcl.push_back(c);
+                cl.push_back(c);
             }
         }
-        std::sort(rcl.begin(), rcl.end(), rcl_dist_lte_cmp);
-        Candidate chosen_candidate = choose_candidate(rcl, params, randmt);
+        Candidate chosen_candidate = choose_candidate(cl, params, randmt);
 
         if (chosen_candidate.node_orig == inst.node_coords[tour.front()].id) {
             this->tour.push_front(chosen_candidate.node);
+            this->sol_value += chosen_candidate.dist;
             visited[chosen_candidate.node] = true;
         }
         else if (chosen_candidate.node_orig == inst.node_coords[tour.back()].id) {
             this->tour.push_back(chosen_candidate.node);
+            this->sol_value += chosen_candidate.dist;
             visited[chosen_candidate.node] = true;
         }
     }
+    this->sol_value += inst.dist(inst.node_coords[this->tour.back()], inst.node_coords[this->tour.front()]);
+
 }
