@@ -1,0 +1,9 @@
+--------------- Running GRASP with two_opt_first_imprv_circ_search and alpha = 0.050000
+sex 17 mai 2024 13:32:48 -03
+fernando
+--------------- Running GRASP with two_opt_first_imprv_circ_search and alpha = 0.050000
+sáb 18 mai 2024 00:42:53 -03
+fernando
+sáb 18 mai 2024 03:28:33 -03
+fernando
+---------------
