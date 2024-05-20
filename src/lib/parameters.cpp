@@ -7,7 +7,7 @@ void Parameters::build_path_to(){
         this->path_to += "_i" + std::to_string(this->iterations);
     }
     else if (this->stop_criterion == "time") {
-        this->path_to += "_time" + std::to_string(this->maxtime);
+        this->path_to += "_t" + std::to_string(this->maxtime);
     }
 
     if (this->scheme == "alpha") {
