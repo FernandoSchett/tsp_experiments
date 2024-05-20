@@ -166,5 +166,5 @@ void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time,
 		i++;
 	}
 	get_cpu_time(&cpu_time.s_CPU_final, &cpu_time.s_total_final);
-	cpu_time.total_s_CPU += (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
+	cpu_time.total_s_CPU = (cpu_time.s_CPU_final - cpu_time.s_CPU_inicial);
 }
