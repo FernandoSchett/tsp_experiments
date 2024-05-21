@@ -7,3 +7,29 @@ fernando
 sáb 18 mai 2024 03:28:33 -03
 fernando
 ---------------
+--------------- Running GRASP with two_opt_first_imprv_circ_search and alpha = 0.050000
+seg 20 mai 2024 7:03:23 -03
+fernando
+bays29;grasp;2020;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;900
+brd14051;grasp;527796;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;3669.49
+d15112;grasp;1763517;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;3653.81
+d18512;grasp;727533;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;3688.25
+d2103;grasp;86654;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;3601.1
+eil76;grasp;538;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;900.001
+fl1400;grasp;20823;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800.53
+fl1577;grasp;23731;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;3601.97
+hk48;grasp;11461;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;900
+kroA100;grasp;21282;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;900.001
+nrw1379;grasp;61957;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800
+pcb1173;grasp;63307;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800.09
+pla7397;grasp;25978665;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;3601.28
+rl11849;grasp;1058050;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;3689.52
+rl1304;grasp;271022;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800.59
+rl1323;grasp;296029;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800.9
+si1032;grasp;92842;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800.51
+st70;grasp;675;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;900.001
+u1060;grasp;244110;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800.59
+vm1084;grasp;258637;0.05;1822720;alpha;1819457;two_opt_first_imprv_circ_search;1800.54
+ter 20 mai 2024 20:37:33 -03
+fernando
+---------------
