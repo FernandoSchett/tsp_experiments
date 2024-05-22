@@ -48,11 +48,6 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 		local_search(best_tour, idata, params, cpu_time);
 	}
 	else if (params.choice_method == "grasp"){
-		if (idata.n_nodes <= 100){
-			params.maxtime /= 4;
-		}else if(idata.n_nodes <= 1500){
-			params.maxtime /= 2;
-		}
 		grasp(best_tour, idata, params, cpu_time, randmt);
 	}
 	else {
@@ -62,9 +57,12 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 
 }
 
-bool is_stop_criterion_satsfied(Parameters& params, double t, int i) {
+bool is_stop_criterion_satsfied(Parameters& params, int sol_value, double t, int i) {
 	if (params.stop_criterion == "iter") {
 		return i >= params.iterations;
+	}
+	else if (params.stop_criterion == "look4") {
+		return t >= params.maxtime || sol_value <= params.look4;
 	}
 	else if (params.stop_criterion == "time") {
 		return t >= params.maxtime;
@@ -147,10 +145,15 @@ void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time,
 	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
 
+	printf("bestsol;currsol;grasp_sol_value;currtime;iteration\n");
+	
 	best_tour.nn_heur(idata, params);
-	printf("%d\n", best_tour.sol_value);
-	printf("bestsol;currsol;semi_nn_sol_value;currtime;iteration\n");
-	int i = 0;
+	int greedy_sol_value = best_tour.sol_value;
+	local_search(best_tour, idata, params, cpu_time);
+	printf("%d;%d;%d;%lf;%d\n", best_tour.sol_value, best_tour.sol_value, greedy_sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, 1);
+
+	int i = 2;
+	
 	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_nn_heur(idata, params, randmt);

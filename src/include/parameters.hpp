@@ -9,7 +9,7 @@ class Parameters {
 public:
 	char* filename;
 	long double alpha;
-	int k_best, seed_rand, iterations, maxtime;
+	int k_best, seed_rand, iterations, maxtime, look4;
 	std::string scheme;
 	std::string choice_method;
 	std::string stop_criterion; // "iter" or "time"

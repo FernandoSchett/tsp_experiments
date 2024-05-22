@@ -24,7 +24,8 @@ void show_help(const char* name) {
 			-p, 	--stop_crit 		set stop criterion for choice_method.\n\
 			-l, 	--path_load_sol		set path to load solution.\n\
 			-t, 	--maxtime 			set maxtime in seconds.\n\
-			-i,		--iterations		set multi-start number of iterations.\n", name);
+			-i,		--iterations		set max number of iterations.\n\
+			-o,		--look4		set look4 value.\n", name);
 	exit(-1);
 }
 
@@ -47,6 +48,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"scheme"			, required_argument , 0 , 'm' },
 		{"stop_crit"		, required_argument , 0 , 'p' },
 		{"path_load_sol" 	, required_argument , 0 , 'l' },
+		{"look4" 	        , required_argument , 0 , 'o' },
 		{0       			, 0 				, 0	,  0  },
 	};
 
@@ -54,7 +56,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:r:a:f:c:m:p:i:t:l:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:r:a:f:c:m:p:i:t:l:o:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -91,6 +93,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			break;
 		case 'r': /* -r ou --local_search */
 			param.local_search = optarg;
+			break;
+		case 'o': /* -o ou --look4 */
+			param.look4 = std::atoi(optarg);
 			break;
 		default:
 			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
