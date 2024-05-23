@@ -5,7 +5,7 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 
 	if (params.choice_method == "nn_heur") {
 		int i = 0;
-		while (!is_stop_criterion_satsfied(params, cpu_time.total_s_CPU, i)) {
+		while (!is_stop_criterion_satsfied(params, 0, cpu_time.total_s_CPU, i)) {
 			best_tour.tour.clear();
 			get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 			best_tour.nn_heur(idata, params);
@@ -16,7 +16,7 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 	}
 	else if (params.choice_method == "dsnn_heur") {
 		int i = 0;
-		while (!is_stop_criterion_satsfied(params, cpu_time.total_s_CPU, i)) {
+		while (!is_stop_criterion_satsfied(params, 0, cpu_time.total_s_CPU, i)) {
 			best_tour.tour.clear();
 			get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 			best_tour.double_sided_nn_heur(idata, params);
@@ -80,7 +80,7 @@ void multist_semi_nn_heur(Tour& best_tour, IData& idata, Parameters& params, CPU
 	int i = 0;
 	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
+	while (!is_stop_criterion_satsfied(params, 0, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_nn_heur(idata, params, randmt);
 
@@ -103,7 +103,7 @@ void multist_semi_dsnn_heur(Tour& best_tour, IData& idata, Parameters& params, C
 	int i = 0;
 	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
+	while (!is_stop_criterion_satsfied(params, 0, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_double_sided_nn_heur(idata, params, randmt);
 
@@ -147,14 +147,14 @@ void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time,
 
 	printf("bestsol;currsol;grasp_sol_value;currtime;iteration\n");
 	
-	best_tour.nn_heur(idata, params);
+	best_tour.semi_nn_heur(idata, params, randmt);
 	int greedy_sol_value = best_tour.sol_value;
 	local_search(best_tour, idata, params, cpu_time);
 	printf("%d;%d;%d;%lf;%d\n", best_tour.sol_value, best_tour.sol_value, greedy_sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, 1);
 
 	int i = 2;
 	
-	while (!is_stop_criterion_satsfied(params, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
+	while (!is_stop_criterion_satsfied(params, best_tour.sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
 		tour.semi_nn_heur(idata, params, randmt);
 		int semi_greedy_sol_value = tour.sol_value;
