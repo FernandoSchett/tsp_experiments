@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd ..
-inst=("kroA100.tsp" "si1032.tsp")
-look4=("21282" "92650") 
+inst=("st70.tsp") # inst=("kroA100.tsp" "si1032.tsp") 
+look4=("675") # look4=("21282" "92650")
 time="600"
 alphas="0.010000 0.025000 0.050000 0.100000"
 
