@@ -1,0 +1,2 @@
+kroA100;grasp;21282;0.025;1;alpha;163840;two_opt_first_imprv_circ_search;82.415
+si1032;grasp;92711;0.025;1;alpha;163840;two_opt_first_imprv_circ_search;600.006

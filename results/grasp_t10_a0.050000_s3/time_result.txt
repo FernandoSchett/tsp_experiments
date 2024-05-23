@@ -1,0 +1,15 @@
+--------------- Running reduced tests GRASP with two_opt_first_imprv_circ_search and alpha = 0.050000 and seed = 3
+qua 22 mai 2024 00:51:01 -03
+fernando
+qua 22 mai 2024 00:51:01 -03
+fernando
+---------------
+--------------- Running reduced tests GRASP with two_opt_first_imprv_circ_search and alpha = 0.050000 and seed = 3
+qua 22 mai 2024 00:58:13 -03
+fernando
+qua 22 mai 2024 00:58:15 -03
+fernando
+---------------
+--------------- Running reduced tests GRASP with two_opt_first_imprv_circ_search and alpha = 0.050000 and seed = 3
+qua 22 mai 2024 01:00:34 -03
+fernando

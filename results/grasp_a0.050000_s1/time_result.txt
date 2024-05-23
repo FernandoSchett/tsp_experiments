@@ -1,0 +1,13 @@
+brd14051;grasp;506981;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;104.981
+rl1323;grasp;297103;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;0.710735
+d2103;grasp;82640;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;1.8326
+rl1323;grasp;297103;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;0.737328
+d2103;grasp;82640;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;12.0978
+rl1323;grasp;297103;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;0.668679
+d2103;grasp;82640;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;12.0014
+rl1323;grasp;297103;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;0.671473
+d2103;grasp;82640;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;12.0308
+rl1323;grasp;297103;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;10.1244
+d2103;grasp;82640;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;101.139
+kroA100;grasp;21282;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;149.346
+si1032;grasp;92872;0.05;1;alpha;163840;two_opt_first_imprv_circ_search;600.394
