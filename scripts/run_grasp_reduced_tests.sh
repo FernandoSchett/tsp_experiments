@@ -1,18 +1,17 @@
-cd ..
-#inst=./benchmark/instances/reduce_tests/*
+#!/bin/bash
 
-inst=("brd14051.tsp" "kroA100.tsp" "rl1323.tsp")
-look4=("530000" "21282" "297493") 
+cd ..
+inst=("kroA100.tsp" "si1032.tsp")
+look4=("21282" "92650") 
+time="100"
+alphas="0.010000 0.025000 0.050000 0.100000"
 
 make clean
 make 
 
-time="300"
-alphas="0.050000 0.100000 0.150000"
-
 for alp in $alphas
 do
-    for s in $(seq 1 200)
+    for s in $(seq 1 50)
     do
         dir="grasp_t${time}_a${alp}_s${s}"
 
@@ -25,8 +24,9 @@ do
 
         for i in $(seq 0 $((${#inst[@]} - 1)))
         do
-            echo "./TSP -f  ${inst[$i]} -p look4 -o ${look4[$i]} -t $time -c grasp -m alpha --a=$alp --seed=$s -r two_opt_first_imprv_circ_search >> benchmark/logs/${dir}/${inst[$i]}.txt" 
-            #./TSP -f  ${inst[$i]} -p look4 -o ${look4[$i]} -t $time -c grasp -m alpha --a=$alp --seed=$s -r two_opt_first_imprv_circ_search >> benchmark/logs/${dir}/${inst[$i]}.txt
+            path=./benchmark/instances/chosen_inst/${inst[$i]} 
+            echo "./TSP -f  $path -p look4 -o ${look4[$i]} -t $time -c grasp -m alpha --a=$alp --seed=$s -r two_opt_first_imprv_circ_search >> benchmark/logs/${dir}/${inst[$i]}.txt" 
+            ./TSP -f  $path -p look4 -o ${look4[$i]} -t $time -c grasp -m alpha --a=$alp --seed=$s -r two_opt_first_imprv_circ_search >> benchmark/logs/${dir}/${inst[$i]}.txt
         done
 
         date >> ./results/${dir}/time_result.txt
