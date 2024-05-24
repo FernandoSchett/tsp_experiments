@@ -1,0 +1,1 @@
+st70;grasp;675;0.1;1;alpha;163840;two_opt_first_imprv_circ_search;23.9309

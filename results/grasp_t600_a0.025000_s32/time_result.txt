@@ -10,3 +10,9 @@ fernando
 qua 22 mai 2024 16:08:00 -03
 fernando
 ---------------
+--------------- Running reduced tests GRASP with two_opt_first_imprv_circ_search and alpha = 0.025000 and seed = 32
+qui 23 mai 2024 17:42:36 -03
+fernando
+qui 23 mai 2024 17:43:11 -03
+fernando
+---------------

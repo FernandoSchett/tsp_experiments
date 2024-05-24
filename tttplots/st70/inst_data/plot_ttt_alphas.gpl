@@ -1,0 +1,10 @@
+set xlabel 'time to target solution'
+set size ratio 1
+set ylabel 'cumulative probability'
+set yrange [0:1]
+set key right bottom
+set grid
+set title 'st70'
+set terminal postscript color 'Helvetica'
+set output 'st70_ttt.ps'
+plot "../0.01/st70_0.01-ee.dat" t "0.01 empirical" w points, "../0.01/st70_0.01-te.dat" t "0.01 theoretical" w lines lt 3,"../0.025/st70_0.025-ee.dat" t "0.025 empirical" w points, "../0.025/st70_0.025-te.dat" t "0.025 theoretical" w lines lt 3,"../0.05/st70_0.05-ee.dat" t "0.05 empirical" w points, "../0.05/st70_0.05-te.dat" t "0.05 theoretical" w lines lt 3,"../0.1/st70_0.1-ee.dat" t "0.1 empirical" w points, "../0.1/st70_0.1-te.dat" t "0.1 theoretical" w lines lt 3,

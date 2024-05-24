@@ -2,3 +2,4 @@ d2103;grasp;82640;0.025;1;alpha;163840;two_opt_first_imprv_circ_search;12.0734
 rl1323;grasp;297103;0.025;1;alpha;163840;two_opt_first_imprv_circ_search;10.3572
 kroA100;grasp;21282;0.025;1;alpha;163840;two_opt_first_imprv_circ_search;4.7289
 si1032;grasp;92758;0.025;1;alpha;163840;two_opt_first_imprv_circ_search;600.399
+st70;grasp;675;0.025;1;alpha;163840;two_opt_first_imprv_circ_search;7.62406

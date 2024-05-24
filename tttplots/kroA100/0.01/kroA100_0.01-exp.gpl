@@ -1,0 +1,11 @@
+		set xlabel 'time to target solution'
+		set size ratio 1
+		set ylabel 'cumulative probability'
+                set yrange [0:1]
+		set key right bottom
+                set grid
+		set title 'kroA100_0.01'
+		set terminal postscript color 'Helvetica'
+		set output 'kroA100_0.01-exp.ps'
+		plot "kroA100_0.01-ee.dat" t "empirical" w points, "kroA100_0.01-te.dat" t "theoretical" w lines lt 3
+		quit

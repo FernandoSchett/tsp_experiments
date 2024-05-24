@@ -1,0 +1,9 @@
+		set xlabel 'exponential quantiles'
+		set size ratio 1
+		set ylabel 'measured times'
+		set key right bottom
+		set title 'kroA100_0.025'
+		set terminal postscript color 'Helvetica' 
+		set output 'kroA100_0.025-qq.ps'
+		plot "kroA100_0.025-el.dat" t "empirical" w points, "kroA100_0.025-tl.dat" t "estimated" with lines lt 3, "kroA100_0.025-ul.dat" t "+1 std dev range" w lines lt 4, "kroA100_0.025-ll.dat" t "-1 std dev range" w lines lt 4 
+		quit

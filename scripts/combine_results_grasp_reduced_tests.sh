@@ -17,6 +17,7 @@ do
         awk -v var=";${s}" '{print $0 var}' "./results/${dir}/time_result.txt" > "./results/${dir}/tmp.txt"
         cat ./results/${dir}/tmp.txt | grep kroA100 >> tttplots/time_result.txt
         cat ./results/${dir}/tmp.txt | grep si1032 >> tttplots/time_result.txt
+        cat ./results/${dir}/tmp.txt | grep st70 >> tttplots/time_result.txt
         rm ./results/${dir}/tmp.txt
     done
 done

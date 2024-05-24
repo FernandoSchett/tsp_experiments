@@ -1,0 +1,9 @@
+		set xlabel 'exponential quantiles'
+		set size ratio 1
+		set ylabel 'measured times'
+		set key right bottom
+		set title 'st70_0.1'
+		set terminal postscript color 'Helvetica' 
+		set output 'st70_0.1-qq.ps'
+		plot "st70_0.1-el.dat" t "empirical" w points, "st70_0.1-tl.dat" t "estimated" with lines lt 3, "st70_0.1-ul.dat" t "+1 std dev range" w lines lt 4, "st70_0.1-ll.dat" t "-1 std dev range" w lines lt 4 
+		quit
