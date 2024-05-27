@@ -4,8 +4,8 @@ make clean
 make 
 
 time="3600"
-alp="0.050000"
-s=5
+alp="0.025000"
+s=51
 
 mkdir benchmark/logs/grasp_t${time}_a${alp}_s${s}
 mkdir results/grasp_t${time}_a${alp}_s${s}
