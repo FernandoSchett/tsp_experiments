@@ -20,12 +20,13 @@ void show_help(const char* name) {
 			-a, 	--alpha=ALPHA 	    set alpha for quality-based randomization.\n\
 			-f,  	--filename     		set filename.\n\
 			-c,  	--choice_method     set choice_method.\n\
-			-m, 	--scheme 			set scheme for algorithms.\n\
+			-m, 	--scheme 			set scheme for algori thms.\n\
 			-p, 	--stop_crit 		set stop criterion for choice_method.\n\
 			-l, 	--path_load_sol		set path to load solution.\n\
 			-t, 	--maxtime 			set maxtime in seconds.\n\
 			-i,		--iterations		set max number of iterations.\n\
-			-o,		--look4		set look4 value.\n", name);
+			-g,		--pr_mode		    set path relinking mode.\n\
+			-o,		--look4		        set look4 value.\n", name);
 	exit(-1);
 }
 
@@ -49,6 +50,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"stop_crit"		, required_argument , 0 , 'p' },
 		{"path_load_sol" 	, required_argument , 0 , 'l' },
 		{"look4" 	        , required_argument , 0 , 'o' },
+		{"pr_mode" 	        , required_argument , 0 , 'g' },
 		{0       			, 0 				, 0	,  0  },
 	};
 
@@ -56,7 +58,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:r:a:f:c:m:p:i:t:l:o:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:r:a:f:c:m:p:i:t:l:o:g:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -96,6 +98,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			break;
 		case 'o': /* -o ou --look4 */
 			param.look4 = std::atoi(optarg);
+			break;
+		case 'g': /* -g ou --pr_mode */
+			param.pr_mode = std::atoi(optarg);
 			break;
 		default:
 			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);

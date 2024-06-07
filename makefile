@@ -16,8 +16,9 @@ SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp \
 	src/lib/dists.cpp src/lib/tour_solution.cpp \
 	src/lib/semi_greedy_schemes.cpp src/lib/choice_method.cpp \
 	src/lib/parameters.cpp \
-	src/lib/local_search.cpp
-
+	src/lib/local_search.cpp \
+	src/lib/path_relinking.cpp
+ 
 # object files
 # src/lib/ -> build/
 OBJECTS := $(patsubst src/lib/%,build/%,$(SOURCES))
@@ -68,6 +69,11 @@ build/parameters.o: src/lib/parameters.cpp
 build/local_search.o: src/lib/local_search.cpp
 	mkdir -p $(dir $@)
 	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/local_search.cpp -o $@
+
+build/path_relinking.o: src/lib/path_relinking.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/path_relinking.cpp -o $@
+
 
 clean:
 	$(RM) -r build

@@ -16,6 +16,7 @@ public:
 	std::string path_to;
 	std::string path_load_solution;
 	std::string local_search;
+	std::string pr_mode;
 
 	void build_path_to();
 };
