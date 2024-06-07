@@ -1,3 +1,4 @@
+#include "local_search.hpp"
 #include "tour.hpp"
 
 void Tour::two_opt_first_imprv(IData& inst, Parameters& params, CPUTime& cpu_time) {
@@ -338,3 +339,24 @@ std::list<Candidate_ls> Tour::get_candidate_list(IData& inst) {
     return candidate_list;
 }
 
+void local_search(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time) {
+
+	if (params.local_search == "two_opt_best_imprv") {
+		best_tour.two_opt_best_imprv(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_first_imprv") {
+		best_tour.two_opt_first_imprv(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_best_imprv_cand_list") {
+		best_tour.two_opt_best_imprv_cand_list(idata, params, cpu_time);
+	}
+	else if (params.local_search == "two_opt_first_imprv_circ_search") {
+		best_tour.two_opt_first_imprv_circ_search(idata, params, cpu_time);
+	}
+	else {
+		printf("ERROR: Local search provided does not exist.");
+		exit(0);
+	}
+
+	return;
+}

@@ -15,9 +15,9 @@ SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp \
 	src/lib/get_sys_time.cpp src/lib/nn_heur.cpp \
 	src/lib/dists.cpp src/lib/tour_solution.cpp \
 	src/lib/semi_greedy_schemes.cpp src/lib/choice_method.cpp \
-	src/lib/parameters.cpp \
-	src/lib/local_search.cpp \
-	src/lib/path_relinking.cpp
+	src/lib/parameters.cpp src/lib/multi_start.cpp \
+	src/lib/local_search.cpp src/lib/grasp.cpp \
+	src/lib/path_relinking.cpp src/lib/stop_criterion.cpp
  
 # object files
 # src/lib/ -> build/
@@ -74,6 +74,17 @@ build/path_relinking.o: src/lib/path_relinking.cpp
 	mkdir -p $(dir $@)
 	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/path_relinking.cpp -o $@
 
+build/multi_start.o: src/lib/multi_start.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/multi_start.cpp -o $@
+
+build/grasp.o: src/lib/grasp.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/grasp.cpp -o $@
+
+build/stop_criterion.o: src/lib/stop_criterion.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/stop_criterion.cpp -o $@
 
 clean:
 	$(RM) -r build
