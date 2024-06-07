@@ -55,9 +55,10 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 		}
 		grasp(best_tour, idata, params, cpu_time, randmt);
 	}
-	else {
+	else if(params.choice_method == "grasp_pr"){	
+		grasp_pr(best_tour, idata, params, cpu_time, randmt);
+	}else{
 		printf("ERROR: No choice method selected.\n");
 		exit(0);
 	}
-
 }

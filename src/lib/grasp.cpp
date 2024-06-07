@@ -35,7 +35,8 @@ void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time,
 void grasp_pr(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt) {
 	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
-
+	
+	CPUTime dummy_time;
 	printf("bestsol;currsol;grasp_sol_value;currtime;iteration\n");
 	
 	best_tour.nn_heur(idata, params);
@@ -49,17 +50,17 @@ void grasp_pr(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_ti
 		Tour tour;
 		tour.semi_nn_heur(idata, params, randmt);
 		int semi_greedy_sol_value = tour.sol_value;
-		local_search(tour, idata, params, cpu_time);
+		local_search(tour, idata, params, dummy_time);
 		
 		if(params.pr_mode == "f"){
-			path_relinking(best_tour, tour, idata);
+			path_relinking(best_tour, tour, idata, params, dummy_time);
 		}else if(params.pr_mode == "b"){
-			path_relinking(tour, best_tour, idata);
+			path_relinking(tour, best_tour, idata, params, dummy_time);
 		}else if(params.pr_mode == "bf"){
-			path_relinking(best_tour, tour, idata);
-			path_relinking(tour, best_tour, idata);
+			path_relinking(best_tour, tour, idata, params, dummy_time);
+			path_relinking(tour, best_tour, idata, params, dummy_time);
 		}else if(params.pr_mode == "m"){
-			path_relinking_mixed(tour, best_tour, idata);
+			path_relinking_mixed(tour, best_tour, idata, params, dummy_time);
 		}else{
 			printf("ERROR: No PR mode avaliabe.\n");
 			exit(0);
