@@ -100,7 +100,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 			param.look4 = std::atoi(optarg);
 			break;
 		case 'g': /* -g ou --pr_mode */
-			param.pr_mode = std::atoi(optarg);
+			param.pr_mode = optarg;
 			break;
 		default:
 			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
@@ -118,7 +118,7 @@ int32_t main(int argc, char* argv[]) {
 	CPUTime cpu_time;
 
 	read_args(argc, argv, param);
-
+	
 	std::cout << param.filename << std::endl;
 
 	randmt = std::mt19937(param.seed_rand);

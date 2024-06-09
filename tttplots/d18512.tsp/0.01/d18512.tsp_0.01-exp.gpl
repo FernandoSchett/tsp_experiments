@@ -1,0 +1,11 @@
+		set xlabel 'time to target solution'
+		set size ratio 1
+		set ylabel 'cumulative probability'
+                set yrange [0:1]
+		set key right bottom
+                set grid
+		set title 'd18512.tsp_0.01'
+		set terminal postscript color 'Helvetica'
+		set output 'd18512.tsp_0.01-exp.ps'
+		plot "d18512.tsp_0.01-ee.dat" t "empirical" w points, "d18512.tsp_0.01-te.dat" t "theoretical" w lines lt 3
+		quit

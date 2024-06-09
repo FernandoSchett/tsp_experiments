@@ -1,6 +1,5 @@
 #include "grasp.hpp"
 
-
 void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt) {
 	get_cpu_time(&cpu_time.s_CPU_inicial, &cpu_time.s_total_inicial);
 	get_cpu_time(&cpu_time.s_CPU_during, &cpu_time.s_total_during);
@@ -12,7 +11,7 @@ void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time,
 	local_search(best_tour, idata, params, cpu_time);
 	printf("%d;%d;%d;%lf;%d\n", best_tour.sol_value, best_tour.sol_value, greedy_sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, 1);
 
-	int i = 2;
+	int i = 1;
 	
 	while (!is_stop_criterion_satsfied(params, best_tour.sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
@@ -44,7 +43,7 @@ void grasp_pr(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_ti
 	local_search(best_tour, idata, params, cpu_time);
 	printf("%d;%d;%d;%lf;%d\n", best_tour.sol_value, best_tour.sol_value, greedy_sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, 1);
 
-	int i = 2;
+	int i = 1;
 	
 	while (!is_stop_criterion_satsfied(params, best_tour.sol_value, cpu_time.s_CPU_during - cpu_time.s_CPU_inicial, i)) {
 		Tour tour;
