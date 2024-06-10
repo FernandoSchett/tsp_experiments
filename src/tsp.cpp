@@ -26,6 +26,7 @@ void show_help(const char* name) {
 			-t, 	--maxtime 			set maxtime in seconds.\n\
 			-i,		--iterations		set max number of iterations.\n\
 			-g,		--pr_mode		    set path relinking mode.\n\
+			-e,		--restart_k		    set restart iterations for path relinking.\n\
 			-o,		--look4		        set look4 value.\n", name);
 	exit(-1);
 }
@@ -51,6 +52,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		{"path_load_sol" 	, required_argument , 0 , 'l' },
 		{"look4" 	        , required_argument , 0 , 'o' },
 		{"pr_mode" 	        , required_argument , 0 , 'g' },
+		{"restart_k" 	    , required_argument , 0 , 'e' },
 		{0       			, 0 				, 0	,  0  },
 	};
 
@@ -58,7 +60,7 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		show_help(argv[0]);
 	}
 
-	while ((opt = getopt_long(argc, argv, "hs:k:r:a:f:c:m:p:i:t:l:o:g:", options, NULL)) > 0) {
+	while ((opt = getopt_long(argc, argv, "hs:k:r:a:f:c:m:p:i:t:l:o:g:e:", options, NULL)) > 0) {
 		switch (opt) {
 		case 'h': /* -h ou --help */
 			show_help(argv[0]);
@@ -102,6 +104,9 @@ void read_args(const int argc, char* argv[], Parameters& param) {
 		case 'g': /* -g ou --pr_mode */
 			param.pr_mode = optarg;
 			break;
+		case 'e': /* -e ou --restart */
+			param.restart_k = std::atoi(optarg);
+			break;
 		default:
 			fprintf(stderr, "Opcao invalida ou faltando argumento: `%c'\n", optopt);
 			exit(-1);
@@ -118,7 +123,7 @@ int32_t main(int argc, char* argv[]) {
 	CPUTime cpu_time;
 
 	read_args(argc, argv, param);
-	
+
 	std::cout << param.filename << std::endl;
 
 	randmt = std::mt19937(param.seed_rand);

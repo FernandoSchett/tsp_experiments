@@ -11,6 +11,7 @@
 
 void grasp(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt);
 void grasp_pr(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt);
+void grasp_prr(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt);
 void update_elite_group(std::vector<Tour>& elite_group, Tour& tour, int elite_size);  
 bool is_equal(Tour& tour1, Tour& tour2);
 #endif
