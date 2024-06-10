@@ -1,0 +1,11 @@
+		set xlabel 'time to target solution'
+		set size ratio 1
+		set ylabel 'cumulative probability'
+                set yrange [0:1]
+		set key right bottom
+                set grid
+		set title 'u1060_0.05'
+		set terminal postscript color 'Helvetica'
+		set output 'u1060_0.05-exp.ps'
+		plot "u1060_0.05-ee.dat" t "empirical" w points, "u1060_0.05-te.dat" t "theoretical" w lines lt 3
+		quit

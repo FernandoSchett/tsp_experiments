@@ -1,7 +1,8 @@
 #!/bin/bash
 
-inst="brd14051 d15112.tsp d18512.tsp"
-alphas="0.01 0.025 0.05"
+inst="rl1304 u1060 fl1400"
+alphas="0.05"
+#alphas="0.01 0.025 0.05"
 
 for i in $inst
 do

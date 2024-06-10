@@ -2,9 +2,10 @@
 
 #inst="kroA100 si1032 st70"
 #alphas="0.01 0.025 0.05 0.1"
-
-inst="brd14051 d15112.tsp d18512.tsp"
-alphas="0.01 0.025 0.05"
+#inst="brd14051 d15112.tsp d18512.tsp"
+#alphas="0.01 0.025 0.05"
+inst="rl1304 u1060 fl1400"
+alphas="0.05"
 
 dir=inst_data/plot_ttt_alphas.gpl
 

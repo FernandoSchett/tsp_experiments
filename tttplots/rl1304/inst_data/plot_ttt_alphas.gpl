@@ -1,0 +1,10 @@
+set xlabel 'time to target solution'
+set size ratio 1
+set ylabel 'cumulative probability'
+set yrange [0:1]
+set key right bottom
+set grid
+set title 'rl1304'
+set terminal postscript color 'Helvetica'
+set output 'rl1304_ttt.ps'
+plot "../0.05/rl1304_0.05-ee.dat" t "0.05 empirical" w points, "../0.05/rl1304_0.05-te.dat" t "0.05 theoretical" w lines lt 3,
