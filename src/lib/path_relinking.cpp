@@ -19,7 +19,7 @@ Tour path_relinking(Tour& guide_tour, Tour& inicial_tour, IData& idata, Paramete
         // inter_sol.print_tour();
         // std::cout <<"\n";
         if(inter_sol.sol_value < best_tour.sol_value){
-            std::cout << "ENTROU AQUI" <<'\n';
+            //std::cout << "ENTROU AQUI" <<'\n';
             updated = true;
             best_tour = inter_sol;
         }
@@ -65,7 +65,7 @@ Tour path_relinking_mixed(Tour& guide_tour, Tour& inicial_tour, IData& idata, Pa
         // std::cout << guide_tour.sol_value <<'\n' <<'\n'<<'\n';
 
         if(inter_sol.sol_value < best_tour.sol_value){
-            std::cout << "ENTROU AQUI" <<'\n';
+            //std::cout << "ENTROU AQUI" <<'\n';
             updated = true;
             best_tour = inter_sol;
         }

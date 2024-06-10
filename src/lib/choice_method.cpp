@@ -48,11 +48,11 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 		local_search(best_tour, idata, params, cpu_time);
 	}
 	else if (params.choice_method == "grasp"){
-		if(idata.n_nodes <= 100){
-			params.maxtime = params.maxtime/4; 
-		}else if(idata.n_nodes < 2500){
-			params.maxtime = params.maxtime/2;
-		}
+		//if(idata.n_nodes <= 100){
+		//	params.maxtime = params.maxtime/4; 
+		//}else if(idata.n_nodes < 2500){
+		//	params.maxtime = params.maxtime/2;
+		//}
 		grasp(best_tour, idata, params, cpu_time, randmt);
 	}
 	else if(params.choice_method == "grasp_pr"){	
