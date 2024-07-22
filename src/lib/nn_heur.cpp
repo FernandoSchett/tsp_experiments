@@ -1,7 +1,7 @@
 /*
  * -----------------------------------------------------------------------------
  * File Name:          nn_heur.cpp
- * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com)
  * Last Modified Date: 22/07/2024
  * Purpose: 		  Functions responsible for the Nearest Neighbor heuristic and Semi-Randomized Nearest Neighbor [3]         
  * Notes:
