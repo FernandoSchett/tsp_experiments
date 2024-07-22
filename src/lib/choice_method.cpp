@@ -1,3 +1,20 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          choice_method.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for choosing the running the choice method.            
+ * Notes:
+ * - Nearest Neighbor and Semi-Randomized Nearest Neighbor [3]
+ * - Double-Sided Nearest Neighbor and Semi-Randomized Double-Sided Nearest Neighbor [3]
+ * - Multi-Start Semi-Randomized Nearest Neighbor and Multi-Start Semi-Randomized Double-Sided Nearest Neighbor [3]
+ * - Local Search [3]
+ * - GRASP [3]
+ * - Grasp + Path Relinking [3]
+ * - Grasp + Path Relinking + Restart Techniques [3]
+ * -----------------------------------------------------------------------------
+ */
+
 #include "choice_method.hpp"
 
 void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt) {
@@ -57,6 +74,9 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 	}
 	else if(params.choice_method == "grasp_pr"){	
 		grasp_pr(best_tour, idata, params, cpu_time, randmt);
+	}else if(params.choice_method == "grasp_prr"){
+		std::cout << "grasp_prr" << std::endl;	
+		grasp_prr(best_tour, idata, params, cpu_time, randmt);
 	}else{
 		printf("ERROR: No choice method selected.\n");
 		exit(0);

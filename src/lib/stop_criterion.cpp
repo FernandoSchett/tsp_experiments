@@ -1,3 +1,16 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          stop_criterion.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for handling the heuristic stop criterion.           
+ * Notes:
+ * - Iterations
+ * - Time
+ * - Look4 (minumum value)
+ * -----------------------------------------------------------------------------
+ */
+
 #include "stop_criterion.hpp"
 
 bool is_stop_criterion_satsfied(Parameters& params, int sol_value, double t, int i) {

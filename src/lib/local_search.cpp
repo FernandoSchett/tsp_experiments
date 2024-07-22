@@ -1,3 +1,19 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          local_search.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for the local search.            
+ * Notes:
+ * - 2-opt first improvement [3]
+ * - 2-opt best improvement [3]
+ * - 2-opt best improvement with candidate list [3]
+ * - 2-opt first improvement with circular search [3]
+ * TO-DO:
+ * - 3-opt versions
+ * -----------------------------------------------------------------------------
+ */
+
 #include "local_search.hpp"
 #include "tour.hpp"
 

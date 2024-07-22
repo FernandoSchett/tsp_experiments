@@ -1,3 +1,14 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          multi_start.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for the Multi-Start heuristic.         
+ * Notes: 
+ * - Multi-Start Semi-Randomized Nearest Neighbor and Multi-Start Semi-Randomized Double-Sided Nearest Neighbor [3]
+ * -----------------------------------------------------------------------------
+ */
+
 #include "multi_start.hpp"
 
 void multist_semi_nn_heur(Tour& best_tour, IData& idata, Parameters& params, CPUTime& cpu_time, std::mt19937& randmt) {

@@ -1,12 +1,28 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          parameters.cpp
+ * Authors:            Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for setting the path to the output file.
+ * Notes:
+ * - choice_method+stop_criterion+scheme+local_search         
+ * -----------------------------------------------------------------------------
+ */
+
+
 #include "parameters.hpp"
+#include <iostream>
 
 void Parameters::build_path_to(){
     this->path_to = this->choice_method;
+    if(this->choice_method == "grasp_pr" || this->choice_method == "grasp_prr"){
+        this->path_to += "_" + this->pr_mode;
+    }
     
     if (this->stop_criterion == "iter") {
         this->path_to += "_i" + std::to_string(this->iterations);
     }
-    else if (this->stop_criterion == "time") {
+    else if (this->stop_criterion == "time" || this->stop_criterion == "look4") {
         this->path_to += "_t" + std::to_string(this->maxtime);
     }
 
@@ -21,4 +37,7 @@ void Parameters::build_path_to(){
     if (this->choice_method == "local_search") {
         this->path_to += "_" + this->local_search;
     }
-}
+
+    std::cout << "path_to: " << this->path_to << std::endl;
+    
+}   

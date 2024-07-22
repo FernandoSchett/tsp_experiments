@@ -1,9 +1,27 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          path_relinkg.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for the Path Relinking heuristic.
+ * Notes:
+ * - Path Relinking [3]
+ * - Path Relinking Mixed [3]
+ * TO-DO:
+ * - Path Relinking Mixed version not working properly           
+ * -----------------------------------------------------------------------------
+ */
+
 #include "path_relinking.hpp"
 
 Tour path_relinking(Tour& guide_tour, Tour& inicial_tour, IData& idata, Parameters& params, CPUTime& dummy_time){
     Tour inter_sol, best_tour;
     inter_sol = inicial_tour;
-    best_tour = inicial_tour;
+    if(inicial_tour.sol_value < guide_tour.sol_value){
+        best_tour = inicial_tour;
+    }else{
+        best_tour = guide_tour;
+    }
     bool updated = false;
     //std::cout << "SOCORRO SOCORRO: " <<'\n';
     if(neighborhood_size(inter_sol, guide_tour) < 4 ){
@@ -28,8 +46,8 @@ Tour path_relinking(Tour& guide_tour, Tour& inicial_tour, IData& idata, Paramete
     }while(neighborhood_size(inter_sol, guide_tour) >= 2);
 
     
-
     if(updated){
+        //std::cout << "ACHOU ALGO MELHOR!" <<'\n';
         local_search(best_tour, idata, params, dummy_time);
     }
 
@@ -83,7 +101,7 @@ Tour path_relinking_mixed(Tour& guide_tour, Tour& inicial_tour, IData& idata, Pa
     return best_tour;
 }
 
-
+// Get number of neighborhood size (different elements between two tours)
 int neighborhood_size(Tour& inter_sol, Tour& guide_tour){
     
     int neighbors = 0; 
@@ -119,6 +137,7 @@ int neighborhood_size(Tour& inter_sol, Tour& guide_tour){
     return neighbors;
 }
 
+// Select the best neighbor of a tour
 Tour get_best_neighbor(Tour& guide_tour, Tour& inter_sol,  IData& inst){
     //std::cout << "COMECOU A PROCURAR " <<'\n';
     Tour best_tour = inter_sol;

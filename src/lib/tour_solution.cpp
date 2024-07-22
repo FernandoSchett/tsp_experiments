@@ -1,3 +1,20 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          tour_solution.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Util functions for tour solution.           
+ * Notes:
+ * - Tour solution validation
+ * - Save time result
+ * - Save solution to file
+ * - Read solution file
+ * - Print tour
+ * - Calculate tour cost
+ * -----------------------------------------------------------------------------
+ */
+
+
 #include "tour.hpp"
 
 void Tour::calc_tour_cost(IData& inst) {

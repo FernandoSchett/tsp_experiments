@@ -1,3 +1,12 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          double_sided_nn_heur.cpp
+ * Authors:            Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for the double-sided nearest neighbor heuristic [3].             
+ * -----------------------------------------------------------------------------
+ */
+
 #include "tour.hpp"
 #include "semi_greedy_schemes.hpp"
 

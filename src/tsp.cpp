@@ -1,5 +1,18 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          tsp.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose:            Read a TSP instance and execute a heuristic on the traveling salesman problem, saving the solution to a file.
+ * How to Compile: make all
+ * How to Run: ./tsp [options]
+ * 
+ * Notes:
+ * - Check the README.md and ./scripts files for more information.          
+ * -----------------------------------------------------------------------------
+ */
+
 #include <random>
-std::mt19937 randmt;
 #include "parameters.hpp"
 #include "io_inst.hpp"
 #include "get_sys_time.hpp"
@@ -9,6 +22,8 @@ std::mt19937 randmt;
 #include <iomanip>
 #include <getopt.h>
 #include <string>
+
+std::mt19937 randmt;
 
 void show_help(const char* name) {
 	fprintf(stderr, "\
