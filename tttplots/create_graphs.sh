@@ -2,7 +2,7 @@
 
 # ==============================================
 # Script Name:    create_graphs.sh
-# Description:    Get data from instances folders and create overlapping graphs
+# Description:    Get data from instances folders and create overlapping graphs (run after run_tttplots.sh)
 # Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
 # Created Date:   22/07/2024
 # ==============================================
