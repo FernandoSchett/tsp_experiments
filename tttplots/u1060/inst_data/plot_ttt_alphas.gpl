@@ -7,4 +7,4 @@ set grid
 set title 'u1060'
 set terminal postscript color 'Helvetica'
 set output 'u1060_ttt.ps'
-plot "../0.05/u1060_0.05-ee.dat" t "0.05 empirical" w points, "../0.05/u1060_0.05-te.dat" t "0.05 theoretical" w lines lt 3,
+plot "../backward/u1060_backward-ee.dat" t "backward empirical" w points, "../backward/u1060_backward-te.dat" t "backward theoretical" w lines lt 3,"../prr_b_restart_100/u1060_prr_b_restart_100-ee.dat" t "restart-100 empirical" w points, "../prr_b_restart_100/u1060_prr_b_restart_100-te.dat" t "restart-100 theoretical" w lines lt 3,"../prr_b_restart_200/u1060_prr_b_restart_200-ee.dat" t "restart-200 empirical" w points, "../prr_b_restart_200/u1060_prr_b_restart_200-te.dat" t "restart-200 theoretical" w lines lt 3,

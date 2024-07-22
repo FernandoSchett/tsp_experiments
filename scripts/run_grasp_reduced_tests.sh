@@ -1,18 +1,19 @@
 #!/bin/bash
 
 cd ..
-inst= ("brd14051 d15112.tsp d18512.tsp")
-inst=("brd14051.tsp" "d15112.tsp" "d18512.tsp") # inst=("kroA100.tsp" "si1032.tsp") 
-look4=("530512" "1769898" "733473") # look4=("21282" "92650")
+inst=("fl1400.tsp")
+#inst=("rl1304.tsp" "u1060.tsp" "fl1400.tsp") # inst=("kroA100.tsp" "si1032.tsp") 
+look4=("20977")
+#look4=("280207" "246164" "20977") # look4=("21282" "92650")
 time="600" 
-alphas="0.025000 0.050000 0.100000"
+alphas="0.050000"
 
 make clean
 make 
 
 for alp in $alphas
 do
-    for s in $(seq 1 82)
+    for s in $(seq 94 84)
     do
         dir="grasp_t${time}_a${alp}_s${s}"
 

@@ -1,26 +1,57 @@
 #!/bin/bash
 
 cd ..
-inst=("brd14051.tsp d15112.tsp d18512.tsp")
+inst=("rl1304.tsp" "u1060.tsp" "fl1400.tsp") 
+#inst=("brd14051.tsp d15112.tsp d18512.tsp")
 #inst=("kroA100.tsp" "si1032.tsp")
-look4=("530512" "1769898" "733473") 
+look4=("280207" "246164" "20977")
+#look4=("530512" "1769898" "733473") 
 #look4=("21282" "92650") 
 time="600"
-alphas="0.010000 0.025000 0.050000"
+alphas="0.050000"
+modes="b" 
+#alphas="0.010000 0.025000 0.050000"
 
 mkdir tttplots
 
-for alp in $alphas
+for mod in $modes
 do
-    for s in $(seq 1 200)
+    for s in $(seq 1 100)
     do
-        dir_with_time="grasp_t${time}_a${alp}_s${s}"
-        dir="grasp_a${alp}_s${s}"
-        awk -v var=";${s}" '{print $0 var}' "./results/${dir}/time_result.txt" > "./results/${dir}/tmp.txt"
-        cat ./results/${dir}/tmp.txt | grep brd14051 >> tttplots/time_result.txt
-        cat ./results/${dir}/tmp.txt | grep d15112 >> tttplots/time_result.txt
-        cat ./results/${dir}/tmp.txt | grep d18512 >> tttplots/time_result.txt
-        rm ./results/${dir}/tmp.txt
+        dir="grasp_prr_b_t600_a0.050000_s${s}"
+        awk -v var=";${s}"  '{print $0 var}' "./results/${dir}/time_result.txt" > "./results/${dir}/tmp.txt"
+        #var=$(awk 'NR <= 3' ./results/${dir}/tmp.txt)
+        #echo $var >> tttplots/time_result_forward.txt
+        #ar=$(awk 'NR >= 7 && NR <= 9' ./results/${dir}/tmp.txt)
+        #echo $var >> tttplots/time_result_backward.txt
+        var=$(awk 'NR >= 4 && NR <= 6' ./results/${dir}/tmp.txt)
+        echo $var >> tttplots/time_result_prr_100_backward.txt
+        var=$(awk 'NR >= 13 && NR <= 15' ./results/${dir}/tmp.txt)
+        echo $var >> tttplots/time_result_prr_200_backward.txt        
+        #cat ./results/${dir}/tmp.txt | grep rl1304 >> tttplots/time_result.txt
+        #cat ./results/${dir}/tmp.txt | grep u1060 >> tttplots/time_result.txt
+        #cat ./results/${dir}/tmp.txt | grep fl1400 >> tttplots/time_result.txt
+        #rm ./results/${dir}/tmp.txt
     done
 done
 
+
+
+#for mod in $modes
+#do
+    #for s in $(seq 36 100)
+    #do
+        #dir="grasp_pr_a0.050000_s${s}"
+        #awk -v var=";${s}"  '{print $0 var}' "./results/${dir}/time_result.txt" > "./results/${dir}/tmp.txt"
+        #var=$(awk 'NR <= 3' ./results/${dir}/tmp.txt)
+        #echo $var >> tttplots/time_result_forward.txt
+        #var=$(awk 'NR >= 4 && NR <= 6' ./results/${dir}/tmp.txt)
+        #echo $var >> tttplots/time_result_backward.txt
+        #var=$(awk 'NR >= 7 && NR <= 9' ./results/${dir}/tmp.txt)
+        #echo $var >> tttplots/time_result_forward_backward.txt        
+        #cat ./results/${dir}/tmp.txt | grep rl1304 >> tttplots/time_result.txt
+        #cat ./results/${dir}/tmp.txt | grep u1060 >> tttplots/time_result.txt
+        #cat ./results/${dir}/tmp.txt | grep fl1400 >> tttplots/time_result.txt
+        #rm ./results/${dir}/tmp.txt
+    #done
+#done

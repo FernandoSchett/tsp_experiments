@@ -1,0 +1,9 @@
+		set xlabel 'exponential quantiles'
+		set size ratio 1
+		set ylabel 'measured times'
+		set key right bottom
+		set title 'u1060_forward_backward'
+		set terminal postscript color 'Helvetica' 
+		set output 'u1060_forward_backward-qq.ps'
+		plot "u1060_forward_backward-el.dat" t "empirical" w points, "u1060_forward_backward-tl.dat" t "estimated" with lines lt 3, "u1060_forward_backward-ul.dat" t "+1 std dev range" w lines lt 4, "u1060_forward_backward-ll.dat" t "-1 std dev range" w lines lt 4 
+		quit
