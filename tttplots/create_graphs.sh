@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# ==============================================
+# Script Name:    create_graphs.sh
+# Description:    Get data from instances folders and create overlapping graphs
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# ==============================================
+
 #inst="kroA100 si1032 st70"
 #alphas="0.01 0.025 0.05 0.1"
 #inst="brd14051 d15112.tsp d18512.tsp"
