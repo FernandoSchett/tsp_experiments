@@ -1,9 +1,0 @@
-		set xlabel 'exponential quantiles'
-		set size ratio 1
-		set ylabel 'measured times'
-		set key right bottom
-		set title 'fl1400_forward'
-		set terminal postscript color 'Helvetica' 
-		set output 'fl1400_forward-qq.ps'
-		plot "fl1400_forward-el.dat" t "empirical" w points, "fl1400_forward-tl.dat" t "estimated" with lines lt 3, "fl1400_forward-ul.dat" t "+1 std dev range" w lines lt 4, "fl1400_forward-ll.dat" t "-1 std dev range" w lines lt 4 
-		quit

@@ -1,9 +1,0 @@
-		set xlabel 'exponential quantiles'
-		set size ratio 1
-		set ylabel 'measured times'
-		set key right bottom
-		set title 'u1060_prr_b_restart_100'
-		set terminal postscript color 'Helvetica' 
-		set output 'u1060_prr_b_restart_100-qq.ps'
-		plot "u1060_prr_b_restart_100-el.dat" t "empirical" w points, "u1060_prr_b_restart_100-tl.dat" t "estimated" with lines lt 3, "u1060_prr_b_restart_100-ul.dat" t "+1 std dev range" w lines lt 4, "u1060_prr_b_restart_100-ll.dat" t "-1 std dev range" w lines lt 4 
-		quit
