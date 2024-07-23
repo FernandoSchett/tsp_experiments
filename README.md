@@ -15,7 +15,9 @@
 
 ## About 🤔:
 
-This repository contains the implementation of various algorithms designed to tackle the Traveling Salesman Problem (TSP). The project is part of the evaluation for the Topics in Computational Systems III course at the Federal University of Bahia (UFBA), supervised by Professor Celso da Cruz Carneiro Ribeiro, conducted in the first semester of 2023. The repository includes the implementation of adaptive greedy heuristics, multi-start procedures, and local search algorithms. The source code and datasets[2] used for testing are provided to facilitate further research and replication of results.
+This repository contains the implementation of various algorithms designed to tackle the Traveling Salesman Problem (TSP). The project is part of the evaluation for the Topics in Computational Systems III course at the Federal University of Bahia (UFBA), supervised by Professor Celso da Cruz Carneiro Ribeiro, conducted in the first semester of 2023. The repository includes the implementation of adaptive greedy heuristics, multi-start procedures, and local search algorithms.
+
+The source code and datasets used for testing are provided to facilitate further research and replication of results. You can also read `./results_tsp_project.pdf` to get experiment analysis and graphs, or check this [Overleaf link](https://www.overleaf.com/read/yzgxqkwwzkwt#623679) for the online version. For a quicker approach, check out our YouTube presentation available at this [link]().
 
 ## Summary 📝:
 
@@ -24,10 +26,10 @@ This repository contains the implementation of various algorithms designed to ta
 - TSP instances and solutions **reader**; 
 - **Constructive Heuristics:** Nearest Neighbor (Greedy and Semi-Greedy, alpha and k_best);
 - **Local Search:** Two-opt Best Improvement, First Improvement, Candidade lists and Circular Search;
-- **GRASP Heuristic**, and it's variations;
 - **Path Relinking** with restart;
-- **Executions Scripts** avaliable at ```./scripts/```;
-- **Experiments Analysis and graphs** at ```./results_tsp_project.pdf``` ; 
+- **GRASP Heuristic** (GRASP, GRASP + Path Relinking and GRASP + Path Relinking + Restart);
+- **Executions Test Scripts**;
+- **Experiments Analysis and graphs** at `./results_tsp_project.pdf`; 
 - **Logs generators**;
 
 ## How to run it 🏃:
