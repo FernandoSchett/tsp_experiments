@@ -1,3 +1,10 @@
+# ==============================================
+# Script Name:    run_ls_two_opt_best_imprv_chosen_insts.sh
+# Description:    Run 2-opt best improvement heuristic on reduced tests and create logs and results
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# ==============================================
+
 cd ..
 inst=./benchmark/instances/chosen_inst/*.tsp
 make clean

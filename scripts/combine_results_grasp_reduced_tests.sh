@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# ==============================================
+# Script Name:    combine_results_grasp_reduced_tests.sh
+# Description:    Combine results from reduced tests GRASP PR to one file
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# ==============================================
+
 cd ..
 inst=("rl1304.tsp" "u1060.tsp" "fl1400.tsp") 
 #inst=("brd14051.tsp d15112.tsp d18512.tsp")

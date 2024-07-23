@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# ==============================================
+# Script Name:    run_grasp_reduced_tests.sh
+# Description:    Run GRASP + Path Relinking + Reestart heuristic on Reduced tests and create logs and results
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# ==============================================
+
 cd ..
 inst=("fl1400.tsp")
 #inst=("rl1304.tsp" "u1060.tsp" "fl1400.tsp") # inst=("kroA100.tsp" "si1032.tsp") 

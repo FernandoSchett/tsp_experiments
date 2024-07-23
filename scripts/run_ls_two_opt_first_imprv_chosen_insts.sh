@@ -1,3 +1,10 @@
+# ==============================================
+# Script Name:    run_ls_two_opt_first_imprv_chosen_insts.sh
+# Description:    Run 2-opt first improvement heuristic on chosen instances and create logs and results
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# ==============================================
+
 cd ..
 inst=./benchmark/instances/chosen_inst/*.tsp
 make clean

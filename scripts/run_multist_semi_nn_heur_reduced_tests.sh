@@ -1,3 +1,10 @@
+# ==============================================
+# Script Name:    run_multist_semi_nn_heur_reduced_tests.sh
+# Description:    Run SEMI-NN (alpha scheme) heuristic on reduced instances and create logs and results
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# ==============================================
+
 cd ..
 inst=./benchmark/instances/reduce_tests/*
 make clean
