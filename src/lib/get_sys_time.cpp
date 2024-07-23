@@ -1,3 +1,12 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          get_sys_time.cpp
+ * Authors:            Celso Ribeiro
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for getting the exact cpu process time.            
+ * -----------------------------------------------------------------------------
+ */
+
 #include "get_sys_time.hpp"
 
 void get_cpu_time(double *seg_CPU_total, double *seg_sistema_total)

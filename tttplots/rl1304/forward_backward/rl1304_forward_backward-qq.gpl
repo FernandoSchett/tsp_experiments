@@ -1,0 +1,9 @@
+		set xlabel 'exponential quantiles'
+		set size ratio 1
+		set ylabel 'measured times'
+		set key right bottom
+		set title 'rl1304_forward_backward'
+		set terminal postscript color 'Helvetica' 
+		set output 'rl1304_forward_backward-qq.ps'
+		plot "rl1304_forward_backward-el.dat" t "empirical" w points, "rl1304_forward_backward-tl.dat" t "estimated" with lines lt 3, "rl1304_forward_backward-ul.dat" t "+1 std dev range" w lines lt 4, "rl1304_forward_backward-ll.dat" t "-1 std dev range" w lines lt 4 
+		quit

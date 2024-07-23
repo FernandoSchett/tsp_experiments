@@ -1,3 +1,12 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          io_inst.cpp
+ * Authors:            Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for reading the input instance.
+ * -----------------------------------------------------------------------------
+ */
+
 #include "io_inst.hpp"
 #include "dists.hpp"
 

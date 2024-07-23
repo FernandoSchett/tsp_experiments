@@ -1,0 +1,9 @@
+		set xlabel 'exponential quantiles'
+		set size ratio 1
+		set ylabel 'measured times'
+		set key right bottom
+		set title 'brd14051_0.01'
+		set terminal postscript color 'Helvetica' 
+		set output 'brd14051_0.01-qq.ps'
+		plot "brd14051_0.01-el.dat" t "empirical" w points, "brd14051_0.01-tl.dat" t "estimated" with lines lt 3, "brd14051_0.01-ul.dat" t "+1 std dev range" w lines lt 4, "brd14051_0.01-ll.dat" t "-1 std dev range" w lines lt 4 
+		quit

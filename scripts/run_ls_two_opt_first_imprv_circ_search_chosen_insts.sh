@@ -1,3 +1,11 @@
+# ==============================================
+# Script Name:    run_ls_two_opt_first_imprv_circ_search_chosen_insts.sh
+# Description:    Run 2-opt first improv (circular search) heuristic on chosen instances and create logs and results
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# How to run it:  bash run_ls_two_opt_first_imprv_circ_search_chosen_insts.sh
+# ==============================================
+
 cd ..
 inst=./benchmark/instances/chosen_inst/*.tsp
 make clean

@@ -1,3 +1,16 @@
+/*
+ * -----------------------------------------------------------------------------
+ * File Name:          semi_greedy_schemes.cpp
+ * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+ * Last Modified Date: 22/07/2024
+ * Purpose: 		  Functions responsible for chosing and handling with the semi-greedy different schemes.            
+ * Notes:
+ * - Cardinality Scheme [3]
+ * - Quality Scheme [3]
+ * -----------------------------------------------------------------------------
+ */
+
+
 #include "tour.hpp"
 #include "semi_greedy_schemes.hpp"
 
@@ -31,6 +44,7 @@ Candidate quality_scheme(std::vector<Candidate>& cl, Parameters& params, std::mt
     return chosen_candidate;
 }
 
+// Returns the chosen candidate according to the scheme
 Candidate choose_candidate(std::vector<Candidate>& cl, Parameters& params, std::mt19937& randmt) {
     Candidate chosen_candidate;
     if (params.scheme == "k_best") {

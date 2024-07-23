@@ -1,17 +1,27 @@
 #!/bin/bash
 
+# ==============================================
+# Script Name:    run_grasp_reduced_tests.sh
+# Description:    Run GRASP + Path Relinking + Reestart heuristic on Reduced tests and create logs and results
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# How to run it: ./run_grasp_reduced_tests.sh
+# ==============================================
+
 cd ..
-inst=("st70.tsp") # inst=("kroA100.tsp" "si1032.tsp") 
-look4=("675") # look4=("21282" "92650")
-time="600"
-alphas="0.010000 0.025000 0.050000 0.100000"
+inst=("fl1400.tsp")
+#inst=("rl1304.tsp" "u1060.tsp" "fl1400.tsp") # inst=("kroA100.tsp" "si1032.tsp") 
+look4=("20977")
+#look4=("280207" "246164" "20977") # look4=("21282" "92650")
+time="600" 
+alphas="0.050000"
 
 make clean
 make 
 
 for alp in $alphas
 do
-    for s in $(seq 1 50)
+    for s in $(seq 94 84)
     do
         dir="grasp_t${time}_a${alp}_s${s}"
 

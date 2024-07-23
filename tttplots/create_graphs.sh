@@ -1,7 +1,23 @@
 #!/bin/bash
 
-inst="kroA100 si1032 st70"
-alphas="0.01 0.025 0.05 0.1"
+# ==============================================
+# Script Name:    create_graphs.sh
+# Description:    Get data from instances folders and create overlapping graphs (run after run_tttplots.sh)
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# ==============================================
+
+#inst="kroA100 si1032 st70"
+#alphas="0.01 0.025 0.05 0.1"
+#inst="brd14051 d15112.tsp d18512.tsp"
+#alphas="0.01 0.025 0.05"
+inst="rl1304 u1060 fl1400"
+#alphas=("0.05" "backward" "forward" "forward_backward")
+#nomes=("0.05" "backward" "forward" "backward-forward")
+alphas=("backward" "prr_b_restart_100" "prr_b_restart_200")
+nomes=("backward" "restart-100" "restart-200")
+
+#alphas="0.05"
 
 dir=inst_data/plot_ttt_alphas.gpl
 
@@ -21,9 +37,9 @@ do
     echo set output \'${i}_ttt.ps\' >> ${dir} 
     echo -n "plot " >> ${dir} 
     
-    for alp in $alphas
+    for j in $(seq 0 $((${#alphas[@]} - 1)))
     do  
-        echo -n \"../${alp}/${i}_${alp}-ee.dat\" t \"${alp} empirical\" w points, \"../${alp}/${i}_${alp}-te.dat\" t \"${alp} theoretical\" w lines lt 3, >> ${dir}          
+        echo -n \"../${alphas[$j]}/${i}_${alphas[$j]}-ee.dat\" t \"${nomes[$j]} empirical\" w points, \"../${alphas[$j]}/${i}_${alphas[$j]}-te.dat\" t \"${nomes[$j]} theoretical\" w lines lt 3, >> ${dir}          
     done
     
     cd inst_data

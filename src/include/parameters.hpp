@@ -9,13 +9,14 @@ class Parameters {
 public:
 	char* filename;
 	long double alpha;
-	int k_best, seed_rand, iterations, maxtime, look4;
+	int k_best, seed_rand, iterations, maxtime, look4, restart_k;
 	std::string scheme;
 	std::string choice_method;
 	std::string stop_criterion; // "iter" or "time"
 	std::string path_to;
 	std::string path_load_solution;
 	std::string local_search;
+	std::string pr_mode;
 
 	void build_path_to();
 };

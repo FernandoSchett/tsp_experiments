@@ -1,3 +1,11 @@
+# ==============================================
+# Script Name:    run_grasp_heur_chosen_insts.sh
+# Description:    Run GRASP heuristic on chosen instances and create logs and results
+# Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
+# Created Date:   22/07/2024
+# How to run it:  bash run_grasp_heur_chosen_insts.sh
+# ==============================================
+
 cd ..
 inst=./benchmark/instances/chosen_inst/*
 make clean
