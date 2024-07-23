@@ -5,6 +5,7 @@
 # Description:    Combine results from reduced tests GRASP PR to one file
 # Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
 # Created Date:   22/07/2024
+# How to run it:  bash combine_results_grasp_reduced_tests.sh
 # ==============================================
 
 cd ..

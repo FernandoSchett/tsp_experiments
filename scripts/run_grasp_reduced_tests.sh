@@ -5,6 +5,7 @@
 # Description:    Run GRASP + Path Relinking + Reestart heuristic on Reduced tests and create logs and results
 # Author:         Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
 # Created Date:   22/07/2024
+# How to run it: ./run_grasp_reduced_tests.sh
 # ==============================================
 
 cd ..
