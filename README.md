@@ -17,7 +17,7 @@
 
 This repository contains the implementation of various algorithms designed to tackle the Traveling Salesman Problem (TSP). The project is part of the evaluation for the Topics in Computational Systems III course at the Federal University of Bahia (UFBA), supervised by Professor Celso da Cruz Carneiro Ribeiro, conducted in the first semester of 2023. The repository includes the implementation of adaptive greedy heuristics, multi-start procedures, local search  and path relinking algorithms.
 
-The source code and datasets used for testing are provided to facilitate further research and replication of results (avaliable at [here](https://docs.google.com/spreadsheets/d/1n4VZjzL19idoP9ZCqErg7BgzjlyMYRbJm0f-WUJRtvw/edit?usp=sharing)). You can also read `./results_tsp_project.pdf` to get experiment analysis and graphs, or check this [Overleaf link](https://www.overleaf.com/read/yzgxqkwwzkwt#623679) for the online version. For a quicker approach, check out our YouTube presentation available at this [link](https://youtu.be/rSF7PO0vX1U).
+The source code and datasets used for testing are provided to facilitate further research and replication of results (avaliable [here](https://docs.google.com/spreadsheets/d/1n4VZjzL19idoP9ZCqErg7BgzjlyMYRbJm0f-WUJRtvw/edit?usp=sharing)). You can also read `./results_tsp_project.pdf` to get experiment analysis and graphs, or check this [Overleaf link](https://www.overleaf.com/read/yzgxqkwwzkwt#623679) for the online version. For a quicker approach, check out our YouTube presentation available at this [link](https://youtu.be/rSF7PO0vX1U).
 
 ## Resourses 🧑‍🔬:
 
