@@ -13,8 +13,9 @@
 ## Special thanks to 🥰:
 - [Celso C. Ribeiro](http://profs.ic.uff.br/~celso/), our advisees in this work.
 
-
 ## About 🤔:
+
+This repository contains the implementation of various algorithms designed to tackle the Traveling Salesman Problem (TSP). The project is part of the evaluation for the Topics in Computational Systems III course at the Federal University of Bahia (UFBA), supervised by Professor Celso da Cruz Carneiro Ribeiro, conducted in the first semester of 2023. The repository includes the implementation of adaptive greedy heuristics, multi-start procedures, and local search algorithms. The source code and datasets[2] used for testing are provided to facilitate further research and replication of results.
 
 ## Summary 📝:
 
@@ -22,17 +23,19 @@
 
 - TSP instances and solutions **reader**; 
 - **Constructive Heuristics:** Nearest Neighbor (Greedy and Semi-Greedy, alpha and k_best);
-- **Local Search:** Two-opt Best Improvement and First Improvement;
-- **GRASP Heuristic**;
+- **Local Search:** Two-opt Best Improvement, First Improvement, Candidade lists and Circular Search;
+- **GRASP Heuristic**, and it's variations;
+- **Path Relinking** with restart;
+- **Executions Scripts** avaliable at ```./scripts/```;
+- **Experiments Analysis and graphs** at ```./results_tsp_project.pdf``` ; 
 - **Logs generators**;
-- Experiments Analisys and graphs; 
 
 ## How to run it 🏃:
 
-First, clone this repository. After that, simply execute the ```file_name``` file with the command:
+First, clone this repository. After that, yout can use some of scripts avaliable at ```./scripts/``` or simply type:
 
-    sudo command_for_running_project
-
+    make all
+    ./TSP [options]
 
 ## UML‍ 💬:
 
@@ -74,3 +77,14 @@ Feel free to create a new branch, fork the project, create a new Issue or make a
 
 [Apache V2](https://choosealicense.com/licenses/apache-2.0/)
 
+
+## References 📙:
+	
+[1] [Karp 1972] Karp, R. M. (1972). Reducibility among Combinatorial Problems, page
+85–103. Springer US.
+	
+[2] [Reinelt 1991] Reinelt, G. (1991). TSPLIB–a traveling salesman problem library. ORSA
+Journal on Computing, 3(4):376–384.
+
+[3] [Resende and Ribeiro 2016] Resende, M. G. and Ribeiro, C. C. (2016). Optimization by
+GRASP: Greedy Randomized Adaptive Search Procedures. Springer New York.
