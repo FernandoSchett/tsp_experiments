@@ -2,7 +2,7 @@
  * -----------------------------------------------------------------------------
  * File Name:          tsp.cpp
  * Authors:            Fernando Schettini (Fernandoschettini@outlook.com) and Vitor Barbosa
- * Last Modified Date: 22/07/2024
+ * Last Modified Date: 10/02/2025
  * Purpose:            Read a TSP instance and execute a heuristic on the traveling salesman problem, saving the solution to a file.
  * How to Compile: make all
  * How to Run: ./tsp [options]
