@@ -1,65 +1,91 @@
-# Definir compilador e flags base
+# compiler
 GXX := g++
-NVCC := nvcc
 
-# Número de processos MPI (default = 1)
-PROCS ?= 1
+# compiler flags
+GXXFLAGS :=
 
-# Flags base para compilação
-BASE_FLAGS := -O2 -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=0 -I src/include
-MPI_FLAGS := -fopenmp -DUSE_MPI -DN_PROCESSES=$(PROCS)
-CUDA_FLAGS := -std=c++17 -Xcompiler "-fopenmp" -DUSE_CUDA
+# target executable
+TARGET := TSP
 
-# Diretórios
-BUILD_DIR := build
-SRC_DIR := src/lib
+# header files
 INCLUDES := -I src/include
 
-# Definição dos arquivos fonte
-SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
-OBJECTS := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SOURCES))
-CUDA_SOURCES := $(SRC_DIR)/pso_cuda.cu
-CUDA_OBJECTS := $(patsubst $(SRC_DIR)/%.cu,$(BUILD_DIR)/%.o,$(CUDA_SOURCES))
+# source files
+SOURCES := src/lib/io_inst.cpp src/lib/double_sided_nn_heur.cpp \
+	src/lib/get_sys_time.cpp src/lib/nn_heur.cpp \
+	src/lib/dists.cpp src/lib/tour_solution.cpp \
+	src/lib/semi_greedy_schemes.cpp src/lib/choice_method.cpp \
+	src/lib/parameters.cpp src/lib/multi_start.cpp \
+	src/lib/local_search.cpp src/lib/grasp.cpp \
+	src/lib/path_relinking.cpp src/lib/stop_criterion.cpp
+ 
+# object files
+# src/lib/ -> build/
+OBJECTS := $(patsubst src/lib/%,build/%,$(SOURCES))
+# .cpp -> .o
+OBJECTS := $(patsubst %.cpp,%.o,$(OBJECTS))
 
-# Bibliotecas
-LIBS := -lpthread
-MPI_LIBS := -lmpi
-CUDA_LIBS := -lcudart
+all: $(TARGET)
 
-# Definir regras de compilação modularizadas
-.PHONY: all default mpi cuda clean
+$(TARGET): src/tsp.cpp $(OBJECTS) src/include/
+	$(GXX) $(GXXFLAGS) $(INCLUDES) src/tsp.cpp -o $@ $(OBJECTS)
 
-all: default
-
-# Compilação padrão (sem CUDA e sem MPI)
-default: $(BUILD_DIR)/tsp
-$(BUILD_DIR)/tsp: src/tsp.cpp $(OBJECTS)
-	mkdir -p $(BUILD_DIR)
-	$(GXX) $(BASE_FLAGS) $(INCLUDES) src/tsp.cpp -o $@ $(OBJECTS) $(LIBS)
-
-# Compilação para MPI + OpenMP
-mpi: $(BUILD_DIR)/tsp-mpi
-$(BUILD_DIR)/tsp-mpi: src/tsp.cpp $(OBJECTS)
-	mkdir -p $(BUILD_DIR)
-	mpicxx $(BASE_FLAGS) $(MPI_FLAGS) $(INCLUDES) src/tsp.cpp -o $@ $(OBJECTS) $(MPI_LIBS)
-
-# Compilação com CUDA
-cuda: $(BUILD_DIR)/tsp-cuda
-$(BUILD_DIR)/tsp-cuda: src/tsp.cpp $(OBJECTS) $(CUDA_OBJECTS)
-	mkdir -p $(BUILD_DIR)
-	$(GXX) $(BASE_FLAGS) -DUSE_CUDA $(INCLUDES) src/tsp.cpp -o $@ $(OBJECTS) $(CUDA_OBJECTS) $(CUDA_LIBS)
-
-# Regra para compilar arquivos C++ (.cpp)
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+build/io_inst.o: src/lib/io_inst.cpp
 	mkdir -p $(dir $@)
-	$(GXX) $(BASE_FLAGS) $(INCLUDES) -c $< -o $@
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/io_inst.cpp -o $@
 
-# Regra para compilar arquivos CUDA (.cu)
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cu
+build/double_sided_nn_heur.o: src/lib/double_sided_nn_heur.cpp
 	mkdir -p $(dir $@)
-	$(NVCC) $(CUDA_FLAGS) $(INCLUDES) -c $< -o $@
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/double_sided_nn_heur.cpp -o $@
 
-# Limpeza dos arquivos gerados
+build/get_sys_time.o: src/lib/get_sys_time.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/get_sys_time.cpp -o $@
+
+build/nn_heur.o: src/lib/nn_heur.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/nn_heur.cpp -o $@
+
+build/dists.o: src/lib/dists.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/dists.cpp -o $@
+
+build/tour_solution.o: src/lib/tour_solution.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/tour_solution.cpp -o $@
+
+build/semi_greedy_schemes.o: src/lib/semi_greedy_schemes.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/semi_greedy_schemes.cpp -o $@
+
+build/choice_method.o: src/lib/choice_method.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/choice_method.cpp -o $@
+
+build/parameters.o: src/lib/parameters.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/parameters.cpp -o $@
+
+build/local_search.o: src/lib/local_search.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/local_search.cpp -o $@
+
+build/path_relinking.o: src/lib/path_relinking.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/path_relinking.cpp -o $@
+
+build/multi_start.o: src/lib/multi_start.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/multi_start.cpp -o $@
+
+build/grasp.o: src/lib/grasp.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/grasp.cpp -o $@
+
+build/stop_criterion.o: src/lib/stop_criterion.cpp
+	mkdir -p $(dir $@)
+	$(GXX) $(GXXFLAGS) $(INCLUDES) -c src/lib/stop_criterion.cpp -o $@
+
 clean:
-	rm -rf $(BUILD_DIR)
-	rm -f $(BUILD_DIR)/tsp $(BUILD_DIR)/tsp-mpi $(BUILD_DIR)/tsp-cuda
+	$(RM) -r build
+	$(RM) $(TARGET)
