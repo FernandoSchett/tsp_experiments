@@ -12,6 +12,7 @@
  * - GRASP [3]
  * - Grasp + Path Relinking [3]
  * - Grasp + Path Relinking + Restart Techniques [3]
+ * - PSO, PSO Multithread, PSO MultiProcess, PSO Hibrid, PSO GPU [4]
  * -----------------------------------------------------------------------------
  */
 
@@ -77,6 +78,22 @@ void run_choice_method(Tour& best_tour, IData& idata, Parameters& params, CPUTim
 	}else if(params.choice_method == "grasp_prr"){
 		std::cout << "grasp_prr" << std::endl;	
 		grasp_prr(best_tour, idata, params, cpu_time, randmt);
+	}else if(params.choice_method == "pso"){
+			std::cout << "grasp_prr" << std::endl;	
+			grasp_prr(best_tour, idata, params, cpu_time, randmt);	
+	}else if(params.choice_method == "pso_multithread"){
+		std::cout << "pso_multithread" << std::endl;	
+		pso_multithread(best_tour, idata, params, cpu_time, randmt);
+	}else if(params.choice_method == "pso_multiprocess"){
+		std::cout << "pso_multiprocess" << std::endl;	
+		pso_multiprocess(best_tour, idata, params, cpu_time, randmt);
+	}else if(params.choice_method == "pso_hibrid"){
+		std::cout << "pso_hibrid" << std::endl;	
+		pso_hibrid(best_tour, idata, params, cpu_time, randmt);
+	}else if(params.choice_method == "pso_gpu"){
+		
+		std::cout << "pso_gpu" << std::endl;	
+		pso_gpu(best_tour, idata, params, cpu_time, randmt);	
 	}else{
 		printf("ERROR: No choice method selected.\n");
 		exit(0);

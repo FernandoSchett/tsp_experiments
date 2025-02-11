@@ -10,6 +10,8 @@
 #include "grasp.hpp"
 #include "path_relinking.hpp"
 #include "stop_criterion.hpp"
+#include "pso.hpp"
+#include "pso_cuda.hpp"
 
 void run_choice_method(Tour& best_tour, IData& idata, Parameters& param, CPUTime& cpu_time, std::mt19937& randmt);
 
